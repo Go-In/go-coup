@@ -9,9 +9,18 @@ def customerSignup(request):
     if request.method == 'GET':
         return render(request,'usermanage/signup-customer.html')
     data = request.POST
-    print(data)
     user = User.objects.create_user(data['username'], password = data['password'])
     user.save()
     customerprofile = models.Customer(user = user)
     customerprofile.save()
+    return redirect('index:index')
+
+def storeSignup(request):
+    if request.method == 'GET':
+        return render(request,'usermanage/signup-store.html')
+    data = request.POST
+    user = User.objects.create_user(data['username'], password = data['password'])
+    user.save()
+    storeprofile = models.Store(user = user, store_name=data['storename'])
+    storeprofile.save()
     return redirect('index:index')
