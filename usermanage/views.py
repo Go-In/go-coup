@@ -7,6 +7,8 @@ from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 from . import views, models
 def customerSignup(request):
+    if request.user.is_authenticated:
+        return redirect('index:index')
     if request.method == 'GET':
         return render(request,'usermanage/signup-customer.html')
     data = request.POST
@@ -20,6 +22,8 @@ def customerSignup(request):
     return redirect('index:index')
 
 def storeSignup(request):
+    if request.user.is_authenticated:
+        return redirect('index:index')
     if request.method == 'GET':
         return render(request,'usermanage/signup-store.html')
     data = request.POST
