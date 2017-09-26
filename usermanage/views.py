@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.models import User, Group
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
@@ -10,7 +11,10 @@ def customerSignup(request):
         return render(request,'usermanage/signup-customer.html')
     data = request.POST
     user = User.objects.create_user(data['username'], password = data['password'])
+    g = Group.objects.get(name='customer')
+    g.user_set.add(user)
     user.save()
+    g.save()
     customerprofile = models.Customer(user = user)
     customerprofile.save()
     return redirect('index:index')
@@ -20,7 +24,41 @@ def storeSignup(request):
         return render(request,'usermanage/signup-store.html')
     data = request.POST
     user = User.objects.create_user(data['username'], password = data['password'])
+    g = Group.objects.get(name='store')
+    g.user_set.add(user)
     user.save()
+    g.save()
     storeprofile = models.Store(user = user, store_name=data['storename'])
     storeprofile.save()
     return redirect('index:index')
+
+def signin(request):
+    if request.user.is_authenticated:
+        return redirect('index:index')
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index:index')
+
+    return render(request,'usermanage/signin.html')
+
+def signout(request):
+    logout(request)
+    return redirect('index:index')
+
+@login_required(redirect_field_name='user:signin')
+def profile(request):
+    user = User.objects.get(pk=request.user.pk)
+    data = {'username':user.username,'email':user.email,'type':user.groups.all()}
+    if user.groups.filter(name='store').exists():
+        store = models.Store.objects.get(user=user)
+        data['store_name']=store.store_name
+    if user.groups.filter(name='customer').exists():
+        customer = models.Customer.objects.get(user=user)
+        data['first_name']=customer.first_name
+        data['last_name']=customer.last_name
+    print(data)
+    return render(request,'usermanage/profile.html', context={'d':data})
