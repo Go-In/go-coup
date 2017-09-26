@@ -10,6 +10,7 @@ def customerSignup(request):
         return render(request,'usermanage/signup-customer.html')
     data = request.POST
     user = User.objects.create_user(data['username'], password = data['password'])
+    user.group = 'customer'
     user.save()
     customerprofile = models.Customer(user = user)
     customerprofile.save()
@@ -20,7 +21,19 @@ def storeSignup(request):
         return render(request,'usermanage/signup-store.html')
     data = request.POST
     user = User.objects.create_user(data['username'], password = data['password'])
+    user.group='store'
     user.save()
     storeprofile = models.Store(user = user, store_name=data['storename'])
     storeprofile.save()
     return redirect('index:index')
+
+def signin(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index:index')
+
+    return render(request,'usermanage/signin.html')
