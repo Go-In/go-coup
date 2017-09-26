@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
@@ -7,6 +8,8 @@ from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 from . import views, models
 def customerSignup(request):
+    if request.user.is_authenticated:
+        return redirect('index:index')
     if request.method == 'GET':
         return render(request,'usermanage/signup-customer.html')
     data = request.POST
@@ -20,6 +23,8 @@ def customerSignup(request):
     return redirect('index:index')
 
 def storeSignup(request):
+    if request.user.is_authenticated:
+        return redirect('index:index')
     if request.method == 'GET':
         return render(request,'usermanage/signup-store.html')
     data = request.POST
@@ -41,22 +46,23 @@ def signin(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            if request.GET.get("next") is not None:
+                return HttpResponseRedirect(request.GET["next"])
             return redirect('index:index')
-
     return render(request,'usermanage/signin.html')
 
 def signout(request):
     logout(request)
     return redirect('index:index')
 
-@login_required(redirect_field_name='user:signin')
+@login_required()
 def profile(request):
-    user = User.objects.get(pk=request.user.pk)
-    data = {'username':user.username,'email':user.email,'type':user.groups.all()}
+    user = request.user
+    data = {'username':user.username,'email':user.email}
     if user.groups.filter(name='store').exists():
         store = models.Store.objects.get(user=user)
         data['store_name']=store.store_name
-    if user.groups.filter(name='customer').exists():
+    elif user.groups.filter(name='customer').exists():
         customer = models.Customer.objects.get(user=user)
         data['first_name']=customer.first_name
         data['last_name']=customer.last_name
