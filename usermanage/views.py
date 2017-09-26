@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
@@ -45,15 +46,16 @@ def signin(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            if request.GET.get("next") is not None:
+                return HttpResponseRedirect(request.GET["next"])
             return redirect('index:index')
-
     return render(request,'usermanage/signin.html')
 
 def signout(request):
     logout(request)
     return redirect('index:index')
 
-@login_required(redirect_field_name='user:profile')
+@login_required()
 def profile(request):
     user = request.user
     data = {'username':user.username,'email':user.email}
