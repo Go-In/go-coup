@@ -51,12 +51,12 @@ def signout(request):
 
 @login_required(redirect_field_name='user:signin')
 def profile(request):
-    user = User.objects.get(pk=request.user.pk)
-    data = {'username':user.username,'email':user.email,'type':user.groups.all()}
+    user = request.user
+    data = {'username':user.username,'email':user.email}
     if user.groups.filter(name='store').exists():
         store = models.Store.objects.get(user=user)
         data['store_name']=store.store_name
-    if user.groups.filter(name='customer').exists():
+    elif user.groups.filter(name='customer').exists():
         customer = models.Customer.objects.get(user=user)
         data['first_name']=customer.first_name
         data['last_name']=customer.last_name
