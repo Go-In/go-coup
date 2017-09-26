@@ -53,7 +53,7 @@ def signout(request):
     logout(request)
     return redirect('index:index')
 
-@login_required(redirect_field_name='user:signin')
+@login_required(redirect_field_name='user:profile')
 def profile(request):
     user = request.user
     data = {'username':user.username,'email':user.email}
