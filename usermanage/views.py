@@ -39,3 +39,7 @@ def signin(request):
             return redirect('index:index')
 
     return render(request,'usermanage/signin.html')
+
+def signout(request):
+    logout(request)
+    return redirect('index:index')
