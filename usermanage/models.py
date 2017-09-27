@@ -19,12 +19,8 @@ class Store(models.Model):
 class RightsSupport(models.Model):
 
     class Meta:
-
-        managed = False  # No database table creation or deletion operations \
-                         # will be performed for this model.
-
+        managed = False
         permissions = (
             ('customer_rigths', 'Global customer rights'),
-            ('store_rights', 'Global store rights'), 
-            ('any_rights', 'Global any rights'),
+            ('store_rights', 'Global store rights'),
         )
