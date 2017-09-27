@@ -18,4 +18,5 @@ from . import views
 
 urlpatterns = [
     url(r'^currency/add/$', views.currencyRegister, name='currency-register'),
+    url(r'^ticket/add/$', views.ticketRegister, name='ticket-register'),
 ]
