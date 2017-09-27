@@ -58,14 +58,14 @@
 .footer-right {
   text-align: right;
 }
-.coupon {
+.coupon-sell {
   border: 1px solid #f1457c;
   -webkit-transition: background 0.5s; /* Safari */
   -moz-transition: background 0.5s; /* Safari */
   -o-transition: background 0.5s; /* Safari */
   transition: background 0.5s;
 }
-.coupon:hover {
+.coupon-sell:hover {
   -webkit-transition: background 0.5s; /* Safari */
   -moz-transition: background 0.5s; /* Safari */
   -o-transition: background 0.5s; /* Safari */

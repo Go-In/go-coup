@@ -12,3 +12,12 @@ def profile(request):
 
 def cart(request):
     return render(request, 'index/cart.html', {})
+
+def coupon(request):
+    return render(request, 'index/coupon.html', {})
+
+def setting(request):
+    return render(request, 'index/setting.html', {})
+
+def wallet(request):
+    return render(request, 'index/wallet.html', {})
