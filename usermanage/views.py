@@ -58,8 +58,6 @@ def signout(request):
 @login_required()
 def profile(request):
     user = request.user
-    print(user.has_perm('usermanage.customer_rigths'))
-    print(user.has_perm('usermanage.store_rigths'))
 
     data = {'username':user.username,'email':user.email}
     if user.groups.filter(name='store').exists():
@@ -69,7 +67,6 @@ def profile(request):
         customer = models.Customer.objects.get(user=user)
         data['first_name']=customer.first_name
         data['last_name']=customer.last_name
-    print(data)
     return render(request,'usermanage/profile.html', context={'d':data})
 
 
