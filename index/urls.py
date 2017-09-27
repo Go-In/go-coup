@@ -8,5 +8,8 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^detail/$', views.detail, name='detail'),
     url(r'^profile/$', views.profile, name='profile'),
-    url(r'^cart/$', views.cart, name='cart')
+    url(r'^cart/$', views.cart, name='cart'),
+    url(r'^coupon/$', views.coupon, name='coupon'),
+    url(r'^wallet/$', views.wallet, name='wallet'),
+    url(r'^setting/$', views.setting, name='setting')
 ]
