@@ -13,6 +13,11 @@ def customerSignup(request):
     if request.method == 'GET':
         return render(request,'usermanage/signup-customer.html')
     data = request.POST
+    
+    # check user already exits
+    if User.objects.filter(username=data['username']).exists():
+        return render(request,'usermanage/signup-customer.html')
+
     user = User.objects.create_user(data['username'], password = data['password'])
     g = Group.objects.get(name='customer')
     g.user_set.add(user)
