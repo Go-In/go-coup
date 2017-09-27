@@ -15,3 +15,12 @@ class Store(models.Model):
     store_name = models.CharField(max_length=30)
     def __str__(self):
         return self.user
+
+class RightsSupport(models.Model):
+
+    class Meta:
+        managed = False
+        permissions = (
+            ('customer_rigths', 'Global customer rights'),
+            ('store_rights', 'Global store rights'),
+        )
