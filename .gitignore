@@ -1,3 +1,4 @@
 *.py[cod]
 *.swp
 __pycache__/
+.DS_Store

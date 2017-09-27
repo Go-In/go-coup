@@ -1,0 +1,39 @@
+.profile-nav {
+  max-width: 600px;
+  display: flex;
+  margin: 50px auto;
+  align-items: center;
+}
+.profile-nav-btn {
+  flex: 1;
+  background: #f1457c;
+  font-size: 23px;
+  color: white;
+  text-align: center;
+  border: 1px solid #b80d43;
+  padding: 15px 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-nav-btn:link {
+  text-decoration: none;
+  color: white;
+}
+.profile-nav-btn:hover {
+  background: #f51c61;
+  color: white;
+}
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border: 1px solid #b80d43;
+  border-radius: 100%;
+}
+.profile-image-wrapper {
+  margin: 0 15px;
+}
+.pink {
+  color: #f51c61;
+}
