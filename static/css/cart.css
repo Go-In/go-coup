@@ -1,0 +1,13 @@
+.list {
+  border: 1px solid #f1457c;
+  margin-top: 20px;
+}
+.list-image {
+  width: 40%;
+  display: inline-block;
+}
+.list-content {
+  width: 58%;
+  padding: 10px 1%;
+  display: inline-block;
+}

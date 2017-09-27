@@ -1,0 +1,16 @@
+.coupon {
+  display: flex;
+  align-items: center;
+  max-width: 700px;
+  margin: 10px auto;
+}
+.coupon-content {
+  padding: 10px 15px;
+  font-size: 18px;
+  flex: 1;
+}
+.coupon-img {
+}
+.coupon-image {
+  width: 124px;
+}

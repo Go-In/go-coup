@@ -1,0 +1,38 @@
+{% load staticfiles %}
+{% include 'components/header.html' %}
+<div class="full-container">
+  <div class="container">
+    <div class="content row">
+      <div class="col-md-6 col-xs-12">
+        <div class="detail-head">
+          <img class="detail-head-image" src="https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/KFC_logo.svg/1024px-KFC_logo.svg.png" alt="head">
+          <div class="detail-head-title">
+            <h1>KFC</h1>
+            <p>exp: 19/0/17</p>
+          </div>
+        </div>
+        <div class="detail-content">
+          <img src="https://assets.kfc.co.uk/3f040df6-0c9cdd0f/wicked-variety-bucket-320w.jpeg" alt="detail content">
+        </div>
+      </div>
+      <div class="col-md-6 col-xs-12">
+        <div class="detail">
+          <table class="detail-table">
+            <tr>
+              <td class="align-left">Detail:</td>
+              <td class="align-right">90 pts</td>
+            </tr>
+          </table>
+          <div class="detail-discription">
+            <p>ไก่อร่อยมากก</p>
+            <p>Buy Coupon get free ไก่</p>
+          </div>
+          <button class="btn buy-btn">Buy</button>
+          <button class="btn buy-btn" onclick="addItemToCart(1)">add to cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% include 'components/footer.html' %}
+  
