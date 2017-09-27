@@ -1,10 +1,10 @@
 from django.db import models
-from usermanage.models import Store
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Currency(models.Model):
     name = models.CharField(max_length=30)
-    store = models.ForeignKey(Store, on_delete=models.CASCADE)
+    store = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
 
@@ -18,4 +18,4 @@ class Ticket(models.Model):
     is_limit = models.BooleanField()
     remain = models.IntegerField(null=True)  #จำนวนที่ยังเหลืออยู่
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
-    store = models.ForeignKey(Store, on_delete=models.CASCADE)
+    store = models.ForeignKey(User, on_delete=models.CASCADE)
