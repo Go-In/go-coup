@@ -1,0 +1,46 @@
+.detail-head-image {
+  width: 150px;
+  margin-right: 30px;
+}
+.detail-head {
+  color: #f1457c;
+  margin-bottom: 50px;
+}
+.detail-head-title {
+  display: inline-block;
+}
+.detail-content {
+  text-align: center;
+}
+.detail-table {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  color: #f1457c;
+  font-size: 20px;
+}
+.align-right {
+  text-align: right;
+}
+.align-left {
+  text-align: left;
+}
+.detail {
+  text-align: center;
+}
+.detail-discription {
+  margin-top: 40px;
+  border: 1px solid #f1457c;
+  padding: 15px;
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+.buy-btn {
+  background: #f1457c;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+}
+.buy-btn:hover {
+  background: #f51c61;
+}
