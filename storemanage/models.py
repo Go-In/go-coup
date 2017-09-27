@@ -12,7 +12,7 @@ class Ticket(models.Model):
     name = models.CharField(max_length=127)
     price = models.PositiveIntegerField()
     detail = models.TextField(max_length=1023)
-    expire_date = models.TimeField() #วันหมดอายุของคูปอง
+    expire_date = models.DateField() #วันหมดอายุของคูปอง
     is_period = models.BooleanField()
     remaining_day = models.PositiveIntegerField(null=True) #จำนวนวันที่คูปองสามารถใช้งานได้ นับตั้งแต่การซื้อ
     is_limit = models.BooleanField()
