@@ -6,7 +6,15 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         new_group, created = Group.objects.get_or_create(name='customer')
         self.stdout.write('created customer' if created else 'customer has been created')
+        customer_rights = Permission.objects.get(name='Global customer rights')
+        new_group.permissions.add(customer_rights)
+        self.stdout.write('give permission to customer')
+
         new_group, created = Group.objects.get_or_create(name='store')
         self.stdout.write('created store' if created else 'store has been created')
+        store_rights = Permission.objects.get(name='Global store rights')
+        new_group.permissions.add(store_rights)
+        self.stdout.write('give permission to store')
+
         new_group, created = Group.objects.get_or_create(name='mockup')
         self.stdout.write('created mockup' if created else 'mockup has been created')
