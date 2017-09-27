@@ -33,6 +33,11 @@ def storeSignup(request):
     if request.method == 'GET':
         return render(request,'usermanage/signup-store.html')
     data = request.POST
+
+     # check user already exits
+    if User.objects.filter(username=data['username']).exists():
+        return render(request,'usermanage/signup-store.html')
+
     user = User.objects.create_user(data['username'], password = data['password'])
     g = Group.objects.get(name='store')
     g.user_set.add(user)
