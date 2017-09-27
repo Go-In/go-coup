@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}">
   
   <script src="{% static 'js/script.js' %}"></script>
 
@@ -29,7 +30,7 @@
           </div>
           <div class="right">
             <div class="nav-btn">
-              <a href="/profile.html">
+              <a href="{% url 'index:profile' %}">
                 Profile
                 <img class="logo-nav" src="{% static 'images/profile.png' %}" alt="">
               </a>

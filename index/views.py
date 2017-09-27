@@ -6,3 +6,6 @@ def index(request):
 
 def detail(request):
     return render(request, 'index/detail.html', {})
+
+def profile(request):
+    return render(request, 'index/profile.html', {})
