@@ -7,9 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/detail.css' %}">
   <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+  <link rel="stylesheet" href="{% static 'css/cart.css' %}">
   
   <script src="{% static 'js/script.js' %}"></script>
 
@@ -36,7 +37,9 @@
               </a>
             </div>
             <div class="nav-btn">
-              <img class="logo-nav" src="{% static 'images/cart.png' %}" alt="">
+              <a href="{% url 'index:cart' %}">
+                <img class="logo-nav" src="{% static 'images/cart.png' %}" alt="">
+              </a>
             </div>
           </div>
         </div>

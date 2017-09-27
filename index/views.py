@@ -9,3 +9,6 @@ def detail(request):
 
 def profile(request):
     return render(request, 'index/profile.html', {})
+
+def cart(request):
+    return render(request, 'index/cart.html', {})
