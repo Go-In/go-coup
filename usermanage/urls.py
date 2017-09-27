@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^store-signup/$', views.storeSignup, name='store-signup'),
     url(r'^signin/$',views.signin, name='signin'),
     url(r'^signout/$',views.signout, name='signout'),
-    url(r'^profile/$',views.profile, name='profile')
-
+    url(r'^profile/$',views.profile, name='profile'),
+    url(r'^customertest/$',views.customertest, name='customertest'),
+    url(r'^storetest/$',views.storetest, name='storetest'),
 ]

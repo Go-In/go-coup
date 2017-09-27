@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User, Group
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
@@ -58,6 +58,9 @@ def signout(request):
 @login_required()
 def profile(request):
     user = request.user
+    print(user.has_perm('usermanage.customer_rigths'))
+    print(user.has_perm('usermanage.store_rigths'))
+
     data = {'username':user.username,'email':user.email}
     if user.groups.filter(name='store').exists():
         store = models.Store.objects.get(user=user)
@@ -68,3 +71,18 @@ def profile(request):
         data['last_name']=customer.last_name
     print(data)
     return render(request,'usermanage/profile.html', context={'d':data})
+
+
+def isStore(user):
+    return user.groups.filter(name='store').exists()
+
+def isCustomer(user):
+    return user.groups.filter(name='customer').exists()
+
+@permission_required('usermanage.customer_rigths',raise_exception=True)
+def customertest(request):
+    return render(request,'usermanage/customertest.html')
+
+@permission_required('usermanage.store_rigths',raise_exception=True)
+def storetest(request):
+    return render(request,'usermanage/storetest.html')
