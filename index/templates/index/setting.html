@@ -1,0 +1,59 @@
+
+{% include 'components/header.html' %}
+
+<div class="full-container">
+    
+  <div class="container">
+    {% include 'components/tabbar.html' %}
+
+    <div class="container">
+      <form action="">
+        <div class="form-group row">
+          <div class="col-md-6 col-xs-12">
+            <label for="usr">Name:</label>
+            <input type="text" class="form-control" id="name" name="name">
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <label for="usr">Birthday:</label>
+            <input type="text" class="form-control" id="lastname" name="lastname">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6 col-xs-12">
+            <label for="usr">Lastname:</label>
+            <input type="date" class="form-control" id="birthday" name="birthday">
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <label for="usr">Tel:</label>
+            <input type="password" class="form-control" id="password" name="password">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6 col-xs-12">
+            <label for="usr">Password:</label>
+            <input type="password" class="form-control" id="password" name="password">
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <label for="usr">Email:</label>
+            <input type="password" class="form-control" id="password" name="password">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6 col-xs-12">
+            <label for="usr">Confirm Password:</label>
+            <input type="password" class="form-control" id="confirm" name="confirm">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-4 col-xs-12">
+            <input type="submit" class="btn btn-gocoup" value="Submit">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+{% include 'components/footer.html' %}
+
