@@ -86,5 +86,4 @@ def ticketEdit(request, ticket_id):
             'error': error,
             'currency_list':currency_list
         })
-    print(data)
     return redirect('store:index')

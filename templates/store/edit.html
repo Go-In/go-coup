@@ -3,7 +3,7 @@
     name *:<input type="text" name="name" value="{{ ticket.name }}" /></br>
     detail *:<input type="text" name="detail" value="{{ ticket.detail }}" /></br>
     price *:<input type="number" name="price" value="{{ ticket.price }}" /></br>
-    expire date *:<input type="date" name="expire_date" value="{{ ticket.expired_date }}" /></br>
+    expire date *:<input type="date" name="expire_date" value="{{ ticket.expire_date|date:"Y-m-d" }}" /></br>
     is period:<input type="checkbox" name="is_period" value="period" {% if ticket.is_period %} checked {% endif %} /></br>
     remaining day:<input type="number" name="remaining_day" value="{{ ticket.remaining_day }}" /></br>
     is limit:<input type="checkbox" name="is_limit" value="limit" {% if ticket.is_limit %} checked {% endif %} /></br>
