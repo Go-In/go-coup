@@ -21,3 +21,6 @@ def setting(request):
 
 def wallet(request):
     return render(request, 'index/wallet.html', {})
+
+def login(request):
+    return render(request, 'index/login.html', {})

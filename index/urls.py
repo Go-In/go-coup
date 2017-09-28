@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^detail/(?P<coupon_id>[0-9]+)/$', views.detail, name='detail'),
     url(r'^profile/$', views.profile, name='profile'),
     url(r'^cart/$', views.cart, name='cart'),
+    url(r'^login/$', views.login, name='login'),
     url(r'^profile/coupon/$', views.coupon, name='coupon'),
     url(r'^profile/wallet/$', views.wallet, name='wallet'),
     url(r'^profile/setting/$', views.setting, name='setting')
