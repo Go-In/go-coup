@@ -24,9 +24,8 @@ def ticketRegister(request):
         return render(request,'storemanage/ticket-form.html',context)
     data = request.POST
     ticket_attrib = {k:v for k,v in data.items() if v != ''}
-    print(ticket_attrib)
     ticket_attrib.pop('csrfmiddlewaretoken')
-    ticket_attrib['is_period'] = True if ticket_attrib['is_period']=='period' else False
+    ticket_attrib['is_period'] = True if ticket_attrib['is_period'] else False
     ticket_attrib['is_limit'] = True if ticket_attrib['is_limit']=='limit' else False
     ticket_attrib['currency'] = Currency.objects.get(pk=ticket_attrib['currency'])
     ticket_attrib['store'] = user
