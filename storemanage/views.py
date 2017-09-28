@@ -8,8 +8,10 @@ from django.utils.dateparse import parse_date
 @permission_required('usermanage.store_rights',raise_exception=True)
 def index(request):
     user = request.user
+    tickets = Ticket.objects.filter(store=user)
     return render(request,'store/index.html', {
-        'user': user
+        'user': user,
+        'tickets': tickets
     })
 
 def currencyRegister(request):
@@ -21,15 +23,7 @@ def currencyRegister(request):
     currency.save()
     return redirect('index:index')
 
-def ticketRegister(request):
-    user = request.user
-    currency_list = [{'pk':c.pk,'name':c.name} for c in Currency.objects.filter(store=user)]
-    context = {
-        'currency_list':currency_list
-    }
-    if request.method == 'GET':
-        return render(request,'store/add.html',context)
-    data = request.POST
+def validateForm(data):
     error = {}
     if not data['name']:
         error['name'] = True
@@ -43,6 +37,18 @@ def ticketRegister(request):
         error['ticket_image_url'] = True
     if not data['content_image_url']:
         error['content_image_url'] = True
+    return error
+
+def ticketRegister(request):
+    user = request.user
+    currency_list = [{'pk':c.pk,'name':c.name} for c in Currency.objects.filter(store=user)]
+    context = {
+        'currency_list':currency_list
+    }
+    if request.method == 'GET':
+        return render(request,'store/add.html',context)
+    data = request.POST
+    error = validateForm(data)
     if error:
         return render(request,'store/add.html', {
             'error': error,
@@ -58,3 +64,12 @@ def ticketRegister(request):
     ticket = Ticket(**ticket_attrib)
     ticket.save()
     return redirect('store:index')
+
+def ticketEdit(request, ticket_id):
+    user = request.user
+    currency_list = [{'pk':c.pk,'name':c.name} for c in Currency.objects.filter(store=user)]
+    ticket = Ticket.objects.get(pk=ticket_id)
+    return render(request, 'store/edit.html', {
+        'ticket': ticket,
+        'currency_list':currency_list
+    })
