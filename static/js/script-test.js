@@ -1,4 +1,4 @@
-const getCartItem = (storage = localStorage) => {
+export const getCartItem = (storage = localStorage) => {
   const data = storage.getItem('gocoup-cart') || '';
   const currentItems = data.split(',').filter(d => d !== '');
   console.log(currentItems);
@@ -11,7 +11,7 @@ const addItemToCart = (itemId) => {
   localStorage.setItem('gocoup-cart', [...new Set(cartItems)]);
 }
 
-const getCartUrl = (storage = localStorage) => {
+export const getCartUrl = (storage = localStorage) => {
   const cartItems = getCartItem(storage);
   return `/cart?cart=${cartItems}`;
 }
