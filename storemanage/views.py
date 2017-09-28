@@ -19,6 +19,7 @@ def currencyRegister(request):
     return redirect('index:index')
 
 def ticketRegister(request):
+    print('ssss')
     user = request.user
     if request.method == 'GET':
         print('GET')
@@ -26,6 +27,7 @@ def ticketRegister(request):
         context = {
             'currency_list':currency_list
         }
+        print('ssss')
         return render(request,'storemanage/ticket-form.html',context)
     data = request.POST
     ticket_attrib = {k:v for k,v in data.items() if v != ''}
