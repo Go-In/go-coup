@@ -31,10 +31,16 @@
         </div>
         <div class="right">
           <div class="nav-btn">
+            {% if user.is_authenticated %}
             <a href="/profile">
               Profile
               <img class="logo-nav" src="../../static/images/profile.png" alt="">
             </a>
+            {% else %}
+            <a href="/user/signin">
+            Sign In
+            </a>
+            {% endif %}
           </div>
           <div class="nav-btn">
             <img class="logo-nav" src="../../static/images/cart.png" alt="">

@@ -18,7 +18,7 @@ def customerSignup(request):
     if User.objects.filter(username=data['username']).exists():
         return render(request,'usermanage/signup-customer.html')
 
-    user = User.objects.create_user(data['username'], password = data['password'])
+    user = User.objects.create_user(data['username'], password = data['password'], email = data['email'])
     g = Group.objects.get(name='customer')
     g.user_set.add(user)
     user.save()
