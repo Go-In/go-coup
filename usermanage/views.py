@@ -45,11 +45,11 @@ def storeSignup(request):
     g.save()
     storeprofile = models.Store(user = user, store_name=data['storename'])
     storeprofile.save()
-    return redirect('index:index')
+    return redirect_after_signin(user)
 
 def signin(request):
     if request.user.is_authenticated:
-        return redirect('index:index')
+        return redirect_after_signin(user)
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -58,8 +58,16 @@ def signin(request):
             login(request, user)
             if request.GET.get("next") is not None:
                 return HttpResponseRedirect(request.GET["next"])
-            return redirect('index:index')
+            return redirect_after_signin(user)
     return render(request,'usermanage/signin.html')
+
+def redirect_after_signin(user):
+    if user.groups.filter(name='store').exists():
+        print('store')
+        return redirect('store:index')
+    else:
+        print('user')
+        return redirect('index:index')
 
 def signout(request):
     logout(request)
@@ -86,11 +94,11 @@ def isStore(user):
 def isCustomer(user):
     return user.groups.filter(name='customer').exists()
 
-@permission_required('usermanage.customer_rigths',raise_exception=True)
+@permission_required('usermanage.customer_rights',raise_exception=True)
 def customertest(request):
     return render(request,'usermanage/customertest.html')
 
-@permission_required('usermanage.store_rigths',raise_exception=True)
+@permission_required('usermanage.store_rights',raise_exception=True)
 def storetest(request):
     return render(request,'usermanage/storetest.html')
 
@@ -103,18 +111,31 @@ def userProfileContextGenerate(user):
         customer = models.Customer.objects.get(user=user)
         data['first_name']=customer.first_name
         data['last_name']=customer.last_name
-    return data
+        data['birthdate']=customer.birthdate
+    return {k:v for k,v in data.items() if v is not None}
 
 @login_required()
-@permission_required('usermanage.customer_rigths',raise_exception=True)
+@permission_required('usermanage.customer_rights',raise_exception=True)
 def customerProfile(request):
-    data = {'data':{k:v for k,v in userProfileContextGenerate(request.user).items() if v is not None}}
+    data = {'data':userProfileContextGenerate(request.user)}
     return render(request,'index/profile.html',data)
 
 @login_required()
-@permission_required('usermanage.customer_rigths',raise_exception=True)
+@permission_required('usermanage.customer_rights',raise_exception=True)
 def customerSetting(request):
     if request.method == 'GET':
-        data = {'data':{k:v for k,v in userProfileContextGenerate(request.user).items() if v is not None}}
+        data = {'data':userProfileContextGenerate(request.user)}
         return render(request,'index/setting.html',data)
-    return redirect('index:index')
+
+    user = request.user
+    data = request.POST
+    customer_attrib = {k:v for k,v in data.items()}
+    customer_attrib.pop('csrfmiddlewaretoken', None)
+    customer = models.Customer.objects.get(user=user)
+    print(customer_attrib)
+    for k,v in customer_attrib.items():
+        setattr(customer,k,v)
+    customer.save()
+    user.email = customer_attrib['email']
+    user.save()
+    return render(request,'index/setting.html',{'data':customer_attrib})

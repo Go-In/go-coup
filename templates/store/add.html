@@ -1,0 +1,20 @@
+<form method="POST" action="">
+{% csrf_token %}
+    name *:<input type="text" name="name" value="" /></br>
+    detail *:<input type="text" name="detail" value="" /></br>
+    price *:<input type="number" name="price" value="" /></br>
+    expire date *:<input type="date" name="expire_date" value="" /></br>
+    is period:<input type="checkbox" name="is_period" value="period" /></br>
+    remaining day:<input type="number" name="remaining_day" value="" /></br>
+    is limit:<input type="checkbox" name="is_limit" value="limit" /></br>
+    remain:<input type="number" name="remain" value="" /></br>
+    currency *:
+    <select name="currency">
+        {% for c in currency_list %}
+            <option value="{{c.pk}}">{{c.name}}</option>
+        {% endfor %}
+    </select></br>
+    ticket image url *:<input type="text" name="ticket_image_url" value="" /></br>
+    content image url *:<input type="text" name="content_image_url" value="" /></br>    
+    <input type="submit" value="submit" />
+</form>
