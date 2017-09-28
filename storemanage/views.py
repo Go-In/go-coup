@@ -46,9 +46,6 @@ def validateForm(data):
 def ticketRegister(request):
     user = request.user
     currency_list = [{'pk':c.pk,'name':c.name} for c in Currency.objects.filter(store=user)]
-    context = {
-        'currency_list':currency_list
-    }
     if request.method == 'GET':
         return render(request,'store/add.html',context)
     data = request.POST
@@ -74,8 +71,26 @@ def ticketRegister(request):
 def ticketEdit(request, ticket_id):
     user = request.user
     currency_list = [{'pk':c.pk,'name':c.name} for c in Currency.objects.filter(store=user)]
-    ticket = Ticket.objects.get(pk=ticket_id)
-    return render(request, 'store/edit.html', {
-        'ticket': ticket,
-        'currency_list':currency_list
-    })
+    if request.method == 'GET':
+        ticket = Ticket.objects.get(pk=ticket_id)
+        return render(request, 'store/edit.html', {
+            'ticket': ticket,
+            'currency_list':currency_list
+        })
+    data = request.POST
+    error = validateForm(data)
+    if error:
+        return render(request,'store/edit.html', {
+            'error': error,
+            'currency_list':currency_list
+        })
+
+    ticket_attrib = {k:v for k,v in data.items() if v != ''}
+    ticket_attrib.pop('csrfmiddlewaretoken')
+    ticket_attrib['is_period'] = True if 'is_period' in ticket_attrib else False
+    ticket_attrib['is_limit'] = True if 'is_limit' in ticket_attrib else False
+    ticket_attrib['currency'] = Currency.objects.get(pk=ticket_attrib['currency'])
+    ticket_attrib['store'] = user
+    ticket = Ticket(**ticket_attrib)
+    ticket.save()
+    return redirect('store:index')
