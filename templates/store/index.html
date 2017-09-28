@@ -1,0 +1,10 @@
+{% include 'components/store/header.html' %}
+<h1>STORE MANAGE</h1>
+<p>you are {{ user.username }}</p>
+<a href="{% url 'store:ticket-register' %}">add new ticket</a>
+<ul>
+  {% for ticket in tickets %}
+    <li>{{ ticket.name }}  <a href="{% url 'store:ticket-edit' ticket.id %}">edit</a></li>
+  {% endfor %}
+</ul>
+{% include 'components/store/footer.html' %}

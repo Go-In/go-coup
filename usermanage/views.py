@@ -45,11 +45,11 @@ def storeSignup(request):
     g.save()
     storeprofile = models.Store(user = user, store_name=data['storename'])
     storeprofile.save()
-    return redirect('index:index')
+    return redirect_after_signin(user)
 
 def signin(request):
     if request.user.is_authenticated:
-        return redirect('index:index')
+        return redirect_after_signin(user)
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -58,8 +58,16 @@ def signin(request):
             login(request, user)
             if request.GET.get("next") is not None:
                 return HttpResponseRedirect(request.GET["next"])
-            return redirect('index:index')
+            return redirect_after_signin(user)
     return render(request,'usermanage/signin.html')
+
+def redirect_after_signin(user):
+    if user.groups.filter(name='store').exists():
+        print('store')
+        return redirect('store:index')
+    else:
+        print('user')
+        return redirect('index:index')
 
 def signout(request):
     logout(request)
