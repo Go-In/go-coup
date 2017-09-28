@@ -103,19 +103,20 @@ def userProfileContextGenerate(user):
         customer = models.Customer.objects.get(user=user)
         data['first_name']=customer.first_name
         data['last_name']=customer.last_name
-    return data
+        data['birthdate']=customer.birthdate
+    return {k:v for k,v in data.items() if v is not None}
 
 @login_required()
 @permission_required('usermanage.customer_rigths',raise_exception=True)
 def customerProfile(request):
-    data = {'data':{k:v for k,v in userProfileContextGenerate(request.user).items() if v is not None}}
+    data = {'data':userProfileContextGenerate(request.user).items()}
     return render(request,'index/profile.html',data)
 
 @login_required()
 @permission_required('usermanage.customer_rigths',raise_exception=True)
 def customerSetting(request):
     if request.method == 'GET':
-        data = {'data':{k:v for k,v in userProfileContextGenerate(request.user).items() if v is not None}}
+        data = {'data':userProfileContextGenerate(request.user)}
         return render(request,'index/setting.html',data)
 
     user = request.user
