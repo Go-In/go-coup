@@ -4,7 +4,7 @@ from django.shortcuts import render
 def index(request):
     return render(request, 'index/index.html', {})
 
-def detail(request):
+def detail(request, coupon_id):
     return render(request, 'index/detail.html', {})
 
 def profile(request):
@@ -21,3 +21,6 @@ def setting(request):
 
 def wallet(request):
     return render(request, 'index/wallet.html', {})
+
+def login(request):
+    return render(request, 'index/login.html', {})

@@ -13,7 +13,7 @@ def customerSignup(request):
     if request.method == 'GET':
         return render(request,'usermanage/signup-customer.html')
     data = request.POST
-    
+
     # check user already exits
     if User.objects.filter(username=data['username']).exists():
         return render(request,'usermanage/signup-customer.html')
@@ -93,3 +93,41 @@ def customertest(request):
 @permission_required('usermanage.store_rigths',raise_exception=True)
 def storetest(request):
     return render(request,'usermanage/storetest.html')
+
+def userProfileContextGenerate(user):
+    data = {'username':user.username,'email':user.email}
+    if user.groups.filter(name='store').exists():
+        store = models.Store.objects.get(user=user)
+        data['store_name']=store.store_name
+    elif user.groups.filter(name='customer').exists():
+        customer = models.Customer.objects.get(user=user)
+        data['first_name']=customer.first_name
+        data['last_name']=customer.last_name
+        data['birthdate']=customer.birthdate
+    return {k:v for k,v in data.items() if v is not None}
+
+@login_required()
+@permission_required('usermanage.customer_rigths',raise_exception=True)
+def customerProfile(request):
+    data = {'data':userProfileContextGenerate(request.user)}
+    return render(request,'index/profile.html',data)
+
+@login_required()
+@permission_required('usermanage.customer_rigths',raise_exception=True)
+def customerSetting(request):
+    if request.method == 'GET':
+        data = {'data':userProfileContextGenerate(request.user)}
+        return render(request,'index/setting.html',data)
+
+    user = request.user
+    data = request.POST
+    customer_attrib = {k:v for k,v in data.items()}
+    customer_attrib.pop('csrfmiddlewaretoken', None)
+    customer = models.Customer.objects.get(user=user)
+    print(customer_attrib)
+    for k,v in customer_attrib.items():
+        setattr(customer,k,v)
+    customer.save()
+    user.email = customer_attrib['email']
+    user.save()
+    return render(request,'index/setting.html',{'data':customer_attrib})
