@@ -7,8 +7,8 @@
         <div class="detail-head">
           <img class="detail-head-image" src="https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/KFC_logo.svg/1024px-KFC_logo.svg.png" alt="head">
           <div class="detail-head-title">
-            <h1>KFC</h1>
-            <p>exp: 19/0/17</p>
+            <h1>{{ ticket.store }}</h1>
+            <p>{{ ticket.expire_date }}</p>
           </div>
         </div>
         <div class="detail-content">
@@ -20,12 +20,11 @@
           <table class="detail-table">
             <tr>
               <td class="align-left">Detail:</td>
-              <td class="align-right">90 pts</td>
+              <td class="align-right">{{ ticket.price }} {{ ticket.currency }}</td>
             </tr>
           </table>
           <div class="detail-discription">
-            <p>ไก่อร่อยมากก</p>
-            <p>Buy Coupon get free ไก่</p>
+            <p>{{ ticket.detail }}</p>
           </div>
           <button class="btn buy-btn">Buy</button>
           <button class="btn buy-btn" onclick="addItemToCart(1)">add to cart</button>
