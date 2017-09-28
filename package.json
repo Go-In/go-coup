@@ -1,0 +1,29 @@
+{
+  "name": "go-coup",
+  "version": "1.0.0",
+  "description": "### Dependencies",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Go-In/go-coup.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Go-In/go-coup/issues"
+  },
+  "homepage": "https://github.com/Go-In/go-coup#readme",
+  "devDependencies": {
+    "babel-jest": "^21.2.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.1.2",
+    "jest": "^21.2.1",
+    "regenerator-runtime": "^0.11.0"
+  }
+}

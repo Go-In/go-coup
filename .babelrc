@@ -1,0 +1,13 @@
+{
+  "presets": [
+    ["es2015", { "modules": false }]
+  ],
+  "ignore": [],
+  "env": {
+   "test": {
+     "presets": [
+       ["env", { "modules": "commonjs" }]
+     ]
+   }
+ }
+}
