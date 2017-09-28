@@ -1,6 +1,6 @@
 {% load staticfiles %}
 {% include 'components/header.html' %}
-<!-- 
+<!--
 <img
     src="https://f.ptcdn.info/808/052/000/ou0idx1t5MrjxrpCEIA-o.jpg" \
     width="100%"
@@ -50,62 +50,30 @@
         </button>
     </div>
 
-
     <div class="content row">
-        
-        <div class="col-md-4 col-sm-6 col-xs-12">
-            <a href="{% url 'index:detail' %}">
-                <div class="coupon-sell">
-                    <img class="coup-img" src="https://kfcbd.com/wp-content/uploads/2016/11/kfc-logo.png" alt="coup-image">
-                    <div class="row">
-                    <div class="col-xs-8 coup-left">
-                        <p class="coup-text">name: KFC</p>
-                        <p class="coup-text">exp: 19/9/17</p>
+        {% for ticket in tickets %}  
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <a href="{% url 'index:detail' 1 %}">
+                    <div class="coupon-sell">
+                        <img class="coup-img" src="https://kfcbd.com/wp-content/uploads/2016/11/kfc-logo.png" alt="coup-image">
+                        <div class="row">
+                        <div class="col-xs-8 coup-left">
+                            <p class="coup-text">name: {{ ticket.name }}</p>
+                            <p class="coup-text">exp: {{ ticket.expire_date }}</p>
+                        </div>
+                        <div class="col-xs-4 coup-right">
+                            <p>{{ ticket.price }} {{ ticket.currency }}</p>
+                        </div>
+                        </div>
                     </div>
-                    <div class="col-xs-4 coup-right">
-                        <p>90 pts</p>
-                    </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        
-        <div class="col-md-4 col-sm-6 col-xs-12">
-            <a href="{% url 'index:detail' %}">
-            <div class="coupon-sell">
-                <img class="coup-img" src="https://kfcbd.com/wp-content/uploads/2016/11/kfc-logo.png" alt="coup-image">
-                <div class="row">
-                <div class="col-xs-8 coup-left">
-                    <p class="coup-text">name: KFC</p>
-                    <p class="coup-text">exp: 19/9/17</p>
-                </div>
-                <div class="col-xs-4 coup-right">
-                    <p>90 pts</p>
-                </div>
-                </div>
+                </a>
             </div>
-            </a>
-        </div>
-
-        <div class="col-md-4 col-sm-6 col-xs-12">
-            <a href="{% url 'index:detail' %}">
-            <div class="coupon-sell">
-                <img class="coup-img" src="https://kfcbd.com/wp-content/uploads/2016/11/kfc-logo.png" alt="coup-image">
-                <div class="row">
-                <div class="col-xs-8 coup-left">
-                    <p class="coup-text">name: KFC</p>
-                    <p class="coup-text">exp: 19/9/17</p>
-                </div>
-                <div class="col-xs-4 coup-right">
-                    <p>90 pts</p>
-                </div>
-                </div>
-            </div>
-            </a>
-        </div>
-
+            {% if forloop.counter|divisibleby:"3" %}     
+                </div><div class="content row">
+            {% endif %}      
+        {% endfor %}
+    </div>
     </div>
 </div>
 
 {% include 'components/footer.html' %}
-    
