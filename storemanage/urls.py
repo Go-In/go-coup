@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^currency/add/$', views.currencyRegister, name='currency-register'),
     url(r'^add/$', views.ticketRegister, name='ticket-register'),
+    url(r'^edit/(?P<ticket_id>[0-9]+)/$', views.ticketEdit, name='ticket-edit'),
 ]
