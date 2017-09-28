@@ -16,7 +16,10 @@ Including another URLconf
 from django.conf.urls import url, include
 from . import views
 
+app_name = 'store'
 urlpatterns = [
+    url(r'^$', views.index, name='index'),
     url(r'^currency/add/$', views.currencyRegister, name='currency-register'),
-    url(r'^ticket/add/$', views.ticketRegister, name='ticket-register'),
+    url(r'^add/$', views.ticketRegister, name='ticket-register'),
+    url(r'^edit/(?P<ticket_id>[0-9]+)/$', views.ticketEdit, name='ticket-edit'),
 ]
