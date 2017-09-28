@@ -5,7 +5,7 @@ from .models import Currency, Ticket
 from django.utils.dateparse import parse_date
 
 @login_required()
-@permission_required('usermanage.store_rigths',raise_exception=True)
+@permission_required('usermanage.store_rights',raise_exception=True)
 def index(request):
     return render(request,'store/index.html', {})
 
