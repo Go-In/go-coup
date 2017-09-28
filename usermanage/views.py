@@ -108,5 +108,14 @@ def userProfileContextGenerate(user):
 @login_required()
 @permission_required('usermanage.customer_rigths',raise_exception=True)
 def customerProfile(request):
-    data = {'data':userProfileContextGenerate(request.user)}
+    data = {'data':{k:v for k,v in userProfileContextGenerate(request.user).items() if v is not None}}
     return render(request,'index/profile.html',data)
+
+@login_required()
+@permission_required('usermanage.customer_rigths',raise_exception=True)
+def setting(request):
+    if request.method == 'GET':
+        data = {k:v for k,v in userProfileContextGenerate(request.user).item() if v is not None}
+        print(data)
+        return render(request,'index/setting.html',data)
+    return redirect('index:index')
