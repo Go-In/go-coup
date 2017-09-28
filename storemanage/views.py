@@ -7,7 +7,10 @@ from django.utils.dateparse import parse_date
 @login_required()
 @permission_required('usermanage.store_rights',raise_exception=True)
 def index(request):
-    return render(request,'store/index.html', {})
+    user = request.user
+    return render(request,'store/index.html', {
+        'user': user
+    })
 
 def currencyRegister(request):
     user = request.user
@@ -19,17 +22,33 @@ def currencyRegister(request):
     return redirect('index:index')
 
 def ticketRegister(request):
-    print('ssss')
     user = request.user
+    currency_list = [{'pk':c.pk,'name':c.name} for c in Currency.objects.filter(store=user)]
+    context = {
+        'currency_list':currency_list
+    }
     if request.method == 'GET':
-        print('GET')
-        currency_list = [{'pk':c.pk,'name':c.name} for c in Currency.objects.filter(store=user)]
-        context = {
-            'currency_list':currency_list
-        }
-        print('ssss')
-        return render(request,'storemanage/ticket-form.html',context)
+        return render(request,'store/add.html',context)
     data = request.POST
+    error = {}
+    if not data['name']:
+        error['name'] = True
+    if not data['detail']:
+        error['price'] = True
+    if not data['expire_date']:
+        error['expire_date'] = True
+    if not data['currency']:
+        error['currency'] = True
+    if not data['ticket_image_url']:
+        error['ticket_image_url'] = True
+    if not data['content_image_url']:
+        error['content_image_url'] = True
+    if error:
+        return render(request,'store/add.html', {
+            'error': error,
+            'currency_list':currency_list
+        })
+
     ticket_attrib = {k:v for k,v in data.items() if v != ''}
     ticket_attrib.pop('csrfmiddlewaretoken')
     ticket_attrib['is_period'] = True if 'is_period' in ticket_attrib else False
@@ -38,4 +57,4 @@ def ticketRegister(request):
     ticket_attrib['store'] = user
     ticket = Ticket(**ticket_attrib)
     ticket.save()
-    return redirect('index:index')
+    return redirect('store:index')
