@@ -113,9 +113,8 @@ def customerProfile(request):
 
 @login_required()
 @permission_required('usermanage.customer_rigths',raise_exception=True)
-def setting(request):
+def customerSetting(request):
     if request.method == 'GET':
-        data = {k:v for k,v in userProfileContextGenerate(request.user).item() if v is not None}
-        print(data)
+        data = {'data':{k:v for k,v in userProfileContextGenerate(request.user).items() if v is not None}}
         return render(request,'index/setting.html',data)
     return redirect('index:index')

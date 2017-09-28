@@ -11,37 +11,37 @@
         <div class="form-group row">
           <div class="col-md-6 col-xs-12">
             <label for="usr">Name:</label>
-            <input type="text" class="form-control" id="name" name="name">
+            <input type="text" class="form-control" id="name" name="first_name" {% if 'first_name' in data %}value="{{ data.first_name }}"{% endif %}>
           </div>
           <div class="col-md-6 col-xs-12">
             <label for="usr">Birthday:</label>
-            <input type="date" class="form-control" id="birthday" name="birthday">
+            <input type="date" class="form-control" id="birthday" name="birthday" disabled>
           </div>
         </div>
         <div class="form-group row">
           <div class="col-md-6 col-xs-12">
             <label for="usr">Lastname:</label>
-            <input type="text" class="form-control" id="lastname" name="lastname">
+            <input type="text" class="form-control" id="lastname" name="last_name"  {% if 'last_name' in data %}value="{{ data.last_name }}"{% endif %}>
           </div>
           <div class="col-md-6 col-xs-12">
             <label for="usr">Tel:</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <input type="text" class="form-control" id="tel" name="tel" disabled>
           </div>
         </div>
         <div class="form-group row">
           <div class="col-md-6 col-xs-12">
             <label for="usr">Password:</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <input type="password" class="form-control" id="password" name="password" disabled>
           </div>
           <div class="col-md-6 col-xs-12">
             <label for="usr">Email:</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <input type="text" class="form-control" id="password" name="email"  {% if 'email' in data %}value="{{ data.email }}"{% endif %}>
           </div>
         </div>
         <div class="form-group row">
           <div class="col-md-6 col-xs-12">
             <label for="usr">Confirm Password:</label>
-            <input type="password" class="form-control" id="confirm" name="confirm">
+            <input type="password" class="form-control" id="confirm" name="confirm" disabled>
           </div>
         </div>
         <div class="form-group row">

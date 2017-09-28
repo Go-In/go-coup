@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^profile/$',views.customerProfile, name='customer-profile'),
     url(r'^customertest/$',views.customertest, name='customertest'),
     url(r'^storetest/$',views.storetest, name='storetest'),
+    url(r'^setting/$',views.customerSetting, name='customer-setting'),    
 ]
