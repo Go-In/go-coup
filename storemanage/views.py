@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from .models import Currency, Ticket
 from django.utils.dateparse import parse_date
 
-# Create your views here.
+@login_required()
+@permission_required('usermanage.store_rigths',raise_exception=True)
+def index(request):
+    return render(request,'store/index.html', {})
+
 def currencyRegister(request):
     user = request.user
     if request.method == 'GET':
@@ -24,7 +29,6 @@ def ticketRegister(request):
         return render(request,'storemanage/ticket-form.html',context)
     data = request.POST
     ticket_attrib = {k:v for k,v in data.items() if v != ''}
-    print(ticket_attrib)
     ticket_attrib.pop('csrfmiddlewaretoken')
     ticket_attrib['is_period'] = True if 'is_period' in ticket_attrib else False
     ticket_attrib['is_limit'] = True if 'is_limit' in ticket_attrib else False
