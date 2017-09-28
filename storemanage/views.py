@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from .models import Currency, Ticket
 from django.utils.dateparse import parse_date
 
-# Create your views here.
+@login_required()
+@permission_required('usermanage.store_rigths',raise_exception=True)
+def index(request):
+    return render(request,'store/index.html', {})
+
 def currencyRegister(request):
     user = request.user
     if request.method == 'GET':
