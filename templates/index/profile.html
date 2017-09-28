@@ -1,14 +1,14 @@
 {% include 'components/header.html' %}
 
 <div class="full-container">
-    
+
   <div class="container">
     {% include 'components/tabbar.html' %}
 
     <div class="container">
-      <p>Name: Cal</p>
-      <p>Last Name: Cal</p>
-      <p>Email: Cal@gmail.com</p>
+      <p>Name: {% if 'first_name' in data %}{{ data.first_name }}{% endif %}</p>
+      <p>Last Name: {% if 'last_name' in data %}{{ data.last_name }}{% endif %}</p>
+      <p>Email: {% if 'email' in data %}{{ data.email }}{% endif %}</p>
     </div>
   </div>
 

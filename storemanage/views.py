@@ -25,7 +25,7 @@ def ticketRegister(request):
         currency_list = [{'pk':c.pk,'name':c.name} for c in Currency.objects.filter(store=user)]
         context = {
             'currency_list':currency_list
-            }
+        }
         return render(request,'storemanage/ticket-form.html',context)
     data = request.POST
     ticket_attrib = {k:v for k,v in data.items() if v != ''}

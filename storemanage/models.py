@@ -19,3 +19,5 @@ class Ticket(models.Model):
     remain = models.IntegerField(null=True)  #จำนวนที่ยังเหลืออยู่
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     store = models.ForeignKey(User, on_delete=models.CASCADE)
+    ticket_image_url = models.CharField(max_length=1023, null=True)
+    content_image_url = models.CharField(max_length=1023, null=True)
