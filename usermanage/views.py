@@ -13,7 +13,7 @@ def customerSignup(request):
     if request.method == 'GET':
         return render(request,'usermanage/signup-customer.html')
     data = request.POST
-    
+
     # check user already exits
     if User.objects.filter(username=data['username']).exists():
         return render(request,'usermanage/signup-customer.html')
@@ -93,3 +93,8 @@ def customertest(request):
 @permission_required('usermanage.store_rigths',raise_exception=True)
 def storetest(request):
     return render(request,'usermanage/storetest.html')
+
+@login_required()
+@permission_required('usermanage.customer_rigths',raise_exception=True)
+def customerProfile(request):
+    pass
