@@ -47,7 +47,9 @@ def ticketRegister(request):
     user = request.user
     currency_list = [{'pk':c.pk,'name':c.name} for c in Currency.objects.filter(store=user)]
     if request.method == 'GET':
-        return render(request,'store/add.html',context)
+        return render(request,'store/add.html',{
+            'currency_list': currency_list
+        })
     data = request.POST
     error = validateForm(data)
     if error:
@@ -84,7 +86,7 @@ def ticketEdit(request, ticket_id):
             'error': error,
             'currency_list':currency_list
         })
-
+`
     ticket_attrib = {k:v for k,v in data.items() if v != ''}
     ticket_attrib.pop('csrfmiddlewaretoken')
     ticket_attrib['is_period'] = True if 'is_period' in ticket_attrib else False
