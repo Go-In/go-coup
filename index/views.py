@@ -4,7 +4,7 @@ from django.shortcuts import render
 def index(request):
     return render(request, 'index/index.html', {})
 
-def detail(request):
+def detail(request, coupon_id):
     return render(request, 'index/detail.html', {})
 
 def profile(request):
