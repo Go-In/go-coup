@@ -103,7 +103,7 @@ def userProfileContextGenerate(user):
         customer = models.Customer.objects.get(user=user)
         data['first_name']=customer.first_name
         data['last_name']=customer.last_name
-        data['birthdate']=customer.birthdate
+        data['birthdate']=customer.birthdate.strftime('%Y-%m-%d')
     return {k:v for k,v in data.items() if v is not None}
 
 @login_required()
@@ -121,7 +121,7 @@ def customerSetting(request):
 
     user = request.user
     data = request.POST
-    customer_attrib = {k:v for k,v in data.items()}
+    customer_attrib = {k:v for k,v in data.items() if v != ''}
     customer_attrib.pop('csrfmiddlewaretoken', None)
     customer = models.Customer.objects.get(user=user)
     print(customer_attrib)
