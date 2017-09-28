@@ -94,7 +94,19 @@ def customertest(request):
 def storetest(request):
     return render(request,'usermanage/storetest.html')
 
+def userProfileContextGenerate(user):
+    data = {'username':user.username,'email':user.email}
+    if user.groups.filter(name='store').exists():
+        store = models.Store.objects.get(user=user)
+        data['store_name']=store.store_name
+    elif user.groups.filter(name='customer').exists():
+        customer = models.Customer.objects.get(user=user)
+        data['first_name']=customer.first_name
+        data['last_name']=customer.last_name
+    return data
+
 @login_required()
 @permission_required('usermanage.customer_rigths',raise_exception=True)
 def customerProfile(request):
-    pass
+    data = {'data':userProfileContextGenerate(request.user)}
+    return render(request,'index/profile.html',data)
