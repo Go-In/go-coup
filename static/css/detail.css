@@ -34,7 +34,9 @@
   padding: 15px;
   font-size: 20px;
   margin-bottom: 40px;
+  word-break: break-all;
 }
+
 .buy-btn {
   background: #f1457c;
   color: white;

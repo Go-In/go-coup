@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from . import views
 
-app_name = "user"
+app_name = 'user'
 urlpatterns = [
     url(r'^signup/$', views.customerSignup, name='customer-signup'),
     url(r'^store-signup/$', views.storeSignup, name='store-signup'),
