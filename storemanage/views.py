@@ -14,6 +14,8 @@ def index(request):
         'tickets': tickets
     })
 
+@login_required()
+@permission_required('usermanage.store_rights',raise_exception=True)
 def currencyRegister(request):
     user = request.user
     if request.method == 'GET':
@@ -39,6 +41,8 @@ def validateForm(data):
         error['content_image_url'] = True
     return error
 
+@login_required()
+@permission_required('usermanage.store_rights',raise_exception=True)
 def ticketRegister(request):
     user = request.user
     currency_list = [{'pk':c.pk,'name':c.name} for c in Currency.objects.filter(store=user)]
@@ -65,6 +69,8 @@ def ticketRegister(request):
     ticket.save()
     return redirect('store:index')
 
+@login_required()
+@permission_required('usermanage.store_rights',raise_exception=True)
 def ticketEdit(request, ticket_id):
     user = request.user
     currency_list = [{'pk':c.pk,'name':c.name} for c in Currency.objects.filter(store=user)]
