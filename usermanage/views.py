@@ -48,6 +48,7 @@ def storeSignup(request):
     return redirect_after_signin(user)
 
 def signin(request):
+    user = request.user
     if request.user.is_authenticated:
         return redirect_after_signin(user)
     if request.method == 'POST':
