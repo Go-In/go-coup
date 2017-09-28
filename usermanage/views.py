@@ -109,7 +109,7 @@ def userProfileContextGenerate(user):
 @login_required()
 @permission_required('usermanage.customer_rigths',raise_exception=True)
 def customerProfile(request):
-    data = {'data':userProfileContextGenerate(request.user).items()}
+    data = {'data':userProfileContextGenerate(request.user)}
     return render(request,'index/profile.html',data)
 
 @login_required()
