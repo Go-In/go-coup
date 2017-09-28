@@ -12,7 +12,8 @@
   <link rel="stylesheet" href="{% static 'css/profile.css' %}">
   <link rel="stylesheet" href="{% static 'css/cart.css' %}">
   <link rel="stylesheet" href="{% static 'css/coupon.css' %}">
-  
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
   <script src="{% static 'js/script.js' %}"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -37,8 +38,8 @@
                 <img class="logo-nav" src="{% static 'images/profile.png' %}" alt="">
               </a>
             </div>
-            <div class="nav-btn">
-              <a href="{% url 'index:cart' %}">
+            <div class="nav-btn" onclick="goToCart()">
+              <a href="#">
                 <img class="logo-nav" src="{% static 'images/cart.png' %}" alt="">
               </a>
             </div>

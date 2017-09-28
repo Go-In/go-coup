@@ -1,0 +1,28 @@
+{% load staticfiles %}
+{% include 'components/header.html' %}
+<!--
+<img
+    src="https://f.ptcdn.info/808/052/000/ou0idx1t5MrjxrpCEIA-o.jpg" \
+    width="100%"
+    border="0" /> -->
+<div class="full-container">
+  <div class="container">
+    <div class="content row">
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12 login-wrapper">
+          <div class="login">
+            <div class="login-header">LOGIN</div>
+            <input type="text" class="form-control login-input" id="username" name="username" placeholder="username">
+            <input type="text" class="form-control login-input" id="password" name="password" placeholder="password">
+            <center>
+              <button class="btn btn-gocoup login-btn">login</button>
+              <button class="btn btn-gocoup signup-btn">signup</button><br>
+              <a href="#" style="font-size:12px;">Forget password?</a>
+            </center>
+            <br>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+{% include 'components/footer.html' %}
