@@ -53,7 +53,7 @@
     <div class="content row">
         {% for ticket in tickets %}  
             <div class="col-md-4 col-sm-6 col-xs-12">
-                <a href="{% url 'index:detail' 1 %}">
+                <a href="{% url 'index:detail' ticket.id %}">
                     <div class="coupon-sell">
                         <img class="coup-img" src="https://kfcbd.com/wp-content/uploads/2016/11/kfc-logo.png" alt="coup-image">
                         <div class="row">
@@ -61,7 +61,7 @@
                             <p class="coup-text">name: {{ ticket.name }}</p>
                             <p class="coup-text">exp: {{ ticket.expire_date }}</p>
                         </div>
-                        <div class="col-xs-4 coup-right">
+                        <div class="col-xs-4 coup-right">   
                             <p>{{ ticket.price }} {{ ticket.currency }}</p>
                         </div>
                         </div>
