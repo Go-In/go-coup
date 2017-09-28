@@ -117,4 +117,16 @@ def customerSetting(request):
     if request.method == 'GET':
         data = {'data':{k:v for k,v in userProfileContextGenerate(request.user).items() if v is not None}}
         return render(request,'index/setting.html',data)
-    return redirect('index:index')
+
+    user = request.user
+    data = request.POST
+    customer_attrib = {k:v for k,v in data.items()}
+    customer_attrib.pop('csrfmiddlewaretoken', None)
+    customer = models.Customer.objects.get(user=user)
+    print(customer_attrib)
+    for k,v in customer_attrib.items():
+        setattr(customer,k,v)
+    customer.save()
+    user.email = customer_attrib['email']
+    user.save()
+    return render(request,'index/setting.html',{'data':customer_attrib})
