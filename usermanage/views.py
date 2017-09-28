@@ -86,11 +86,11 @@ def isStore(user):
 def isCustomer(user):
     return user.groups.filter(name='customer').exists()
 
-@permission_required('usermanage.customer_rigths',raise_exception=True)
+@permission_required('usermanage.customer_rights',raise_exception=True)
 def customertest(request):
     return render(request,'usermanage/customertest.html')
 
-@permission_required('usermanage.store_rigths',raise_exception=True)
+@permission_required('usermanage.store_rights',raise_exception=True)
 def storetest(request):
     return render(request,'usermanage/storetest.html')
 
@@ -106,13 +106,13 @@ def userProfileContextGenerate(user):
     return data
 
 @login_required()
-@permission_required('usermanage.customer_rigths',raise_exception=True)
+@permission_required('usermanage.customer_rights',raise_exception=True)
 def customerProfile(request):
     data = {'data':{k:v for k,v in userProfileContextGenerate(request.user).items() if v is not None}}
     return render(request,'index/profile.html',data)
 
 @login_required()
-@permission_required('usermanage.customer_rigths',raise_exception=True)
+@permission_required('usermanage.customer_rights',raise_exception=True)
 def customerSetting(request):
     if request.method == 'GET':
         data = {'data':{k:v for k,v in userProfileContextGenerate(request.user).items() if v is not None}}

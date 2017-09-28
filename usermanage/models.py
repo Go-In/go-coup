@@ -21,6 +21,6 @@ class RightsSupport(models.Model):
     class Meta:
         managed = False
         permissions = (
-            ('customer_rigths', 'Global customer rights'),
-            ('store_rights', 'Global store rights'),
+            ('customer_rights', 'customer_rights'),
+            ('store_rights', 'store_rights'),
         )
