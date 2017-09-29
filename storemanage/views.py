@@ -75,8 +75,10 @@ def ticketEdit(request, ticket_id):
     user = request.user
     currency_list = [{'pk':c.pk,'name':c.name} for c in Currency.objects.filter(store=user)]
     ticket = Ticket.objects.get(pk=ticket_id)
+
     if ticket.store != user:
         return index(request, 'ไม่มีสิทธิในการเข้าถึง ticket นี้')
+
     if request.method == 'GET':
         return render(request, 'store/edit.html', {
             'ticket': ticket,
