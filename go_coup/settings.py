@@ -132,4 +132,4 @@ STATICFILES_DIRS = [
 
 #auth
 
-LOGIN_URL = '/user/signin'
+LOGIN_URL = '/user/login'
