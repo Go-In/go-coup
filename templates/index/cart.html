@@ -8,7 +8,10 @@
             <img class="list-image" src="{{ ticket.content_image_url }}" alt="detail content">
             <div class="list-content">
               <p>name: {{ ticket.name }}</p>
-            </div>
+              <p id='ticket_{{ ticket.id }}'>จำนวน: 1</p>
+              <button class='btn btn-primary' onclick="incrementTicket({{ ticket.id }})">เพิ่ม</button>
+              <button class='btn btn-danger' onclick="decrementTicket({{ ticket.id }})">ลด</button>              
+            </div>              
           </div>
         </div>
       </div>
@@ -16,6 +19,29 @@
     <button class="btn btn-gocoup">shop</button>
     <button class="btn btn-gocoup">pay</button>
   </div>
-
 </div>
+<script>
+  var count = {}
+  
+  function renderTicket(ticket_id) {
+    var numElement = document.getElementById('ticket_' + ticket_id);
+    numElement.innerText = 'จำนวน:' + count[ticket_id];
+  }
+  
+  function incrementTicket(ticket_id) {
+    if (count[ticket_id])
+      count[ticket_id]++;
+    else
+      count[ticket_id] = 2;
+    renderTicket(ticket_id);
+  }
+
+  function decrementTicket(ticket_id) {
+    if (count[ticket_id] && count[ticket_id] > 1) {
+      count[ticket_id]--;
+      renderTicket(ticket_id);
+    }
+  }
+
+</script>
 {% include 'components/footer.html' %}
