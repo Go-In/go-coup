@@ -6,7 +6,9 @@ class UserTypeMiddleware(object):
     def __call__(self, request):
         # Code to be executed for each request before
         # the view (and later middleware) are called.
-        print('req:', request)
+        print('req:', 'customer' in list(request.user.groups.values_list('name', flat=True)))
+        print('req:', 'store' in list(request.user.groups.values_list('name', flat=True)))
+
         response = self.get_response(request)
         print('res', response)
         # Code to be executed for each request/response after
