@@ -1,3 +1,4 @@
+from django.db import transaction
 from django.shortcuts import render, get_object_or_404, redirect
 from storemanage.models import Currency, Ticket
 from usermanage.models import Store
@@ -13,6 +14,7 @@ def purchasable(wallet, ticket):
             return False
     return True
 
+@transaction.atomic
 def purchase(request):
     if request.method == 'GET':
         return HttpResponseBadRequest()
