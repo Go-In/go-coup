@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from storemanage.models import Currency, Ticket
 from usermanage.models import Store
-from customermanage.models import Wallet
+from customermanage.models import Wallet, Coupon
 from django.http import HttpResponseBadRequest
 # Create your views here.
 
@@ -17,5 +17,6 @@ def purchase(request):
     if ticket.price <= wallet.amount:
         wallet.amount = wallet.amount - ticket.price
         wallet.save()
-        print(wallet.amount)
+        coupon = Coupon(user = user, ticket = ticket)
+        coupon.save()
     return redirect('index:detail',ticket_id = ticket_id)
