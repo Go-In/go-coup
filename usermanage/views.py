@@ -133,7 +133,6 @@ def customerSetting(request):
     customer_attrib = {k:v for k,v in data.items()}
     customer_attrib.pop('csrfmiddlewaretoken', None)
     customer = models.Customer.objects.get(user=user)
-    print(customer_attrib)
     for k,v in customer_attrib.items():
         setattr(customer,k,v)
     customer.save()
