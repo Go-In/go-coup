@@ -8,18 +8,22 @@ class usermanageViewsTestCase(TestCase):
     def test_customer_register_view(self):
         resp = self.client.get('/user/register', follow = True)
         self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.templates[0].name, 'usermanage/register-customer.html')
 
     def test_store_register_view(self):
         resp = self.client.get('/user/store-register', follow = True)
         self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.templates[0].name, 'usermanage/register-store.html')
 
     def test_user_login_view(self):
         resp = self.client.get('/user/login', follow = True)
         self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.templates[0].name, 'usermanage/login.html')
 
     def test_user_logout_view(self):
         resp = self.client.get('/user/logout', follow = True)
         self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.templates[0].name, 'index/index.html')
 
 class usermanageFunctionTestCase(TestCase):
     def setUp(self):
