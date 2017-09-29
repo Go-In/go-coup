@@ -6,6 +6,7 @@ from customermanage.models import Wallet, Coupon
 from django.http import HttpResponseBadRequest
 # Create your views here.
 
+@transaction.atomic
 def purchasable(wallet, ticket):
     if ticket.price > wallet.amount:
         return False
@@ -14,7 +15,6 @@ def purchasable(wallet, ticket):
             return False
     return True
 
-@transaction.atomic
 def purchase(request):
     if request.method == 'GET':
         return HttpResponseBadRequest()
@@ -22,12 +22,13 @@ def purchase(request):
     ticket_id = request.POST['ticket_id']
     ticket = get_object_or_404(Ticket, pk=ticket_id)
     wallet,create = Wallet.objects.get_or_create(user=user, currency = ticket.currency)
-    if purchasable(wallet, ticket):
-        wallet.amount -= ticket.price
-        wallet.save()
-        if ticket.is_limit:
-            ticket.remain -= 1
-            ticket.save()
-        coupon = Coupon(user = user, ticket = ticket)
-        coupon.save()
+    with transaction.atomic():
+        if purchasable(wallet, ticket):
+            wallet.amount -= ticket.price
+            wallet.save()
+            if ticket.is_limit:
+                ticket.remain -= 1
+                ticket.save()
+            coupon = Coupon(user = user, ticket = ticket)
+            coupon.save()
     return redirect('index:detail',ticket_id = ticket_id)
