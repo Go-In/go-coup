@@ -26,6 +26,15 @@ class usermanageFunctionTestCase(TestCase):
         resp = self.client.get('/user/login', follow = True)
         self.assertEqual(resp.templates[0].name, 'index/index.html')
 
+    def test_user_logout(self):
+        resp = self.client.login(username = 'testing_user', password = 'testing_password')
+        resp = self.client.get('/user/login', follow = True)
+        self.assertEqual(resp.templates[0].name, 'index/index.html')
+        
+        resp = self.client.get('/user/logout', follow = True)
+        resp = self.client.get('/user/login', follow = True)
+        self.assertEqual(resp.templates[0].name, 'usermanage/login.html')
+
     def test_customer_str(self):
         customer_user = User.objects.create_user('customer_username')
         customer = models.Customer(user = customer_user, first_name = 'customer_firstname')
