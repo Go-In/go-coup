@@ -28,6 +28,7 @@
   padding: 10px 20px;
   font-size: 18px;
   cursor: pointer;
+  height: 100%;
 }
 .nav-btn:hover {
   background: #f51c61;
