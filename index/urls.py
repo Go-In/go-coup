@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^login/$', views.login, name='login'),
     url(r'^profile/coupon/$', views.coupon, name='coupon'),
     url(r'^profile/wallet/$', views.wallet, name='wallet'),
-    url(r'^profile/setting/$', views.setting, name='setting')
+    url(r'^profile/setting/$', views.setting, name='setting'),
+    url(r'^search/$', views.search, name='search'),
 ]

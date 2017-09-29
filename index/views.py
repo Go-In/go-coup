@@ -31,3 +31,6 @@ def wallet(request):
 
 def login(request):
     return render(request, 'index/login.html', {})
+
+def search(request):
+    return render(request, 'index/search.html', {})
