@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from . import models
 
 class usermanageViewsTestCase(TestCase):
-    def test_user_register(self):
+    def test_customer_register(self):
         resp = self.client.get('/user/register', follow = True)
         self.assertEqual(resp.status_code, 200)
 
@@ -12,7 +12,7 @@ class usermanageViewsTestCase(TestCase):
         resp = self.client.get('/user/store-register', follow = True)
         self.assertEqual(resp.status_code, 200)
 
-    def test_user_str(self):
+    def test_customer_str(self):
         customer_user = User.objects.create_user('customer_username')
         customer = models.Customer(user = customer_user, first_name = 'customer_firstname')
         self.assertEqual(str(customer), customer.first_name)
