@@ -17,6 +17,10 @@ class usermanageViewsTestCase(TestCase):
         resp = self.client.get('/user/login', follow = True)
         self.assertEqual(resp.status_code, 200)
 
+    def test_user_logout_view(self):
+        resp = self.client.get('/user/logout', follow = True)
+        self.assertEqual(resp.status_code, 200)
+
 class usermanageFunctionTestCase(TestCase):
     def setUp(self):
         user = User.objects.create_user('testing_user', password = 'testing_password')
