@@ -12,6 +12,10 @@ class usermanageViewsTestCase(TestCase):
         resp = self.client.get('/user/store-register', follow = True)
         self.assertEqual(resp.status_code, 200)
 
+    def test_user_login(self):
+        resp = self.client.get('/user/login', follow = True)
+        self.assertEqual(resp.status_code, 200)
+
     def test_customer_str(self):
         customer_user = User.objects.create_user('customer_username')
         customer = models.Customer(user = customer_user, first_name = 'customer_firstname')
