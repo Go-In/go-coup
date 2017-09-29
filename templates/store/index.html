@@ -1,6 +1,5 @@
 {% include 'components/store/header.html' %}
 <div class="container">
-
   <h1>STORE MANAGE</h1>
   <p>you are {{ user.username }}</p>
   <a href="{% url 'store:ticket-register' %}">add new ticket</a>
@@ -19,6 +18,7 @@
     '{{ error }}',
     'error'
   )
+  window.history.replaceState(null ,null, '/store')
 </script>
 {% endif %}
 {% include 'components/store/footer.html' %}

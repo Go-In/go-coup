@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from .models import Currency, Ticket
@@ -6,12 +6,13 @@ from django.utils.dateparse import parse_date
 
 @login_required()
 @permission_required('usermanage.store_rights',raise_exception=True)
-def index(request):
+def index(request, error=''):
     user = request.user
     tickets = Ticket.objects.filter(store=user)
     return render(request,'store/index.html', {
         'user': user,
         'tickets': tickets,
+        'error': error
     })
 
 @login_required()
@@ -74,6 +75,8 @@ def ticketEdit(request, ticket_id):
     user = request.user
     currency_list = [{'pk':c.pk,'name':c.name} for c in Currency.objects.filter(store=user)]
     ticket = Ticket.objects.get(pk=ticket_id)
+    if ticket.store != user:
+        return index(request, 'ไม่มีสิทธิในการเข้าถึง ticket นี้')
     if request.method == 'GET':
         return render(request, 'store/edit.html', {
             'ticket': ticket,
@@ -112,12 +115,6 @@ def ticketDelete(request, ticket_id):
     user = request.user
     ticket = Ticket.objects.get(pk=ticket_id)
     if ticket.store != user:
-        tickets = Ticket.objects.filter(store=user)
-        error = 'ไม่มีสิทธิในการลบ ticket นี้'
-        return render(request,'store/index.html', {
-            'user': user,
-            'tickets': tickets,
-            'error': error
-        })
+        return index(request, 'ไม่มีสิทธิในการเข้าถึง ticket นี้')
     ticket.delete()
     return redirect('store:index')
