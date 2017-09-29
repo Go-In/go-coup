@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 from . import models
 
 class usermanageViewsTestCase(TestCase):
-    def setUp(self):
-        user = User.objects.create_user('testing_user', password = 'testing_password')
 
     def test_customer_register(self):
         resp = self.client.get('/user/register', follow = True)
@@ -18,6 +16,10 @@ class usermanageViewsTestCase(TestCase):
     def test_user_login(self):
         resp = self.client.get('/user/login', follow = True)
         self.assertEqual(resp.status_code, 200)
+
+class usermanageFunctionTestCase(TestCase):
+    def setUp(self):
+        user = User.objects.create_user('testing_user', password = 'testing_password')
 
     def test_loged_user_not_be_able_to_login_again(self):
         resp = self.client.login(username = 'testing_user', password = 'testing_password')
