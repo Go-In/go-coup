@@ -16,8 +16,8 @@ services:
             - "5432:5432"
     web:
         build: .
-        #command: /bin/bash -c "sleep 7;python3 manage.py runserver 0.0.0.0:8000"
-        command: /bin/bash -c "sleep 7;uwsgi --http :8000 --static-map /static=/code/static --module go_coup.wsgi"
+        command: /bin/bash -c "sleep 7;python3 manage.py runserver 0.0.0.0:8000"
+        #command: /bin/bash -c "sleep 7;uwsgi --http :8000 --static-map /static=/code/static --module go_coup.wsgi"
         volumes:
             - .:/code
         ports:
