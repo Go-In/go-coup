@@ -18,5 +18,5 @@ from . import views
 
 app_name = 'customer'
 urlpatterns = [
-    url(r'^$', views.motherload,name='motherload')
+    url(r'^motherload/$', views.motherload,name='motherload')
 ]
