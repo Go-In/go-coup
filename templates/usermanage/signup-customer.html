@@ -54,42 +54,45 @@
   <div class="full-container">
 
       <div class="content row">
-        <div class="col-md-4 col-sm-6 col-xs-12">
-        </div>
-        <div class="col-md-4 col-sm-6 col-xs-12" style="margin: 5% 0 5% 0;">
-          <div class="login">
-            <div class="login-header">SIGN UP</div>
+        <div class="login col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12 login-wrapper">
+          <div class="login-header signup">SIGN UP</div>
+          <div class="">
             <form action="" method="POST">
             {% csrf_token %}
-            <label class="signup-form">
-              Name: <input type="text" class="form-control" id="first_name" name="first_name" placeholder="firstname">
-            </label>
-            <label class="signup-form">
-              Lastname: <input type="text" class="form-control" id="last_name" name="last_name" placeholder="lastname">
-            </label>
-            <label class="signup-form">
-              Username: <input type="username" class="form-control" id="username" name="username" placeholder="username">
-            </label>
-            <label class="signup-form">
-              Password: <input type="password" class="form-control" id="password" name="password" placeholder="password">
-            </label>
-            <label class="signup-form">
-              Tel: <input type="text" class="form-control" id="tel" name="tel" placeholder="tel">
-            </label>
-            <label class="signup-form">
-              Birthday: <input type="date" class="form-control" id="birthdate" name="birthdate" placeholder="birthday">
-            </label>
-            <label class="signup-form">
-              Email: <input style="width:215%;" type="text" class="form-control" id="email" name="email" placeholder="email">
-            </label>
+            <div class="form-group">
+              <label for="usr">Name:</label>
+              <input type="text" class="form-control" id="first_name" name="first_name" placeholder="firstname">
+            </div>
+            <div class="form-group">
+              <label for="usr">Lastname:</label>
+              <input type="text" class="form-control" id="last_name" name="last_name" placeholder="lastname">
+            </div>
+            <div class="form-group">
+              <label for="usr">Username:</label>
+              <input type="username" class="form-control" id="username" name="username" placeholder="username">
+            </div>
+            <div class="form-group">
+              <label for="usr">Password:</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="password">
+            </div>
+            <div class="form-group">
+              <label for="usr">Tel:</label>
+              <input type="text" class="form-control" id="tel" name="tel" placeholder="tel">
+            </div>
+            <div class="form-group">
+              <label for="usr">Birthday:</label>
+              <input type="date" class="form-control" id="birthdate" name="birthdate" placeholder="birthday">
+            </div>
+            <div class="form-group">
+              <label for="usr">Email:</label>
+              <input type="text" class="form-control" id="email" name="email" placeholder="email">
+            </div>
             <center>
               <button class="btn btn-gocoup login-btn" style="margin-top:20px;">submit</button>
             </form>
             </center>
             <br>
           </div>
-        </div>
-        <div class="col-md-4 col-sm-6 col-xs-12">
         </div>
       </div>
     </div>
