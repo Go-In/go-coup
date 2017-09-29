@@ -28,15 +28,19 @@ class usermanageFunctionTestCase(TestCase):
     def test_loged_user_not_be_able_to_login_again(self):
         resp = self.client.login(username = 'testing_user', password = 'testing_password')
         resp = self.client.get('/user/login', follow = True)
+        self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.templates[0].name, 'index/index.html')
 
     def test_user_logout(self):
         resp = self.client.login(username = 'testing_user', password = 'testing_password')
         resp = self.client.get('/user/login', follow = True)
+        self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.templates[0].name, 'index/index.html')
         
         resp = self.client.get('/user/logout', follow = True)
+        self.assertEqual(resp.status_code, 200)
         resp = self.client.get('/user/login', follow = True)
+        self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.templates[0].name, 'usermanage/login.html')
 
     def test_customer_str(self):
