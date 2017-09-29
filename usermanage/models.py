@@ -8,12 +8,14 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=30, null=True)
     last_name = models.CharField(max_length=30, null=True)
     birthdate = models.DateField(null=True)
+    tel = models.CharField(max_length=12, null=True)
     def __str__(self):
         return self.user
 
 class Store(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     store_name = models.CharField(max_length=30)
+    tel = models.CharField(max_length=12, null=True)
     def __str__(self):
         return self.user
 
