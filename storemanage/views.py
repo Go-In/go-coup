@@ -57,7 +57,7 @@ def ticketRegister(request):
             'error': error,
             'currency_list':currency_list
         })
-
+    print(data.items())
     ticket_attrib = {k:v for k,v in data.items() if v != ''}
     ticket_attrib.pop('csrfmiddlewaretoken')
     ticket_attrib['is_period'] = True if 'is_period' in ticket_attrib else False
@@ -86,4 +86,22 @@ def ticketEdit(request, ticket_id):
             'error': error,
             'currency_list':currency_list
         })
+    for k, v in data.items():
+        if v != '' and k != 'csrfmiddlewaretoken':
+            if k == 'currency':
+                setattr(ticket,k, Currency.objects.get(pk=v))
+            else:
+                setattr(ticket,k, v)
+    
+    if 'is_period' in data.keys():
+        setattr(ticket, 'is_period', True)
+    else:
+        setattr(ticket, 'is_period', False)
+    
+    if 'is_limit' in data.keys():
+        setattr(ticket, 'is_limit', True)
+    else:
+        setattr(ticket, 'is_limit', False)    
+
+    ticket.save()
     return redirect('store:index')
