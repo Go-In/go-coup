@@ -40,6 +40,14 @@
     if (count[ticket_id] && count[ticket_id] > 1) {
       count[ticket_id]--;
       renderTicket(ticket_id);
+    } else {
+      swal({
+        title: 'เอา ticket นี้ออกจาก cart !',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'ใช่',
+        cancelButtonText: 'ไม่',
+      })
     }
   }
 
