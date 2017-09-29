@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Wallet(models.Model):
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    amount = models.PositiveIntegerField(default=2)
+    amount = models.PositiveIntegerField(default=0)
 
 class Coupon(models.Model):
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
