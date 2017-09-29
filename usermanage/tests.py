@@ -4,12 +4,12 @@ from django.contrib.auth.models import User
 from . import models
 
 class usermanageViewsTestCase(TestCase):
-    def test_user_signup(self):
-        resp = self.client.get('/user/signup', follow = True)
+    def test_user_register(self):
+        resp = self.client.get('/user/register', follow = True)
         self.assertEqual(resp.status_code, 200)
 
-    def test_store_signup(self):
-        resp = self.client.get('/user/store-signup', follow = True)
+    def test_store_register(self):
+        resp = self.client.get('/user/store-register', follow = True)
         self.assertEqual(resp.status_code, 200)
 
     def test_user_str(self):
