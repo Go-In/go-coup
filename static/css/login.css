@@ -5,6 +5,13 @@
   -o-transition: background 0.5s; /* Safari */
   transition: background 0.5s;
 }
+.signup {
+  margin: 0 -15px 20px -15px;
+}
+.login-wrapper {
+  margin-top: 11%;
+  margin-bottom: 11%;
+}
 
 .login-header {
   font-size: 50px;
@@ -41,4 +48,3 @@ a.button {
   text-decoration: none;
   color: initial;
 }
-
