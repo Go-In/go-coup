@@ -11,7 +11,7 @@ def index(request):
     tickets = Ticket.objects.filter(store=user)
     return render(request,'store/index.html', {
         'user': user,
-        'tickets': tickets
+        'tickets': tickets,
     })
 
 @login_required()
@@ -104,4 +104,20 @@ def ticketEdit(request, ticket_id):
         setattr(ticket, 'is_limit', False)    
 
     ticket.save()
+    return redirect('store:index')
+
+@login_required()
+@permission_required('usermanage.store_rights',raise_exception=True)
+def ticketDelete(request, ticket_id):
+    user = request.user
+    ticket = Ticket.objects.get(pk=ticket_id)
+    if ticket.store != user:
+        tickets = Ticket.objects.filter(store=user)
+        error = 'ไม่มีสิทธิในการลบ ticket นี้'
+        return render(request,'store/index.html', {
+            'user': user,
+            'tickets': tickets,
+            'error': error
+        })
+    ticket.delete()
     return redirect('store:index')
