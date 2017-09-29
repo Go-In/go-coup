@@ -32,23 +32,30 @@
               </div>
           </div>
           <div class="right">
-            <div class="nav-btn">
-                {% if user.is_authenticated %}
+            {% if user.is_authenticated %}
+              <div class="nav-btn">                    
                 <a href="/profile">
                   Profile
                   <img class="logo-nav" src="../../static/images/profile.png" alt="">
                 </a>
-                {% else %}
-                <a href="/user/signin">
-                Sign In
+              </div>
+              <div class="nav-btn" onclick="goToCart()">
+                <a href="#">
+                  <img class="logo-nav" src="{% static 'images/cart.png' %}" alt="">
                 </a>
-                {% endif %}
-            </div>
-            <div class="nav-btn" onclick="goToCart()">
-              <a href="#">
-                <img class="logo-nav" src="{% static 'images/cart.png' %}" alt="">
-              </a>
-            </div>
+              </div>            
+              <div class="nav-btn">
+                <a href="{% url 'user:signout' %}">
+                  signout
+                </a>  
+              </div>
+            {% else %}
+            <a href="/user/signin">              
+              <div class="nav-btn">
+                  Sign In
+              </div>
+            </a>          
+            {% endif %}            
           </div>
         </div>
       </div>
