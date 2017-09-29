@@ -7,10 +7,15 @@
           <div class="list">
             <img class="list-image" src="{{ ticket.content_image_url }}" alt="detail content">
             <div class="list-content">
-              <p>name: {{ ticket.name }}</p>
+              <div style="display: flex; justify-content: space-between;">
+                <p>name: {{ ticket.name }}</p>  
+                <a class="btn" onclick="deleteTicketFromCart({{  ticket.id }})">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </a>      
+              </div>
               <p id='ticket_{{ ticket.id }}'>จำนวน: 1</p>
               <button class='btn btn-primary' onclick="incrementTicket({{ ticket.id }})">เพิ่ม</button>
-              <button class='btn btn-danger' onclick="decrementTicket({{ ticket.id }})">ลด</button>              
+              <button class='btn btn-danger' onclick="decrementTicket({{ ticket.id }})">ลด</button>        
             </div>              
           </div>
         </div>
@@ -41,14 +46,18 @@
       count[ticket_id]--;
       renderTicket(ticket_id);
     } else {
-      swal({
+      deleteTicketFormCart(ticket_id)
+    }
+  }
+
+  function deleteTicketFromCart(ticket_id) {
+    swal({
         title: 'เอา ticket นี้ออกจาก cart !',
         type: 'warning',
         showCancelButton: true,
         confirmButtonText: 'ใช่',
         cancelButtonText: 'ไม่',
-      })
-    }
+    })
   }
 
 </script>
