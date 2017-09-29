@@ -27,7 +27,7 @@
             <p>{{ ticket.detail }}</p>
           </div>
           <button class="btn buy-btn">Buy</button>
-          <button class="btn buy-btn" onclick="addItemToCart(1)">add to cart</button>
+          <button class="btn buy-btn" onclick="addItemToCart({{ ticket.id }})">add to cart</button>
         </div>
       </div>
     </div>

@@ -18,7 +18,12 @@ def profile(request):
     return render(request, 'index/profile.html', {})
 
 def cart(request):
-    return render(request, 'index/cart.html', {})
+    data = request.GET
+    items = data['cart'].split(',')
+    tickets = Ticket.objects.filter(pk__in=items)
+    return render(request, 'index/cart.html', {
+        'tickets': tickets
+    })
 
 def coupon(request):
     return render(request, 'index/coupon.html', {})
