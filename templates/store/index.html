@@ -5,9 +5,12 @@
   <a href="{% url 'store:ticket-register' %}">add new ticket</a>
   {% for ticket in tickets %}
     <div class="row">
-      <div class="col-xs-6 col-md-4">{{ ticket.name }}</div>
-      <div class="col-xs-6 col-md-4"><a href="{% url 'store:ticket-edit' ticket.id %}">edit</a></div>
-      <div class="col-xs-6 col-md-4"><a href="{% url 'store:ticket-delete' ticket.id %}">delete</a></div>      
+      <div class="col-xs-12 col-md-2">{{ ticket.name }}</div>
+      <div class="col-xs-12 col-md-2">{{ ticket.price }} {{ ticket.currency }}</div>
+      <div class="col-xs-12 col-md-2">{{ ticket.detail }}</div>
+      <div class="col-xs-12 col-md-2">{{ ticket.expire_date }}</div>
+      <div class="col-xs-12 col-md-2"><a href="{% url 'store:ticket-edit' ticket.id %}">edit</a></div>
+      <div class="col-xs-12 col-md-2"><a href="{% url 'store:ticket-delete' ticket.id %}">delete</a></div>      
     </div>
   {% endfor %}
 </div>
