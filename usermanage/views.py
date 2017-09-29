@@ -13,7 +13,7 @@ def customerSignup(request):
     if request.method == 'GET':
         return render(request,'usermanage/signup-customer.html')
     data = request.POST
-    
+
     # check user already exits
     if User.objects.filter(username=data['username']).exists():
         return render(request,'usermanage/signup-customer.html')
@@ -48,6 +48,7 @@ def storeSignup(request):
     return redirect_after_signin(user)
 
 def signin(request):
+    user = request.user
     if request.user.is_authenticated:
         return redirect_after_signin(user)
     if request.method == 'POST':
@@ -111,7 +112,7 @@ def userProfileContextGenerate(user):
         customer = models.Customer.objects.get(user=user)
         data['first_name']=customer.first_name
         data['last_name']=customer.last_name
-        data['birthdate']=customer.birthdate
+        data['birthdate']=customer.birthdate.strftime('%Y-%m-%d') if customer.birthdate is not None else None
     return {k:v for k,v in data.items() if v is not None}
 
 @login_required()
