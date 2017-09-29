@@ -29,7 +29,7 @@ class usermanageViewsTestCase(TestCase):
         customer = models.Customer(user = customer_user, first_name = 'customer_firstname')
         self.assertEqual(str(customer), customer.first_name)
 
-    def test_store_title(self):
+    def test_store_str(self):
         store_user = User.objects.create_user('store_username')
         store = models.Store(user = store_user, store_name = 'store_storename' )
         self.assertEqual(str(store), store.store_name)
