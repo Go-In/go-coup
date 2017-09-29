@@ -5,15 +5,15 @@ from . import models
 
 class usermanageViewsTestCase(TestCase):
 
-    def test_customer_register(self):
+    def test_customer_register_view(self):
         resp = self.client.get('/user/register', follow = True)
         self.assertEqual(resp.status_code, 200)
 
-    def test_store_register(self):
+    def test_store_register_view(self):
         resp = self.client.get('/user/store-register', follow = True)
         self.assertEqual(resp.status_code, 200)
 
-    def test_user_login(self):
+    def test_user_login_view(self):
         resp = self.client.get('/user/login', follow = True)
         self.assertEqual(resp.status_code, 200)
 
