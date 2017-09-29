@@ -13,12 +13,12 @@ def customerSignup(request):
     if request.method == 'GET':
         return render(request,'usermanage/signup-customer.html')
     data = request.POST
-
+    
     # check user already exits
     if User.objects.filter(username=data['username']).exists():
         return render(request,'usermanage/signup-customer.html')
 
-    user = User.objects.create_user(data['username'], password = data['password'])
+    user = User.objects.create_user(data['username'], password = data['password'], email = data['email'])
     g = Group.objects.get(name='customer')
     g.user_set.add(user)
     user.save()
@@ -48,6 +48,7 @@ def storeSignup(request):
     return redirect_after_signin(user)
 
 def signin(request):
+    user = request.user
     if request.user.is_authenticated:
         return redirect_after_signin(user)
     if request.method == 'POST':
