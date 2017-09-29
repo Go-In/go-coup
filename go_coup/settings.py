@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'index.apps.IndexConfig',
     'usermanage.apps.UsermanageConfig',
     'storemanage.apps.StoremanageConfig',
+    'customermanage.apps.CustomermanageConfig'
 ]
 
 MIDDLEWARE = [
