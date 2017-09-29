@@ -47,7 +47,7 @@ def storeRegister(request):
     storeprofile.save()
     return redirect_after_login(user)
 
-def login(request):
+def singin(request):
     user = request.user
     if request.user.is_authenticated:
         return redirect_after_login(user)
@@ -70,7 +70,7 @@ def redirect_after_login(user):
         print('user')
         return redirect('index:index')
 
-def logout(request):
+def signout(request):
     logout(request)
     return redirect('index:index')
 
