@@ -13,7 +13,7 @@ def customerSignup(request):
     if request.method == 'GET':
         return render(request,'usermanage/signup-customer.html')
     data = request.POST
-    
+
     # check user already exits
     if User.objects.filter(username=data['username']).exists():
         return render(request,'usermanage/signup-customer.html')
@@ -112,7 +112,7 @@ def userProfileContextGenerate(user):
         customer = models.Customer.objects.get(user=user)
         data['first_name']=customer.first_name
         data['last_name']=customer.last_name
-        data['birthdate']=customer.birthdate
+        data['birthdate']=customer.birthdate.strftime('%Y-%m-%d') if customer.birthdate is not None else None
     return {k:v for k,v in data.items() if v is not None}
 
 @login_required()
@@ -133,7 +133,6 @@ def customerSetting(request):
     customer_attrib = {k:v for k,v in data.items()}
     customer_attrib.pop('csrfmiddlewaretoken', None)
     customer = models.Customer.objects.get(user=user)
-    print(customer_attrib)
     for k,v in customer_attrib.items():
         setattr(customer,k,v)
     customer.save()
