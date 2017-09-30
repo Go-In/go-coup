@@ -18,5 +18,6 @@ from . import views
 
 app_name = 'market'
 urlpatterns = [
-    url(r'^purchase/$', views.purchase,name='purchase')
+    url(r'^purchase/$', views.purchase,name='purchase'),
+    url(r'^checkout/$', views.checkout,name='checkout')
 ]
