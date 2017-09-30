@@ -35,22 +35,30 @@
           </div>
           <div class="right">
             {% if user.is_authenticated %}
-              <div class="nav-btn">
-                <a href="/profile">
-                  Profile
-                  <img class="logo-nav" src="../../static/images/profile.png" alt="">
-                </a>
-              </div>
-              <div class="nav-btn" onclick="goToCart()">
-                <a href="#">
-                  <img class="logo-nav" src="{% static 'images/cart.png' %}" alt="">
-                </a>
-              </div>
+              {% if is_store %}
+                <div class="nav-btn">
+                  <a href="{% url 'store:index' %}">
+                    Go to Store
+                  </a>
+                </div>
+              {% else %}
+                <div class="nav-btn">
+                  <a href="{% url 'user:profile' %}">
+                    Profile
+                    <img class="logo-nav" src="{% static 'images/profile.png' %}" alt="">
+                  </a>
+                </div>
+                <div class="nav-btn" onclick="goToCart()">
+                  <a href="#">
+                    <img class="logo-nav" src="{% static 'images/cart.png' %}" alt="">
+                  </a>
+                </div>
+              {% endif %}
               <div class="nav-btn">
                 <a href="{% url 'user:logout' %}">
                   Logout
                 </a>
-              </div>
+              </div>           
             {% else %}
             <a href="/user/login">
               <div class="nav-btn">
