@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 from . import views, models
-def customerRegister(request):
+def customerRegister(request, error = '', no_fill = ''):
     if request.user.is_authenticated:
         return redirect('index:index')
     if request.method == 'GET':
@@ -16,7 +16,14 @@ def customerRegister(request):
 
     # check user already exits
     if User.objects.filter(username=data['username']).exists():
-        return render(request, 'usermanage/register-customer.html')
+        first_name = data['first_name']
+        return render(request, 'usermanage/register-customer.html', {
+                'error' : True,
+                })
+    if validateForm(data):
+        return render(request, 'usermanage/register-customer.html', {
+                'no_fill' : True
+                })
 
     user = User.objects.create_user(username = data['username'], password = data['password'], email = data['email'], first_name = data['first_name'], last_name = data['last_name'])
     g = Group.objects.get(name='customer')
@@ -46,6 +53,20 @@ def storeRegister(request):
     storeprofile = models.Store(user = user, store_name=data['storename'])
     storeprofile.save()
     return redirect_after_login(user)
+
+def validateForm(data):
+    error = ''
+    if not data['first_name']:
+        error = True
+    if not data['last_name']:
+        error = True
+    if not data['birthdate']:
+        error = True
+    if not data['tel']:
+        error = True
+    if not data['email']:
+        error = True
+    return error
 
 def singin(request, error = ''):
     user = request.user
