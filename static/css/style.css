@@ -14,7 +14,9 @@ body {
     width: auto;
   }
 }
-
+.navbar-nav>li>.dropdown-menu {
+  background: #f1457c !important;
+}
 .navbar-nav > li > a {
   color: white !important;
 }
