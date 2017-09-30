@@ -49,7 +49,6 @@
             <img class="logo-nav" src="{% static 'images/search.png' %}" alt="">
         </button>
     </div>
-
     <div class="content row">
         {% for ticket in tickets %}  
             <div class="col-md-4 col-sm-6 col-xs-12">
@@ -68,7 +67,12 @@
                     </div>
                 </a>
             </div>
-            {% if forloop.counter|divisibleby:"3" %}     
+            {% if forloop.counter|divisibleby:"3" %}
+<!--            {% if forloop.counter|divisibleby:"9" %}
+
+                {% else %}    -->  
+ <!--                    </div><div class="content row">
+                {% endif %} -->
                 </div><div class="content row">
             {% endif %}      
         {% endfor %}
