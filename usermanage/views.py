@@ -18,12 +18,12 @@ def customerRegister(request):
     if User.objects.filter(username=data['username']).exists():
         return render(request,'usermanage/register-customer.html')
 
-    user = User.objects.create_user(data['username'], password = data['password'], email = data['email'])
+    user = User.objects.create_user(username = data['username'], password = data['password'], email = data['email'], first_name = data['first_name'], last_name = data['last_name'])
     g = Group.objects.get(name='customer')
     g.user_set.add(user)
     user.save()
     g.save()
-    customerprofile = models.Customer(user = user)
+    customerprofile = models.Customer(user = user, first_name = user.first_name, last_name = user.last_name, birthdate = data['birthdate'], tel = data['tel'])
     customerprofile.save()
     return redirect('index:index')
 
