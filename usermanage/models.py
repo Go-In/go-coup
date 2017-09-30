@@ -11,6 +11,8 @@ class Customer(models.Model):
     birthdate = models.DateField(null=True)
     tel = models.CharField(max_length=12, null=True)
     attribute = JSONField(default = dict)
+    available = models.BooleanField(default=True)
+
     def __str__(self):
         return self.user
 
@@ -19,6 +21,7 @@ class Store(models.Model):
     store_name = models.CharField(max_length=30)
     tel = models.CharField(max_length=12, null=True)
     attribute = JSONField(default = dict)
+    available = models.BooleanField(default=True)
 
     def __str__(self):
         return self.user

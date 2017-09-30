@@ -4,8 +4,3 @@ __pycache__/
 .DS_Store
 node_modules
 
-#dockerfile
-Dockerfile
-docker-compose.yml
-entrypoint.sh
-config/nginx
