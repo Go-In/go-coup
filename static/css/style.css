@@ -56,8 +56,6 @@ body {
 }
 .nav-btn {
   display: inline-block;
-  border-left: 1px solid white;
-  border-right: 1px solid white;
   color: white;
   padding: 10px 20px;
   font-size: 18px;
@@ -74,6 +72,10 @@ body {
 .footer {
   background: #f1457c;
   margin-top: 50px;
+  color: white;
+}
+.footer-link:link,.footer-link:visited  {
+  color: white;
 }
 .footer-right {
   text-align: right;
