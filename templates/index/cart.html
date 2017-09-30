@@ -1,34 +1,65 @@
 {% include 'components/header.html' %}
+
 <div class="full-container">
-  
   <div class="container">
-    <div class="row">
-      <div class="col-sm-6 col-sm-offset-3 col-xs-12">
-        <div class="list">
-          <img class="list-image" src="https://assets.kfc.co.uk/3f040df6-0c9cdd0f/wicked-variety-bucket-320w.jpeg" alt="detail content">
-          <div class="list-content">
-            <p>name: KFC</p>
-            <p>name: KFC</p>
-            <p>name: KFC</p>
+    {% for ticket in tickets %}
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 col-xs-12">
+          <div class="list">
+            <img class="list-image" src="{{ ticket.content_image_url }}" alt="detail content">
+            <div class="list-content">
+              <div style="display: flex; justify-content: space-between;">
+                <p>name: {{ ticket.name }}</p>  
+                <a class="btn" onclick="deleteTicketFromCart({{  ticket.id }})">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </a>      
+              </div>
+              <p id='ticket_{{ ticket.id }}'>จำนวน: 1</p>
+              <button class='btn btn-primary' onclick="incrementTicket({{ ticket.id }})">เพิ่ม</button>
+              <button class='btn btn-danger' onclick="decrementTicket({{ ticket.id }})">ลด</button>        
+            </div>              
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6 col-sm-offset-3 col-xs-12">
-        <div class="list">
-          <img class="list-image" src="https://assets.kfc.co.uk/3f040df6-0c9cdd0f/wicked-variety-bucket-320w.jpeg" alt="detail content">
-          <div class="list-content">
-            <p>name: KFC</p>
-            <p>name: KFC</p>
-            <p>name: KFC</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
     <button class="btn btn-gocoup">shop</button>
     <button class="btn btn-gocoup">pay</button>
   </div>
-
 </div>
+<script>
+  var count = {}
+  
+  function renderTicket(ticket_id) {
+    var numElement = document.getElementById('ticket_' + ticket_id);
+    numElement.innerText = 'จำนวน:' + count[ticket_id];
+  }
+  
+  function incrementTicket(ticket_id) {
+    if (count[ticket_id])
+      count[ticket_id]++;
+    else
+      count[ticket_id] = 2;
+    renderTicket(ticket_id);
+  }
+
+  function decrementTicket(ticket_id) {
+    if (count[ticket_id] && count[ticket_id] > 1) {
+      count[ticket_id]--;
+      renderTicket(ticket_id);
+    } else {
+      deleteTicketFromCart(ticket_id)
+    }
+  }
+
+  function deleteTicketFromCart(ticket_id) {
+    swal({
+        title: 'เอา ticket นี้ออกจาก cart !',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'ใช่',
+        cancelButtonText: 'ไม่',
+    })
+  }
+</script>
+
 {% include 'components/footer.html' %}

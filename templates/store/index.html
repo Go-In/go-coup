@@ -25,10 +25,6 @@
       <div class="col-xs-12 col-md-2">{{ ticket.detail }}</div>
       <div class="col-xs-12 col-md-2">{{ ticket.expire_date }}</div>
       <div class="col-xs-12 col-md-2"><a href="{% url 'store:ticket-edit' ticket.id %}">edit</a></div>
-      <!-- <div class="col-xs-12 col-md-2"><a href="{% url 'store:ticket-delete' ticket.id %}">delete</a></div>       -->
-      <div>
-        {% url 'store:ticket-delete' ticket.id %}
-      </div>
       <div class="col-xs-12 col-md-2">
         <a onclick="deleteTicket('{% url 'store:ticket-delete' ticket.id %}')">delete</a>
       </div>
@@ -37,12 +33,23 @@
 </div>
 <script>
   function deleteTicket(ticketUrl) {
-    console.log(ticketUrl);
-    swal(
-      'Delete',
-      'Delete complete!',
-      'success'
-    )
+    swal({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(function () {
+      swal(
+        'Deleted!',
+        'Your row has been deleted.',
+        'success',
+      )
+    }).then(function () {
+      window.location.assign(ticketUrl);
+    })
   }
 </script>
 {% if error %}
