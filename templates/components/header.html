@@ -6,6 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Kanit:300,400,700" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/detail.css' %}">
@@ -14,56 +15,55 @@
   <link rel="stylesheet" href="{% static 'css/coupon.css' %}">
   <link rel="stylesheet" href="{% static 'css/login.css' %}">
 
-  <script src="{% static 'js/script.js' %}"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <title>Go Coup</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.css">
+  <script src="{% static 'js/script.js' %}"></script>
 </head>
 <body>
-  <div class="header">
-      <div class="container">
-        <div class="navigation">
-          <div class="left">
-              <div class="nav-btn">
-                <a href="/">
-                  <img class="logo" src="{% static 'images/logo-white.png' %}" alt="logo">
-                </a>
-              </div>
-          </div>
-          <div class="right">
-            {% if user.is_authenticated %}
-              <div class="nav-btn">
-                <a href="/profile">
-                  Profile
-                  <img class="logo-nav" src="../../static/images/profile.png" alt="">
-                </a>
-              </div>
-              <div class="nav-btn" onclick="goToCart()">
-                <a href="#">
-                  <img class="logo-nav" src="{% static 'images/cart.png' %}" alt="">
-                </a>
-              </div>
-              <div class="nav-btn">
-                <a href="{% url 'user:logout' %}">
-                  Logout
-                </a>
-              </div>
-            {% else %}
-            <a href="/user/login">
-              <div class="nav-btn">
-                  Login
-              </div>
-            </a>
-            <a href="/user/register">
-              <div class="nav-btn">
-                  Register
-              </div>
-            </a>
-            {% endif %}
-          </div>
-        </div>
+  <nav class="navbar navbar-default header">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" class="navbar-brand">
+          <img class="logo" src="{% static 'images/logo-white.png' %}" alt="logo">
+        </a>
       </div>
-    </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/profile/wallet">Wallet</a></li>
+                <li><a href="/profile/coupon">Coupon</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/profile/setting">Setting</a></li>
+                <li><a href="{% url 'user:logout' %}">Logout</a></li>
+              </ul>
+            </li>
+            <li onclick="goToCart()">
+              <a href="#">
+                <img class="logo-nav" src="{% static 'images/cart.png' %}" alt="">
+              </a>
+            </li>
+          {% else %}
+            <li><a href="{% url 'user:login' %}">Login</a></li>
+            <li><a href="{% url 'user:customer-register' %}">Register</a></li>
+          {% endif %}
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>

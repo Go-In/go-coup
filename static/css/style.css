@@ -1,3 +1,6 @@
+body {
+  font-family: 'Kanit', sans-serif;
+}
 .black-ribbon {
   position: fixed;
   z-index: 9999;
@@ -9,16 +12,23 @@
   }
 }
 
+.navbar-nav > li > a {
+  color: white !important;
+}
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+  background: #f51c61;
+}
 .stick-left { left: 0; }
 .stick-bottom { bottom: 0; }
 .logo-nav {
-  width: 40px;
+  width: 22px;
 }
 .logo {
-  width: 150px;
+  width: 90px;
 }
 .header {
   background: #f1457c;
+  color: white;
 }
 .full-container {
   margin: 0 auto;
