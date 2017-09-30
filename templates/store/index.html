@@ -2,16 +2,16 @@
 {% include 'components/store/header.html' %}
 <div class="container">
   <div class="store-header" style="display:flex; justify-content: space-between;">
-    <h1>STORE MANAGE</h1>
-    <h1>You are : {{ user.username }}</h1>
+    <h5>STORE MANAGE</h5>
+    <h5>You are : {{ user.username }}</h5>
   </div>
-  <center>
+  <div style="text-align: right;">
   <a href="{% url 'store:ticket-register' %}">
     <button class="btn btn-gocoup" style="margin-bottom:20px;">
       add new ticket
     </button>
   </a>
-  </center>
+  </div>
   <div class="row table-header">
     <div class="col-xs-12 col-md-2">Name</div>
     <div class="col-xs-12 col-md-2">Price</div>
