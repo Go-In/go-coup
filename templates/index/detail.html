@@ -12,7 +12,11 @@
           </div>
         </div>
         <div class="detail-content">
-          <img src="{{ ticket.content_image_url }}" alt="detail content">
+          <img 
+            src="{{ ticket.content_image_url }}" 
+            alt="detail content"
+            onError="this.onerror=null;this.src='https://assets.kfc.co.uk/3f040df6-0c9cdd0f/wicked-variety-bucket-320w.jpeg'"            
+          >
         </div>
       </div>
       <div class="col-md-6 col-xs-12">
