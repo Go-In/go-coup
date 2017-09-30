@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from storemanage.models import Currency, Ticket
 from usermanage.models import Store
 from customermanage.models import Wallet, Coupon
+from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from django.http import HttpResponseBadRequest
 # Create your views here.
 
@@ -15,6 +16,8 @@ def purchasable(wallet, ticket):
             return False
     return True
 
+@login_required()
+@permission_required('usermanage.customer_rights',raise_exception=True)
 def purchase(request):
     if request.method == 'GET':
         return HttpResponseBadRequest()
