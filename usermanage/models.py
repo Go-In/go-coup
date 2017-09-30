@@ -11,7 +11,7 @@ class Customer(models.Model):
     birthdate = models.DateField(null=True)
     tel = models.CharField(max_length=12, null=True)
     attribute = JSONField(default = dict())
-    thumbnail_image_url = models.CharField(max_length=1023, null=True)
+    profile_image_url = models.CharField(max_length=1023, null=True)
     available = models.BooleanField(default=True)
 
     def __str__(self):
@@ -22,7 +22,7 @@ class Store(models.Model):
     store_name = models.CharField(max_length=30)
     tel = models.CharField(max_length=12, null=True)
     attribute = JSONField(default = dict())
-    thumbnail_image_url = models.CharField(max_length=1023, null=True)
+    profile_image_url = models.CharField(max_length=1023, null=True)
     available = models.BooleanField(default=True)
 
     def __str__(self):
