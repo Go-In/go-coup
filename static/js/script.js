@@ -32,3 +32,16 @@ const goToCart = () => {
   const url = getCartUrl();
   document.location = url;
 }
+
+const cartItemToObject = (storage = localStorage) => {
+  const cartItems = getCartItem(storage);
+  const obj = cartItems.reduce((prev, curr) => {
+    const ticket = {};
+    const key = Object.keys(curr)[0];
+    ticket.id = key;
+    ticket.count = curr[key];
+    prev.push(ticket);
+    return prev;
+  }, [])
+  return obj;
+}
