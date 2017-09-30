@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from storemanage.models import Ticket
+from django import forms
 
+from .forms import NameForm
 # Create your views here.
 def index(request):
     tickets = Ticket.objects.all()
@@ -26,7 +28,10 @@ def search(request):
     return render(request, 'index/search.html', {})
 
 def searchDemo(request):
-    tickets = Ticket.objects.filter(name__search='donut')
+    data = request.POST
+    name = data['search_name']
+
+    tickets = Ticket.objects.filter(name__search=name)
 
     for i in tickets:
         print(i.detail)
