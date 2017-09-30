@@ -6,7 +6,7 @@
 
     </div>
     {% for ticket in tickets %}
-      <div class="row">
+      <div class="row" id="row_{{ ticket.id }}">
         <div class="col-sm-6 col-sm-offset-3 col-xs-12">
           <div class="list">
             <img 
@@ -34,7 +34,6 @@
   </div>
 </div>
 <script>
-  var count = {};
   var cartItems = getCartItem();
 
   cartItems.forEach(c => {
@@ -74,11 +73,18 @@
 
   function deleteTicketFromCart(ticket_id) {
     swal({
-        title: 'เอา ticket นี้ออกจาก cart !',
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'ใช่',
-        cancelButtonText: 'ไม่',
+      title: 'เอา ticket นี้ออกจาก cart !',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'ใช่',
+      cancelButtonText: 'ไม่',
+    }).then(function() {
+      var cartItems = getCartItem();
+      cartItems = cartItems.filter(c => Object.keys(c)[0] !== String(ticket_id))
+      var cartString = cartItems.map(c => JSON.stringify(c));
+      localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
+      document.getElementById('row_' + ticket_id).remove();
+      history.pushState(null, '', getCartUrl());
     })
   }
 </script>
