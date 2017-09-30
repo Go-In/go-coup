@@ -21,7 +21,11 @@
           <div class="detail-discription">
             <table class="detail-table">
               <tr class="detail-tr">
-                <td class="align-left">Detail:</td>
+                <td class="align-left">Name:</td>
+                <td class="align-right">{{ ticket.name }}</td>
+              </tr>
+              <tr class="detail-tr">
+                <td class="align-left">Price:</td>
                 <td class="align-right">{{ ticket.price }} {{ ticket.currency }}</td>
               </tr>
               {% if ticket.is_limit %}

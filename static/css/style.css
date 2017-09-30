@@ -134,6 +134,10 @@ body {
   background: #f1457c;
   color: white;
 }
+.btn-gocoup:hover {
+  background: #f51c61;
+  color: white;
+}
 
 .search-wrapper {
   margin-top: 50px;
