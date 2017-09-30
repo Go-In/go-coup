@@ -1,39 +1,43 @@
 {% include 'components/header.html' %}
 
 <div class="full-container">
-  <div class="container">
+  <div class="cart-wrapper container">
     {% for ticket in tickets %}
       <div class="row">
         <div class="col-sm-6 col-sm-offset-3 col-xs-12">
           <div class="list">
-            <img class="list-image" src="{{ ticket.content_image_url }}" alt="detail content">
+            <img class="list-image" src="{{ ticket.ticket_image_url }}" alt="detail content">
             <div class="list-content">
               <div style="display: flex; justify-content: space-between;">
-                <p>name: {{ ticket.name }}</p>  
+                <p>name: {{ ticket.name }}</p>
                 <a class="btn" onclick="deleteTicketFromCart({{  ticket.id }})">
                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                </a>      
+                </a>
               </div>
-              <p id='ticket_{{ ticket.id }}'>จำนวน: 1</p>
-              <button class='btn btn-primary' onclick="incrementTicket({{ ticket.id }})">เพิ่ม</button>
-              <button class='btn btn-danger' onclick="decrementTicket({{ ticket.id }})">ลด</button>        
-            </div>              
+              <p id='ticket_{{ ticket.id }}'>amount: 1</p>
+              <button class='add-btn btn btn-default' onclick="incrementTicket({{ ticket.id }})">+</button>
+              <button class='add-btn btn btn-default' onclick="decrementTicket({{ ticket.id }})">-</button>
+            </div>
           </div>
         </div>
       </div>
     {% endfor %}
-    <button class="btn btn-gocoup">shop</button>
-    <button class="btn btn-gocoup">pay</button>
+    <div class="row cart-btn-wrapper">
+      <div class="col-xs-12">
+        <button class="btn btn-gocoup">shop</button>
+        <button class="btn btn-gocoup">pay</button>
+      </div>
+    </div>
   </div>
 </div>
 <script>
   var count = {}
-  
+
   function renderTicket(ticket_id) {
     var numElement = document.getElementById('ticket_' + ticket_id);
-    numElement.innerText = 'จำนวน:' + count[ticket_id];
+    numElement.innerText = 'amount: ' + count[ticket_id];
   }
-  
+
   function incrementTicket(ticket_id) {
     if (count[ticket_id])
       count[ticket_id]++;
