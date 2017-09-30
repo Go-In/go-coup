@@ -139,3 +139,13 @@ def customerSetting(request):
     user.email = customer_attrib['email']
     user.save()
     return render(request,'index/setting.html',{'data':customer_attrib})
+
+@login_required()
+@permission_required('usermanage.customer_rights',raise_exception=True)
+def customerCoupon(request):
+    return render(request, 'index/coupon.html')
+
+@login_required()
+@permission_required('usermanage.customer_rights',raise_exception=True)
+def customerWallet(request):
+    return render(request, 'index/wallet.html')
