@@ -18,6 +18,15 @@ body {
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
   background: #f51c61;
 }
+.navbar-default .navbar-toggle:hover {
+  background: #f51c61;
+}
+.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+  color: white !important;
+}
+.icon-bar {
+  background: white !important;
+}
 .stick-left { left: 0; }
 .stick-bottom { bottom: 0; }
 .logo-nav {
