@@ -43,20 +43,20 @@
     numElement.innerText = 'จำนวน:' + c[ticket_id];
   });
 
-  function renderTicket(ticket_id) {
+  function renderTicket(ticket_id, quantity) {
     var numElement = document.getElementById('ticket_' + ticket_id);
-    numElement.innerText = 'จำนวน:' + count[ticket_id];
+    numElement.innerText = 'จำนวน:' + quantity;
   }
 
-  // function incrementTicket(ticket_id) {
-  //   let cartItems = getCartItem();
-  //   const item = cartItems.find(c => Object.keys(c)[0] === String(itemId))
-  //   item[itemId]++;
-  //   cartItems = [...cartItems, item];
-  //   const cartString = cartItems.map(c => JSON.stringify(c))
-  //   localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
-  //   renderTicket(ticket_id);
-  // }
+  function incrementTicket(ticket_id) {
+    var cartItems = getCartItem();
+    var item = cartItems.find(c => Object.keys(c)[0] === String(ticket_id)) 
+    item[ticket_id]++;
+    cartItems = [...cartItems, item];
+    var cartString = cartItems.map(c => JSON.stringify(c))
+    localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
+    renderTicket(ticket_id, item[ticket_id]);
+  }
 
   function decrementTicket(ticket_id) {
     if (count[ticket_id] && count[ticket_id] > 1) {
