@@ -35,7 +35,7 @@
                 {% csrf_token %}
                 <button class="btn buy-btn" type="submit" name="ticket_id" value="{{ticket.pk}}">Buy</button>
             </form>
-            <button class="btn buy-btn" onclick="addItemToCart({{ ticket.id }})">add to cart</button>
+            <button class="btn buy-btn" onclick="addItemToCart({{ ticket.id }}, '{{ ticket.name }}')">add to cart</button>
           {% endif %}
         </div>
       </div>
