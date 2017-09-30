@@ -9,8 +9,8 @@
   margin: 0 -15px 20px -15px;
 }
 .login-wrapper {
-  margin-top: 11%;
-  margin-bottom: 11%;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .login-header {
@@ -48,4 +48,3 @@ a.button {
   text-decoration: none;
   color: initial;
 }
-

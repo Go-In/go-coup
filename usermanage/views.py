@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 from . import views, models
-def customerRegister(request, error = '', no_fill = ''):
+def customerRegister(request):
     if request.user.is_authenticated:
         return redirect('index:index')
     if request.method == 'GET':
@@ -16,21 +16,14 @@ def customerRegister(request, error = '', no_fill = ''):
 
     # check user already exits
     if User.objects.filter(username=data['username']).exists():
-        first_name = data['first_name']
-        return render(request, 'usermanage/register-customer.html', {
-                'error' : True,
-                })
-    if validateForm(data):
-        return render(request, 'usermanage/register-customer.html', {
-                'no_fill' : True
-                })
+        return render(request,'usermanage/register-customer.html')
 
-    user = User.objects.create_user(username = data['username'], password = data['password'], email = data['email'], first_name = data['first_name'], last_name = data['last_name'])
+    user = User.objects.create_user(data['username'], password = data['password'], email = data['email'])
     g = Group.objects.get(name='customer')
     g.user_set.add(user)
     user.save()
     g.save()
-    customerprofile = models.Customer(user = user, first_name = user.first_name, last_name = user.last_name, birthdate = data['birthdate'], tel = data['tel'])
+    customerprofile = models.Customer(user = user)
     customerprofile.save()
     return redirect('index:index')
 
@@ -50,25 +43,11 @@ def storeRegister(request):
     g.user_set.add(user)
     user.save()
     g.save()
-    storeprofile = models.Store(user = user, store_name=data['storename'])
+    storeprofile = models.Store(user = user, store_name=data['storename'], profile_image_url=data['profile_image_url'])
     storeprofile.save()
     return redirect_after_login(user)
 
-def validateForm(data):
-    error = ''
-    if not data['first_name']:
-        error = True
-    if not data['last_name']:
-        error = True
-    if not data['birthdate']:
-        error = True
-    if not data['tel']:
-        error = True
-    if not data['email']:
-        error = True
-    return error
-
-def singin(request, error = ''):
+def singin(request):
     user = request.user
     if request.user.is_authenticated:
         return redirect_after_login(user)
@@ -81,12 +60,6 @@ def singin(request, error = ''):
             if request.GET.get("next") is not None:
                 return HttpResponseRedirect(request.GET["next"])
             return redirect_after_login(user)
-        else:
-            error = True
-            return render(request, 'usermanage/login.html', {
-            'error' : error
-            })
-
     return render(request,'usermanage/login.html')
 
 def redirect_after_login(user):
@@ -166,3 +139,13 @@ def customerSetting(request):
     user.email = customer_attrib['email']
     user.save()
     return render(request,'index/setting.html',{'data':customer_attrib})
+
+@login_required()
+@permission_required('usermanage.customer_rights',raise_exception=True)
+def customerCoupon(request):
+    return render(request, 'index/coupon.html')
+
+@login_required()
+@permission_required('usermanage.customer_rights',raise_exception=True)
+def customerWallet(request):
+    return render(request, 'index/wallet.html')
