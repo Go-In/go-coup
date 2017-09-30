@@ -1,5 +1,5 @@
 body {
-  font-family: 'Kanit', sans-serif;
+  font-family: 'Kanit', sans-serif !important;
 }
 #myCarousel {
   margin-top: -20px;

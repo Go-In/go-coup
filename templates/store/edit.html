@@ -1,5 +1,5 @@
 {% include 'components/store/header.html' %}
-<div class="container">
+<div class="container" style="margin-bottom:50px;">
     <h1>EDIT TICKET</h1>
     <form method="POST" action="" style="border:2px solid pink;">
     {% csrf_token %}
@@ -64,7 +64,7 @@
             <input type="text" class="form-control" name="content_image_url" value="{{ ticket.content_image_url }}" />
         </div>
         <center>
-            <input class="btn btn-gocoup" style="margin:10px;" type="submit" value="submit" />
+            <input style="margin:20px; width:50%;" class="btn btn-gocoup" type="submit" value="submit" />
         </center>
     </form>
 </div>
