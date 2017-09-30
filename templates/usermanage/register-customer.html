@@ -14,6 +14,9 @@
         <div class="login col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12 login-wrapper">
           <div class="login-header signup">SIGN UP</div>
           <div class="">
+            <center>
+                <a href="{% url 'user:store-register' %}" class="btn btn-gocoup login-btn">register as store</a></br>
+            </center>
             <form action="" method="POST">
             {% csrf_token %}
             <div class="form-group">
