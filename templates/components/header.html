@@ -19,6 +19,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <title>Go Coup</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.css">
 </head>
 <body>
   <div class="header">
@@ -32,23 +34,35 @@
               </div>
           </div>
           <div class="right">
-            <div class="nav-btn">
-                {% if user.is_authenticated %}
+            {% if user.is_authenticated %}
+              <div class="nav-btn">
                 <a href="/profile">
                   Profile
                   <img class="logo-nav" src="../../static/images/profile.png" alt="">
                 </a>
-                {% else %}
-                <a href="/user/signin">
-                Sign In
+              </div>
+              <div class="nav-btn" onclick="goToCart()">
+                <a href="#">
+                  <img class="logo-nav" src="{% static 'images/cart.png' %}" alt="">
                 </a>
-                {% endif %}
-            </div>
-            <div class="nav-btn" onclick="goToCart()">
-              <a href="#">
-                <img class="logo-nav" src="{% static 'images/cart.png' %}" alt="">
-              </a>
-            </div>
+              </div>
+              <div class="nav-btn">
+                <a href="{% url 'user:logout' %}">
+                  Logout
+                </a>
+              </div>
+            {% else %}
+            <a href="/user/login">
+              <div class="nav-btn">
+                  Login
+              </div>
+            </a>
+            <a href="/user/register">
+              <div class="nav-btn">
+                  Register
+              </div>
+            </a>
+            {% endif %}
           </div>
         </div>
       </div>
