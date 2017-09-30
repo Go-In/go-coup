@@ -35,3 +35,20 @@ def purchase(request):
             coupon = Coupon(user = user, ticket = ticket)
             coupon.save()
     return redirect('index:detail',ticket_id = ticket_id)
+
+def checkout(request):
+    user = request.user
+    ticket_id = request.POST['cart']
+    tickets = [get_object_or_404(Ticket, pk=t) for t in ticket_id]
+    for ticket in tickets:
+        wallet,create = Wallet.objects.get_or_create(user=user, currency = ticket.currency)
+        with transaction.atomic():
+            if purchasable(wallet, ticket):
+                wallet.amount -= ticket.price
+                wallet.save()
+                if ticket.is_limit:
+                    ticket.remain -= 1
+                    ticket.save()
+                coupon = Coupon(user = user, ticket = ticket)
+                coupon.save()
+    return redirect('index:index')
