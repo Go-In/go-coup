@@ -24,3 +24,13 @@ def cart(request):
 
 def search(request):
     return render(request, 'index/search.html', {})
+
+def searchDemo(request):
+    tickets = Ticket.objects.filter(name__search='donut')
+
+    for i in tickets:
+        print(i.detail)
+
+    return render(request, 'index/search-demo.html', {
+        'tickets' : tickets
+    })

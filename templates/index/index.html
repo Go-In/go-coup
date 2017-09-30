@@ -41,12 +41,12 @@
     <div class="row search-wrapper">
       <div class="col-sm-8 col-sm-offset-2 col-xs-12">
         <div class="search-box">
-          <form action="" class="search-form">
             <input type="text" class="form-control search-input" placeholder="find coupon here.."/>
-            <button class="btn btn-link search-btn">
-              <i class="glyphicon glyphicon-search"></i>
-            </button>
-          </form>
+            <a href="{% url 'index:search-demo' %}">
+                <button class="btn btn-link search-btn">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </a>
         </div>
       </div>
     </div>
