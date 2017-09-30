@@ -36,3 +36,9 @@ def wallet(request):
 
 def login(request):
     return render(request, 'index/login.html', {})
+
+def catalog(request):
+    tickets = Ticket.objects.all()
+    return render(request, 'index/catalog.html', {
+        'tickets': tickets
+    })
