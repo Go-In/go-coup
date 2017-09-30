@@ -26,7 +26,10 @@
           <div class="detail-discription">
             <p>{{ ticket.detail }}</p>
           </div>
-          <button class="btn buy-btn">Buy</button>
+          <form method="POST" action="{% url 'market:purchase' %}">
+              {% csrf_token %}
+              <button class="btn buy-btn" type="submit" name="ticket_id" value="{{ticket.pk}}">Buy</button>
+          </form>
           <button class="btn buy-btn" onclick="addItemToCart({{ ticket.id }})">add to cart</button>
         </div>
       </div>
@@ -34,4 +37,3 @@
   </div>
 
 {% include 'components/footer.html' %}
-  
