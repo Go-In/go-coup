@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from storemanage.models import Ticket
+from django.http import JsonResponse
 
 # Create your views here.
 def index(request):
@@ -16,7 +17,7 @@ def detail(request, ticket_id):
 
 def cart(request):
     data = request.GET
-    items = data['cart'].split(',')
+    items = data['cart'].split(',') if data['cart'] else []
     tickets = Ticket.objects.filter(pk__in=items)
     return render(request, 'index/cart.html', {
         'tickets': tickets
