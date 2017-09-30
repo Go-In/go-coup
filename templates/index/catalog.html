@@ -1,0 +1,46 @@
+{% load staticfiles %}
+{% include 'components/header.html' %}
+<!--
+<img
+    src="https://f.ptcdn.info/808/052/000/ou0idx1t5MrjxrpCEIA-o.jpg" \
+    width="100%"
+    border="0" /> -->
+
+<div class="full-container">
+    <div class="search-bar">
+        <input type="text" class="search-input">
+        <button type="button" name="button" class="btn search-btn">
+            <img class="logo-nav" src="{% static 'images/search.png' %}" alt="">
+        </button>
+    </div>
+    <div class="content row">
+        {% for ticket in tickets %}  
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <a href="{% url 'index:detail' ticket.id %}">
+                    <div class="coupon-sell">
+
+                        <img 
+                            class="coup-img"
+                            src="{{ ticket.ticket_image_url }}" 
+                            alt="coup-image"
+                        >
+                        <div class="row">
+                        <div class="col-xs-8 coup-left">
+                            <p class="coup-text">name: {{ ticket.name }}</p>
+                            <p class="coup-text">exp: {{ ticket.expire_date }}</p>
+                        </div>
+                        <div class="col-xs-4 coup-right">   
+                            <p>{{ ticket.price }} {{ ticket.currency }}</p>
+                        </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% if forloop.counter|divisibleby:"3" %}
+    </div>
+            <div class="content row">
+            {% endif %}      
+        {% endfor %}
+            </div>  
+
+{% include 'components/footer.html' %}
