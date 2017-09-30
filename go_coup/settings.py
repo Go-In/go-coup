@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'index.apps.IndexConfig',
     'usermanage.apps.UsermanageConfig',
     'storemanage.apps.StoremanageConfig',
-    'customermanage.apps.CustomermanageConfig'
+    'customermanage.apps.CustomermanageConfig',
+    'haystack',
 ]
 
 MIDDLEWARE = [
@@ -107,6 +108,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Haystack connect with elasticsearch
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
+    },
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/

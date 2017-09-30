@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 
 from . import views
@@ -13,5 +13,5 @@ urlpatterns = [
     url(r'^profile/coupon/$', views.coupon, name='coupon'),
     url(r'^profile/wallet/$', views.wallet, name='wallet'),
     url(r'^profile/setting/$', views.setting, name='setting'),
-    url(r'^search/$', views.search, name='search'),
+    url(r'^search/', include('haystack.urls')),
 ]
