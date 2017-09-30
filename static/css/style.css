@@ -1,5 +1,5 @@
 body {
-  font-family: 'Kanit', sans-serif;
+  font-family: 'Kanit', sans-serif !important;
 }
 #myCarousel {
   margin-top: -20px;
@@ -184,4 +184,33 @@ body {
 .search-btn:hover {
   color: #fff;
   background-color: #f1457c;
+}
+
+.table-content {
+  color: #f1457c;
+  font-size: 15px;
+}
+
+.table-content > div {
+  border: 1px solid pink;
+}
+
+.table-header {
+  color: white;
+  background-color: #f1457c;
+  font-size: 20px;
+  text-align: center;
+}
+
+.table-header > div {
+  border: 1px solid pink;
+}
+
+.add-item-btn {
+  margin: 0 0 10px 0;
+  width: 12%;
+  border-radius: 20px;
+}
+.min-height {
+  min-height: 500px;
 }

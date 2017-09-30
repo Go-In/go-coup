@@ -1,25 +1,71 @@
 {% include 'components/store/header.html' %}
-<div class="container">
+<div class="container" style="margin-bottom:50px;">
   <h1>ADD TICKET</h1>
-    <form method="POST" action="">
+    <form method="POST" action=""  style="border:2px solid pink;">
     {% csrf_token %}
-        name *:<input type="text" name="name" value="" /></br>
-        detail *:<input type="text" name="detail" value="" /></br>
-        price *:<input type="number" name="price" value="" /></br>
-        expire date *:<input type="date" name="expire_date" value="" /></br>
-        is period:<input type="checkbox" name="is_period" value="period" /></br>
-        remaining day:<input type="number" name="remaining_day" value="" /></br>
-        is limit:<input type="checkbox" name="is_limit" value="limit" /></br>
-        remain:<input type="number" name="remain" value="" /></br>
-        currency *:
-        <select name="currency">
+        <div class="col-md-12 col-xs-12">
+            <label>Name*:</label>
+            <input type="text" class="form-control" name="name" value="" />
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label>Detail*:</label>
+            <input type="text" class="form-control" name="detail" value="" />
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label>Price*:</label>
+            <input type="number" class="form-control" name="price" value="" />
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label>Expire date*:</label>
+            <input type="date" class="form-control" name="expire_date" value="" />
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label class="checkbox">
+            Is period? *
+            <input type="checkbox" value="period" data-toggle="checkbox" class="custom-checkbox" name="is_period">
+            <span class="icons">
+                <span class="icon-unchecked"></span>
+                <span class="icon-checked"></span>
+            </span>
+            </label>
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label>Remaining day*:</label>
+            <input type="number" class="form-control" name="remaining_day" value="" />
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label class="checkbox">
+            Is limit? *
+            <input type="checkbox" value="limit" data-toggle="checkbox" class="custom-checkbox" name="is_limit">
+            <span class="icons">
+                <span class="icon-unchecked"></span>
+                <span class="icon-checked"></span>
+            </span>
+            </label>
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label>Remaining*:</label>
+            <input type="number" class="form-control" name="remain" value="" />
+        </div>
+        <div class="col-md-12 col-xs-12" style="margin-top:10px;">
+            <label>Currency*:</label>
+            <select name="currency" class="selectpicker">
             {% for c in currency_list %}
                 <option value="{{c.pk}}">{{c.name}}</option>
             {% endfor %}
-        </select></br>
-        ticket image url *:<input type="text" name="ticket_image_url" value="" /></br>
-        content image url *:<input type="text" name="content_image_url" value="" /></br>    
-        <input type="submit" value="submit" />
+        </select>
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label>Ticket image url*:</label>
+            <input type="text" class="form-control" name="ticket_image_url" value="" />
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label>Content image url*:</label>
+            <input type="text" class="form-control" name="content_image_url" value="" />
+        </div>
+        <center>
+            <input style="margin:20px; width:50%;" class="btn btn-gocoup" type="submit" value="submit" />
+        </center>
     </form>
 </div>
 {% include 'components/store/footer.html' %}

@@ -98,6 +98,7 @@ def ticketEdit(request, ticket_id):
             else:
                 setattr(ticket,k, v)
     
+    print ()
     if 'is_period' in data.keys():
         setattr(ticket, 'is_period', True)
     else:
