@@ -1,0 +1,15 @@
+{% load staticfiles %}
+{% include 'components/header.html' %}
+
+<div class="full-container">
+  <div class="min-height container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>Page not found.</h1>
+        <a href="{% url 'index:index' %}">back to home</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'components/footer.html' %}
