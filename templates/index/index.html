@@ -54,7 +54,7 @@
     <div class="content row">
         {% for ticket in tickets %}
             <div class="col-md-4 col-sm-6 col-xs-12">
-                <a href="{% url 'index:detail' ticket.id %}">
+                <a class="coup-link" href="{% url 'index:detail' ticket.id %}">
                     <div class="coupon-sell">
 
                         <img
@@ -62,13 +62,13 @@
                             src="{{ ticket.ticket_image_url }}"
                             alt="coup-image"
                         >
-                        <div class="row">
-                        <div class="col-xs-8 coup-left">
+                        <div class="coup-text-wrapper">
+                        <div class="coup-left">
                             <p class="coup-text">name: {{ ticket.name }}</p>
                             <p class="coup-text">exp: {{ ticket.expire_date }}</p>
                         </div>
-                        <div class="col-xs-4 coup-right">
-                            <p>{{ ticket.price }} {{ ticket.currency }}</p>
+                        <div class="coup-right">
+                            <p class="coup-text">{{ ticket.price }} {{ ticket.currency }}</p>
                         </div>
                         </div>
                     </div>
