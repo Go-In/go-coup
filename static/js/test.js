@@ -13,12 +13,12 @@ describe('simple test', () => {
 describe('getCartItem test', () => {
   it('should show array cart', () => {
     const mockStorage = {
-      getItem: () => ['{"1": 1}, {"2": 1}']
+      getItem: () => '{"1":1},{"2":2}'
     }
     const items = getCartItem(mockStorage);
     expect(items.length).to.equal(2);
-    expect(items[0]).to.equal({'1': 1});
-    expect(items[1]).to.equal({'2': 1});
+    expect(items[0]['1']).to.equal(1);
+    expect(items[1]['2']).to.equal(2);
   })
   it('should show empty array when cart empty', () => {
     const mockStorage = {
@@ -32,10 +32,10 @@ describe('getCartItem test', () => {
 describe('getCartUrl test', () => {
   it('should return url with queryString', () => {
     const mockStorage = {
-      getItem: () => '1,2,3'
+      getItem: () => '{"1":1},{"2":2}'
     }
     const url = getCartUrl(mockStorage);
-    expect(url).to.equal('/cart?cart=1,2,3');
+    expect(url).to.equal('/cart?cart=1,2');
   })
   it('should return url with empty queryString', () => {
     const mockStorage = {
