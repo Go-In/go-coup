@@ -24,7 +24,8 @@ const addItemToCart = (itemId, name) => {
 
 const getCartUrl = (storage = localStorage) => {
   const cartItems = getCartItem(storage);
-  return `/cart?cart=${cartItems}`;
+  const keyItems = cartItems.map(c => Object.keys(c)[0])
+  return `/cart?cart=${keyItems}`;
 }
 
 const goToCart = () => {
