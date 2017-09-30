@@ -3,10 +3,14 @@
 <div class="full-container">
   <div class="cart-wrapper container">
     {% for ticket in tickets %}
-      <div class="row">
+      <div class="row" id="row_{{ ticket.id }}">
         <div class="col-sm-6 col-sm-offset-3 col-xs-12">
           <div class="list">
-            <img class="list-image" src="{{ ticket.ticket_image_url }}" alt="detail content">
+            <img 
+              onError="this.onerror=null;this.src='https://assets.kfc.co.uk/3f040df6-0c9cdd0f/wicked-variety-bucket-320w.jpeg'"                        
+              class="list-image" src="{{ ticket.content_image_url }}" 
+              alt="detail content"
+            >
             <div class="list-content">
               <div style="display: flex; justify-content: space-between;">
                 <p>name: {{ ticket.name }}</p>
@@ -31,25 +35,38 @@
   </div>
 </div>
 <script>
-  var count = {}
-
-  function renderTicket(ticket_id) {
+  var cartItems = getCartItem();
+  
+  cartItems.forEach(c => {
+    var ticket_id = Object.keys(c)[0];
     var numElement = document.getElementById('ticket_' + ticket_id);
-    numElement.innerText = 'amount: ' + count[ticket_id];
+    numElement.innerText = 'จำนวน:' + c[ticket_id];
+  });
+
+  function renderTicket(ticket_id, quantity) {
+    var numElement = document.getElementById('ticket_' + ticket_id);
+    numElement.innerText = 'จำนวน:' + quantity;
   }
 
   function incrementTicket(ticket_id) {
-    if (count[ticket_id])
-      count[ticket_id]++;
-    else
-      count[ticket_id] = 2;
-    renderTicket(ticket_id);
+    var cartItems = getCartItem();
+    var item = cartItems.find(c => Object.keys(c)[0] === String(ticket_id)) 
+    item[ticket_id]++;
+    cartItems = [...cartItems, item];
+    var cartString = cartItems.map(c => JSON.stringify(c))
+    localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
+    renderTicket(ticket_id, item[ticket_id]);
   }
 
   function decrementTicket(ticket_id) {
-    if (count[ticket_id] && count[ticket_id] > 1) {
-      count[ticket_id]--;
-      renderTicket(ticket_id);
+    var cartItems = getCartItem();
+    var item = cartItems.find(c => Object.keys(c)[0] === String(ticket_id)) 
+    if (item[ticket_id] > 2) {
+      item[ticket_id]--;
+      cartItems = [...cartItems, item];
+      var cartString = cartItems.map(c => JSON.stringify(c))
+      localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
+      renderTicket(ticket_id, item[ticket_id]);
     } else {
       deleteTicketFromCart(ticket_id)
     }
@@ -57,11 +74,18 @@
 
   function deleteTicketFromCart(ticket_id) {
     swal({
-        title: 'เอา ticket นี้ออกจาก cart !',
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'ใช่',
-        cancelButtonText: 'ไม่',
+      title: 'เอา ticket นี้ออกจาก cart !',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'ใช่',
+      cancelButtonText: 'ไม่',
+    }).then(function() {
+      var cartItems = getCartItem();
+      cartItems = cartItems.filter(c => Object.keys(c)[0] !== String(ticket_id))
+      var cartString = cartItems.map(c => JSON.stringify(c));
+      localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
+      document.getElementById('row_' + ticket_id).remove();
+      history.pushState(null, '', getCartUrl());
     })
   }
 </script>

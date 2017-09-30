@@ -13,13 +13,12 @@ describe('simple test', () => {
 describe('getCartItem test', () => {
   it('should show array cart', () => {
     const mockStorage = {
-      getItem: () => '1,2,3'
+      getItem: () => ['{"1": 1}, {"2": 1}']
     }
     const items = getCartItem(mockStorage);
-    expect(items.length).to.equal(3);
-    expect(items[0]).to.equal('1');
-    expect(items[1]).to.equal('2');
-    expect(items[2]).to.equal('3');
+    expect(items.length).to.equal(2);
+    expect(items[0]).to.equal({'1': 1});
+    expect(items[1]).to.equal({'2': 1});
   })
   it('should show empty array when cart empty', () => {
     const mockStorage = {

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from storemanage.models import Ticket
+from django.http import JsonResponse
 
 # Create your views here.
 def index(request):
