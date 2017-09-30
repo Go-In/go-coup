@@ -1,6 +1,9 @@
 body {
   font-family: 'Kanit', sans-serif;
 }
+#myCarousel {
+  margin-top: -20px;
+}
 .black-ribbon {
   position: fixed;
   z-index: 9999;
