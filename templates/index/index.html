@@ -5,22 +5,6 @@
     src="https://f.ptcdn.info/808/052/000/ou0idx1t5MrjxrpCEIA-o.jpg" \
     width="100%"
     border="0" /> -->
-
-<div class="full-container">
-    <div class="container">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-            <img src="https://www.w3schools.com/bootstrap/ny.jpg" alt="Los Angeles" style="width:100%;">
-            </div>
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -69,7 +53,6 @@
 
     <div class="content row">
         {% for ticket in tickets %}
-                    {% if forloop.counter < 10 %}
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <a class="coup-link" href="{% url 'index:detail' ticket.id %}">
                     <div class="coupon-sell">
@@ -91,16 +74,10 @@
                     </div>
                 </a>
             </div>
-
-            {% endif %}
             {% if forloop.counter|divisibleby:"3" %}
-                <div class="content row">
-        </div>
-            {% endif %}      
+                </div><div class="content row">
+            {% endif %}
         {% endfor %}
-            </div>  
-    <div style="text-align: center;">
-    <a href="{% url 'index:catalog' %}"><input type="button" style="width:200px; height:60px; font-size:24px;" value="view all"></a>
     </div>
     </div>
 </div>
