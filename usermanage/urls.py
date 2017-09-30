@@ -18,13 +18,13 @@ from . import views
 
 app_name = 'user'
 urlpatterns = [
-    url(r'^signup/$', views.customerSignup, name='customer-signup'),
-    url(r'^store-signup/$', views.storeSignup, name='store-signup'),
-    url(r'^signin/$',views.signin, name='signin'),
-    url(r'^signout/$',views.signout, name='signout'),
+    url(r'^register/$', views.customerRegister, name='customer-register'),
+    url(r'^store-register/$', views.storeRegister, name='store-register'),
+    url(r'^login/$',views.singin, name='login'),
+    url(r'^logout/$',views.signout, name='logout'),
     url(r'^tempprofile/$',views.profile, name='profile'),
     url(r'^profile/$',views.customerProfile, name='customer-profile'),
     url(r'^customertest/$',views.customertest, name='customertest'),
     url(r'^storetest/$',views.storetest, name='storetest'),
-    url(r'^setting/$',views.customerSetting, name='customer-setting'),    
+    url(r'^setting/$',views.customerSetting, name='customer-setting'),
 ]

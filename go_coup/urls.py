@@ -20,5 +20,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('index.urls', namespace='index')),
     url(r'^user/',include('usermanage.urls', namespace='user')),
-    url(r'^store/',include('storemanage.urls', namespace='store'))
+    url(r'^store/',include('storemanage.urls', namespace='store')),
+    url(r'^customer/',include('customermanage.urls', namespace='customer')),
+    url(r'^shopping/',include('market.urls', namespace='market'))    
 ]

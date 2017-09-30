@@ -7,16 +7,16 @@ from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 from . import views, models
-def customerSignup(request):
+def customerRegister(request):
     if request.user.is_authenticated:
         return redirect('index:index')
     if request.method == 'GET':
-        return render(request,'usermanage/signup-customer.html')
+        return render(request,'usermanage/register-customer.html')
     data = request.POST
-    
+
     # check user already exits
     if User.objects.filter(username=data['username']).exists():
-        return render(request,'usermanage/signup-customer.html')
+        return render(request,'usermanage/register-customer.html')
 
     user = User.objects.create_user(data['username'], password = data['password'], email = data['email'])
     g = Group.objects.get(name='customer')
@@ -27,16 +27,16 @@ def customerSignup(request):
     customerprofile.save()
     return redirect('index:index')
 
-def storeSignup(request):
+def storeRegister(request):
     if request.user.is_authenticated:
         return redirect('index:index')
     if request.method == 'GET':
-        return render(request,'usermanage/signup-store.html')
+        return render(request,'usermanage/register-store.html')
     data = request.POST
 
      # check user already exits
     if User.objects.filter(username=data['username']).exists():
-        return render(request,'usermanage/signup-store.html')
+        return render(request,'usermanage/register-store.html')
 
     user = User.objects.create_user(data['username'], password = data['password'])
     g = Group.objects.get(name='store')
@@ -45,12 +45,12 @@ def storeSignup(request):
     g.save()
     storeprofile = models.Store(user = user, store_name=data['storename'])
     storeprofile.save()
-    return redirect_after_signin(user)
+    return redirect_after_login(user)
 
-def signin(request):
+def singin(request):
     user = request.user
     if request.user.is_authenticated:
-        return redirect_after_signin(user)
+        return redirect_after_login(user)
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -59,10 +59,10 @@ def signin(request):
             login(request, user)
             if request.GET.get("next") is not None:
                 return HttpResponseRedirect(request.GET["next"])
-            return redirect_after_signin(user)
-    return render(request,'usermanage/signin.html')
+            return redirect_after_login(user)
+    return render(request,'usermanage/login.html')
 
-def redirect_after_signin(user):
+def redirect_after_login(user):
     if user.groups.filter(name='store').exists():
         print('store')
         return redirect('store:index')
@@ -112,7 +112,7 @@ def userProfileContextGenerate(user):
         customer = models.Customer.objects.get(user=user)
         data['first_name']=customer.first_name
         data['last_name']=customer.last_name
-        data['birthdate']=customer.birthdate
+        data['birthdate']=customer.birthdate.strftime('%Y-%m-%d') if customer.birthdate is not None else None
     return {k:v for k,v in data.items() if v is not None}
 
 @login_required()

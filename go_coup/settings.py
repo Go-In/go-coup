@@ -25,7 +25,7 @@ SECRET_KEY = 'n$en9qwosg+r1uhot7qku7fj@2*#)q839zjhhln0dcw20d14#x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['web','localhost']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'index.apps.IndexConfig',
     'usermanage.apps.UsermanageConfig',
     'storemanage.apps.StoremanageConfig',
+    'customermanage.apps.CustomermanageConfig'
 ]
 
 MIDDLEWARE = [
@@ -66,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'go_coup.context_processors.groups'
             ],
         },
     },
@@ -130,4 +132,4 @@ STATICFILES_DIRS = [
 
 #auth
 
-LOGIN_URL = '/user/signin'
+LOGIN_URL = '/user/login'

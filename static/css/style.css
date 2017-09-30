@@ -1,3 +1,16 @@
+.black-ribbon {
+  position: fixed;
+  z-index: 9999;
+  width: 70px;
+}
+@media only all and (min-width: 768px) {
+  .black-ribbon {
+    width: auto;
+  }
+}
+
+.stick-left { left: 0; }
+.stick-bottom { bottom: 0; }
 .logo-nav {
   width: 40px;
 }
@@ -28,6 +41,7 @@
   padding: 10px 20px;
   font-size: 18px;
   cursor: pointer;
+  height: 100%;
 }
 .nav-btn:hover {
   background: #f51c61;
