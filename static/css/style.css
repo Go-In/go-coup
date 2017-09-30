@@ -23,6 +23,9 @@ body {
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
   background: #f51c61;
 }
+.dropdown-menu>li>a:hover {
+  background: #f51c61;
+}
 .navbar-default .navbar-toggle:hover {
   background: #f51c61;
 }
