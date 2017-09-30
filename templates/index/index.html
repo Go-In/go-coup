@@ -43,22 +43,28 @@
 
     </div>
 
-    <div class="search-bar">
-        <input type="text" class="search-input">
-        <button type="button" name="button" class="btn search-btn">
-            <img class="logo-nav" src="{% static 'images/search.png' %}" alt="">
-        </button>
+    <div class="row search-wrapper">
+      <div class="col-sm-8 col-sm-offset-2 col-xs-12">
+        <div class="search-box">
+          <form action="" class="search-form">
+            <input type="text" class="form-control search-input" placeholder="find coupon here.."/>
+            <button class="btn btn-link search-btn">
+              <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
 
     <div class="content row">
-        {% for ticket in tickets %}  
+        {% for ticket in tickets %}
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <a href="{% url 'index:detail' ticket.id %}">
                     <div class="coupon-sell">
 
-                        <img 
+                        <img
                             class="coup-img"
-                            src="{{ ticket.ticket_image_url }}" 
+                            src="{{ ticket.ticket_image_url }}"
                             alt="coup-image"
                         >
                         <div class="row">
@@ -66,16 +72,16 @@
                             <p class="coup-text">name: {{ ticket.name }}</p>
                             <p class="coup-text">exp: {{ ticket.expire_date }}</p>
                         </div>
-                        <div class="col-xs-4 coup-right">   
+                        <div class="col-xs-4 coup-right">
                             <p>{{ ticket.price }} {{ ticket.currency }}</p>
                         </div>
                         </div>
                     </div>
                 </a>
             </div>
-            {% if forloop.counter|divisibleby:"3" %}     
+            {% if forloop.counter|divisibleby:"3" %}
                 </div><div class="content row">
-            {% endif %}      
+            {% endif %}
         {% endfor %}
     </div>
     </div>

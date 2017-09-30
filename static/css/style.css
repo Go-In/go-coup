@@ -29,6 +29,8 @@ body {
 .header {
   background: #f1457c;
   color: white;
+  border: 1px solid #f1457c;
+  border-radius: 0;
 }
 .full-container {
   margin: 0 auto;
@@ -59,21 +61,6 @@ body {
 .nav-btn > a:link, .nav-btn > a:visited {
   text-decoration: none;
   color: white;
-}
-.search-bar {
-  width: 600px;
-  margin: 20px auto 0 auto;
-  display: flex;
-}
-.search-input {
-  height: 50px;
-  border: 1px solid #f1457c;
-  flex: 1;
-}
-.search-btn {
-  background: #f1457c;
-  height: 50px;
-  border-radius: 0;
 }
 .footer {
   background: #f1457c;
@@ -113,8 +100,50 @@ body {
   background: #f1457c;
   color: white;
 }
-@media (max-width: 768px) {
-  .search-bar {
-    width: 100%;
-  }
+
+.search-wrapper {
+  margin-top: 50px;
+}
+.search-box {
+  display: inline-block;
+  width: 100%;
+  border-radius: 3px;
+  padding: 4px 55px 4px 15px:
+  position: relative:
+  background: #fff;
+  border: 1px solid #ddd;
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+.search-box:hover {
+  border: 1px solid #aaa;
+}
+.search-input {
+  border: none;
+  box-shadow: none;
+  display: inline-block;
+  padding: 0;
+  background: transparent;
+  padding-left: 15px;
+}
+
+.search-btn {
+  position: absolute;
+  right: 17px;
+  top: 2px;
+  color: #aaa;
+  border-radius: 3px;
+  font-size: 17px;
+  padding: 5px 10px 1px;
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+
+.search-btn:hover {
+  color: #fff;
+  background-color: #f1457c;
 }
