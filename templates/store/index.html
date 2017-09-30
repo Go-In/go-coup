@@ -5,11 +5,13 @@
     <h1>STORE MANAGE</h1>
     <h1>You are : {{ user.username }}</h1>
   </div>
+  <center>
   <a href="{% url 'store:ticket-register' %}">
     <button class="btn btn-gocoup" style="margin-bottom:20px;">
       add new ticket
     </button>
   </a>
+  </center>
   <div class="row table-header">
     <div class="col-xs-12 col-md-2">Name</div>
     <div class="col-xs-12 col-md-2">Price</div>

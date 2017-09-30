@@ -22,7 +22,7 @@
         <div class="col-md-12 col-xs-12">
             <label class="checkbox">
             Is period? *
-            <input type="checkbox" value="" data-toggle="checkbox" class="custom-checkbox" name="is_period">
+            <input type="checkbox" value="period" data-toggle="checkbox" class="custom-checkbox" name="is_period">
             <span class="icons">
                 <span class="icon-unchecked"></span>
                 <span class="icon-checked"></span>
@@ -30,7 +30,7 @@
             </label>
         </div>
         <div class="col-md-12 col-xs-12">
-            <label>Remaining*:</label>
+            <label>Remaining day*:</label>
             <input type="number" class="form-control" name="remaining_day" value="" />
         </div>
         <div class="col-md-12 col-xs-12">
@@ -43,37 +43,17 @@
             </span>
             </label>
         </div>
-<!--         <div class="col-md-12 col-xs-12">
-            <label>Currency*:</label>
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Choose currency
-                    <span class="caret"></span></button>
-                        <select name="currency">
-                            <select name="currency">
-                            {% for c in currency_list %}
-                                <option value="{{c.pk}}">{{c.name}}</option>
-                            {% endfor %}
-                        </select>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">HTML</a></li>
-                            <li><a href="#">CSS</a></li>
-                            <li><a href="#">JavaScript</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">About Us</a></li>
-                        </ul>
-            </div>
-        </div> -->
         <div class="col-md-12 col-xs-12">
+            <label>Remaining*:</label>
+            <input type="number" class="form-control" name="remain" value="" />
+        </div>
+        <div class="col-md-12 col-xs-12" style="margin-top:10px;">
             <label>Currency*:</label>
             <select name="currency" class="selectpicker">
             {% for c in currency_list %}
                 <option value="{{c.pk}}">{{c.name}}</option>
             {% endfor %}
         </select>
-        </div>
-        <div class="col-md-12 col-xs-12">
-            <label>Price*:</label>
-            <input type="number" class="form-control" name="price" value="" />
         </div>
         <div class="col-md-12 col-xs-12">
             <label>Ticket image url*:</label>
