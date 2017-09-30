@@ -14,9 +14,6 @@ def detail(request, ticket_id):
         'ticket' : ticket
     })
 
-def profile(request):
-    return render(request, 'index/profile.html', {})
-
 def cart(request):
     data = request.GET
     items = data['cart'].split(',')

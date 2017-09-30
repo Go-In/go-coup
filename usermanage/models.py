@@ -10,7 +10,8 @@ class Customer(models.Model):
     last_name = models.CharField(max_length=30, null=True)
     birthdate = models.DateField(null=True)
     tel = models.CharField(max_length=12, null=True)
-    attribute = JSONField(default = dict)
+    attribute = JSONField(default = dict())
+    profile_image_url = models.CharField(max_length=1023, null=True)
     available = models.BooleanField(default=True)
 
     def __str__(self):
@@ -20,7 +21,8 @@ class Store(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     store_name = models.CharField(max_length=30)
     tel = models.CharField(max_length=12, null=True)
-    attribute = JSONField(default = dict)
+    attribute = JSONField(default = dict())
+    profile_image_url = models.CharField(max_length=1023, null=True)
     available = models.BooleanField(default=True)
 
     def __str__(self):
