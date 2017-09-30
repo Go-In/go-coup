@@ -1,10 +1,7 @@
 {% include 'components/header.html' %}
 
 <div class="full-container">
-  <div class="container">
-    <div id="cart">
-
-    </div>
+  <div class="cart-wrapper container">
     {% for ticket in tickets %}
       <div class="row" id="row_{{ ticket.id }}">
         <div class="col-sm-6 col-sm-offset-3 col-xs-12">
@@ -16,26 +13,30 @@
             >
             <div class="list-content">
               <div style="display: flex; justify-content: space-between;">
-                <p>name: {{ ticket.name }}</p>  
+                <p>name: {{ ticket.name }}</p>
                 <a class="btn" onclick="deleteTicketFromCart({{  ticket.id }})">
                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                </a>      
+                </a>
               </div>
-              <p id='ticket_{{ ticket.id }}'>จำนวน: </p>
-              <button class='btn btn-primary' onclick="incrementTicket({{ ticket.id }})">เพิ่ม</button>
-              <button class='btn btn-danger' onclick="decrementTicket({{ ticket.id }})">ลด</button>        
-            </div>              
+              <p id='ticket_{{ ticket.id }}'>amount: 1</p>
+              <button class='add-btn btn btn-default' onclick="incrementTicket({{ ticket.id }})">+</button>
+              <button class='add-btn btn btn-default' onclick="decrementTicket({{ ticket.id }})">-</button>
+            </div>
           </div>
         </div>
       </div>
     {% endfor %}
-    <button class="btn btn-gocoup">shop</button>
-    <button class="btn btn-gocoup">pay</button>
+    <div class="row cart-btn-wrapper">
+      <div class="col-xs-12">
+        <button class="btn btn-gocoup">shop</button>
+        <button class="btn btn-gocoup">pay</button>
+      </div>
+    </div>
   </div>
 </div>
 <script>
   var cartItems = getCartItem();
-
+  
   cartItems.forEach(c => {
     var ticket_id = Object.keys(c)[0];
     var numElement = document.getElementById('ticket_' + ticket_id);
