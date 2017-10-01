@@ -4,6 +4,11 @@ from django.contrib.auth.models import User, Group, Permission
 from usermanage import models
 
 class storemanageViewsTestCase(TestCase):
+    def test_not_loged_user_store_index_view(self):
+        resp = self.client.get('/store/', follow = True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.templates[0].name, 'usermanage/login.html')
+
     def test_not_loged_user_currency_add_view(self):
         resp = self.client.get('/store/currency/add', follow = True)
         self.assertEqual(resp.status_code, 200)
@@ -35,6 +40,11 @@ class customerStoremanageViewsTestCase(TestCase):
         self.group.delete()
         self.userProfile.delete()
 
+    def test_loged_customer_store_index_view(self):
+        resp = self.client.login(username = 'testing_user', password = 'testing_password')
+        resp = self.client.get('/store', follow = True)
+        self.assertEqual(resp.status_code, 403)
+
     def test_loged_customer_currency_add_view(self):
         resp = self.client.login(username = 'testing_user', password = 'testing_password')
         resp = self.client.get('/store/currency/add', follow = True)
@@ -65,6 +75,12 @@ class storeStoremanageViewsTestCase(TestCase):
         self.user.delete()
         self.group.delete()
         self.userProfile.delete()
+
+    def test_loged_store_store_index_view(self):
+        resp = self.client.login(username = 'testing_user', password = 'testing_password')
+        resp = self.client.get('/store/', follow = True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.templates[0].name, 'store/index.html')
 
     def test_loged_store_currency_add_view(self):
         resp = self.client.login(username = 'testing_user', password = 'testing_password')
