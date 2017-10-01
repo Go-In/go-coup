@@ -17,9 +17,11 @@ def customerRegister(request):
 
     # check user already exits
     if User.objects.filter(username=data['username']).exists():
-        return render(request,'usermanage/register-customer.html')
+        return render(request, 'usermanage/register-customer.html', {
+                'error' : True,
+                })
 
-    user = User.objects.create_user(data['username'], password = data['password'], email = data['email'])
+    user = User.objects.create_user(username = data['username'], password = data['password'], email = data['email'], first_name = data['first_name'], last_name = data['last_name'])
     g = Group.objects.get(name='customer')
     g.user_set.add(user)
     user.save()
@@ -37,7 +39,9 @@ def storeRegister(request):
 
      # check user already exits
     if User.objects.filter(username=data['username']).exists():
-        return render(request,'usermanage/register-store.html')
+        return render(request,'usermanage/register-store.html', {
+        'user_error' : True,
+        })
 
     user = User.objects.create_user(data['username'], password = data['password'])
     g = Group.objects.get(name='store')
@@ -48,7 +52,7 @@ def storeRegister(request):
     storeprofile.save()
     return redirect_after_login(user)
 
-def singin(request):
+def singin(request, error = ''):
     user = request.user
     if request.user.is_authenticated:
         return redirect_after_login(user)
@@ -61,6 +65,11 @@ def singin(request):
             if request.GET.get("next") is not None:
                 return HttpResponseRedirect(request.GET["next"])
             return redirect_after_login(user)
+        else:
+             error = True
+             return render(request, 'usermanage/login.html', {
+             'error' : error
+             })
     return render(request,'usermanage/login.html')
 
 def redirect_after_login(user):
