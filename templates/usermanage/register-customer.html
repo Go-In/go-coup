@@ -13,40 +13,52 @@
       <div class="content row">
         <div class="login col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12 login-wrapper">
           <div class="login-header signup">SIGN UP</div>
-          <div class="">
+          <div class=""> 
+              <center>
+                <a href="{% url 'user:store-register' %}" class="btn btn-gocoup login-btn">register as store</a></br>
+              </center> 
             <form action="" method="POST">
             {% csrf_token %}
             <div class="form-group">
               <label for="usr">Name:</label>
-              <input type="text" class="form-control" id="first_name" name="first_name" placeholder="firstname">
+              <input type="text" class="form-control" id="first_name" name="first_name" placeholder="firstname" required>
             </div>
             <div class="form-group">
               <label for="usr">Lastname:</label>
-              <input type="text" class="form-control" id="last_name" name="last_name" placeholder="lastname">
+              <input type="text" class="form-control" id="last_name" name="last_name" placeholder="lastname" required>
             </div>
             <div class="form-group">
               <label for="usr">Username:</label>
-              <input type="username" class="form-control" id="username" name="username" placeholder="username">
+              <input type="username" class="form-control" id="username" name="username" placeholder="username" required>
             </div>
             <div class="form-group">
               <label for="usr">Password:</label>
-              <input type="password" class="form-control" id="password" name="password" placeholder="password">
+              <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
             </div>
             <div class="form-group">
               <label for="usr">Tel:</label>
-              <input type="text" class="form-control" id="tel" name="tel" placeholder="tel">
+              <input type="text" class="form-control" id="tel" name="tel" placeholder="tel" required>
             </div>
             <div class="form-group">
               <label for="usr">Birthday:</label>
-              <input type="date" class="form-control" id="birthdate" name="birthdate" placeholder="birthday">
+              <input type="date" class="form-control" id="birthdate" name="birthdate" placeholder="birthday" required>
             </div>
             <div class="form-group">
               <label for="usr">Email:</label>
-              <input type="text" class="form-control" id="email" name="email" placeholder="email">
+              <input type="text" class="form-control" id="email" name="email" placeholder="email" required>
             </div>
             <center>
               <button class="btn btn-gocoup login-btn" style="margin-top:20px;">submit</button>
             </form>
+            {% if error %}
+                        <script>
+                            swal({
+                              title: 'Username is already exists',
+                              text: "",
+                              type: 'error',
+                            })
+                        </script>
+            {% endif %}
             </center>
             <br>
           </div>

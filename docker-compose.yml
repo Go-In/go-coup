@@ -17,11 +17,12 @@ services:
     web:
         build: .
         command: /bin/bash -c "sleep 7;python3 manage.py runserver 0.0.0.0:8000"
-        #command: /bin/bash -c "sleep 7;uwsgi --http :8000 --static-map /static=/code/static --module go_coup.wsgi"
+        #command: /bin/bash -c "sleep 7;uwsgi uwsgi.ini"
         volumes:
             - .:/code
         ports:
             - "8000:8000"
+            - "9091:9091"
         depends_on:
             - db
         entrypoint: /code/entrypoint.sh
