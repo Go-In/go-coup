@@ -34,9 +34,9 @@ def catalog(request):
     tickets = Ticket.objects.all()
     return render(request, 'index/catalog.html', {
         'tickets': tickets
-
-      def search(request):
-    return render(request, 'index/search.html', {})
+    })
+def search(request):
+    return render(request, 'index/search.html')
 
 def searchDemo(request):
     data = request.POST
