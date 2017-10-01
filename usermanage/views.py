@@ -147,7 +147,14 @@ def customerCoupon(request):
     user = request.user
     coupons = Coupon.objects.filter(user=user)
     context = {
-        'coupon':[{'Name':c.ticket.name,'store':c.ticket.store.store.store_name,'exp':c.ticket.expire_date.strftime('%Y-%m-%d'),'active':c.active,'exp':c.ticket.expire_date,'active':c.active} for c in coupons]
+        'coupon':[{
+                'name':c.ticket.name,
+                'store':c.ticket.store.store.store_name,
+                'exp':c.ticket.expire_date.strftime('%Y-%m-%d'),
+                'active':c.active,
+                'detail':c.ticket.detail,
+                'image_url':c.ticket.ticket_image_url
+            } for c in coupons]
     }
     return render(request, 'index/coupon.html',context)
 
