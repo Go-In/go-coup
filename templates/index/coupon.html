@@ -2,39 +2,26 @@
 <div class="full-container">
   <div class="container">
     {% include 'components/tabbar.html' %}
-      
+
     <h1 class="pink">Current used</h1>
     <div class="container">
+    {% for c in coupon %}
       <div class="row">
         <div class="coupon">
           <div class="coupon-img">
-            <img class="coupon-image" src="https://www.what-dog.net/Images/faces2/scroll001.jpg" alt="">
+            <img class="coupon-image" src="{{c.image_url}}" alt="">
           </div>
           <div class="coupon-content">
-            <p>Name: Cal</p>
-            <p>Exp: 17/7/17</p>
-            <p>Description: aaasdafsdfgsdfgsdfg</p>
+            <p>Name: {{c.name}}</p>
+            <p>Exp: {{c.exp}}</p>
+            <p>Description: {{c.detail}}</p>
           </div>
           <div class="coupon-img">
-            <img class="coupon-image" src="https://www.what-dog.net/Images/faces2/scroll001.jpg" alt="">
+            <img class="coupon-image" src="{{c.image_url}}" alt="">
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="coupon">
-          <div class="coupon-img">
-            <img class="coupon-image" src="https://www.what-dog.net/Images/faces2/scroll001.jpg" alt="">
-          </div>
-          <div class="coupon-content">
-            <p>Name: Cal</p>
-            <p>Exp: 17/7/17</p>
-            <p>Description: aaasdafsdfgsdfgsdfg</p>
-          </div>
-          <div class="coupon-img">
-            <img class="coupon-image" src="https://www.what-dog.net/Images/faces2/scroll001.jpg" alt="">
-          </div>
-        </div>
-      </div>
+     {% endfor %}
     </div>
   </div>
 
