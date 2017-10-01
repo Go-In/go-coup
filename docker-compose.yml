@@ -1,27 +1,27 @@
 version: '3'
 
 services:
-    # nginx:
-    #     image: nginx:latest
-    #     ports:
-    #         - "8080:80"
-    #     volumes:
-    #         - .:/src
-    #         - ./config/nginx:/etc/nginx/conf.d
-    #     depends_on:
-    #         - web
+    nginx:
+        image: nginx:latest
+        ports:
+            - "80:80"
+        volumes:
+            - .:/src
+            - ./config/nginx:/etc/nginx/conf.d
+        depends_on:
+            - web
     db:
         image: postgres
-        ports:
-            - "5432:5432"
+        # ports:
+        #     - "5432:5432"
     web:
         build: .
-        command: /bin/bash -c "sleep 7;python3 manage.py runserver 0.0.0.0:8000"
-        #command: /bin/bash -c "sleep 7;uwsgi uwsgi.ini"
+        # command: /bin/bash -c "sleep 7;python3 manage.py runserver 0.0.0.0:8000"
+        command: /bin/bash -c "sleep 7;uwsgi uwsgi.ini"
         volumes:
             - .:/code
         ports:
-            - "8000:8000"
+            # - "8000:8000"
             - "9091:9091"
         depends_on:
             - db
