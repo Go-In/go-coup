@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from storemanage.models import Ticket
+
 from django.http import JsonResponse
 
 # Create your views here.
@@ -27,4 +28,20 @@ def cart(request):
     tickets = Ticket.objects.filter(pk__in=items)
     return render(request, 'index/cart.html', {
         'tickets': tickets
+    })
+
+def search(request):
+    return render(request, 'index/search.html', {})
+
+def searchDemo(request):
+    data = request.POST
+    name = data['search_name']
+
+    tickets = Ticket.objects.filter(name__search=name)
+
+    for i in tickets:
+        print(i.detail)
+
+    return render(request, 'index/search-demo.html', {
+        'tickets' : tickets
     })
