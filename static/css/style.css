@@ -195,6 +195,10 @@ html, body {
 .table-content {
   color: #f1457c;
   font-size: 15px;
+  text-align: center;  
+}
+.table-content > a {
+  cursor: pointer;  
 }
 
 .table-content > div {
