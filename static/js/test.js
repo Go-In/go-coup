@@ -106,11 +106,11 @@ describe('decrement ticket from cart', () => {
 })
 
 describe('ticket left', () => {
-  it('should return ticket left true', () => {
+  it('should return ticket is left', () => {
     const cart = { '1': 2 }
     expect(ticketLeft(cart, '1')).to.equal(true);
   })
-  it('should return ticket left false', () => {
+  it('should return ticket none left', () => {
     const cart = {}
     expect(ticketLeft(cart, '1')).to.equal(false);
   })

@@ -64,7 +64,7 @@ function ticketLeft(cart, ticket_id) {
 }
 
 function handlerDelete(ticket_id) {
-  var cart = decrementTicket(ticket_id);
+  var cart = decrementTicket(getCartItem(), ticket_id);
   if (ticketLeft(cart, ticket_id)) {  
     localStorage.setItem('gocoup-cart', JSON.stringify(cart));
     renderTicket(ticket_id, cart[ticket_id]);
