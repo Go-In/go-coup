@@ -13,6 +13,19 @@ export const getCartUrl = (storage = localStorage) => {
   return `/cart?cart=${keyItems}`;
 }
 
+export const cartItemToObject = (storage = localStorage) => {
+  const cartItems = getCartItem(storage);
+  const keyItems = Object.keys(cartItems)
+  const obj = keyItems.map(k => {
+    return { 
+      id: k,
+      count: cartItems[k]
+    }
+  })
+  return obj;
+}
+
+
 function decrementTicket(cart, ticket_id) {
   var item = cart.find(c => Object.keys(c)[0] === String(ticket_id));
   item[ticket_id]--;

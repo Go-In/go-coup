@@ -32,13 +32,12 @@ const goToCart = () => {
 
 const cartItemToObject = (storage = localStorage) => {
   const cartItems = getCartItem(storage);
-  const obj = cartItems.reduce((prev, curr) => {
-    const ticket = {};
-    const key = Object.keys(curr)[0];
-    ticket.id = key;
-    ticket.count = curr[key];
-    prev.push(ticket);
-    return prev;
-  }, [])
+  const keyItems = Object.keys(cartItems)
+  const obj = keyItems.map(k => {
+    return { 
+      id: k,
+      count: cartItems[k]
+    }
+  })
   return obj;
 }

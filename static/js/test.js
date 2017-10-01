@@ -63,29 +63,29 @@ describe('getCartUrl test', () => {
   })
 });
 
-// describe('cartItemToObject test', () => {
-//   it('should return object of cart', () => {
-//     const mockStorage = {
-//       getItem: () => '{"1":1},{"2":2}'
-//     }
-//     const expected = [
-//       {
-//         id: '1',
-//         count: 1,
-//       },
-//       {
-//         id: '2',
-//         count: 2,
-//       },
-//     ]
-//     const obj = cartItemToObject(mockStorage);
-//     expect(obj.length).to.equal(expected.length);
-//     expect(obj[0].id).to.equal(expected[0].id);
-//     expect(obj[0].count).to.equal(expected[0].count);
-//     expect(obj[1].id).to.equal(expected[1].id);
-//     expect(obj[1].count).to.equal(expected[1].count);
-//   })
-// })
+describe('cartItemToObject test', () => {
+  it('should return object of cart', () => {
+    const mockStorage = {
+      getItem: () => '{"1":1, "2":2}'
+    }
+    const expected = [
+      {
+        id: '1',
+        count: 1,
+      },
+      {
+        id: '2',
+        count: 2,
+      },
+    ]
+    const obj = cartItemToObject(mockStorage);
+    expect(obj.length).to.equal(expected.length);
+    expect(obj[0].id).to.equal(expected[0].id);
+    expect(obj[0].count).to.equal(expected[0].count);
+    expect(obj[1].id).to.equal(expected[1].id);
+    expect(obj[1].count).to.equal(expected[1].count);
+  })
+})
 
 // // describe('decrement ticket from cart', () => {
 // //   it('should return cart with decrement ticket', () => {
