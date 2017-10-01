@@ -49,7 +49,7 @@
           <div class="detail-discription">
             <p>{{ ticket.detail }}</p>
           </div>
-          {% if not is_store %}
+          {% if not is_store and is_authenticated %}
             <form class="buy-btn-form" method="POST" action="{% url 'market:purchase' %}">
                 {% csrf_token %}
                 <button class="btn buy-btn" type="submit" name="ticket_id" value="{{ticket.pk}}">Buy</button>

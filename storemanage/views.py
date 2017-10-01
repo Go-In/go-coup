@@ -8,7 +8,7 @@ from django.utils.dateparse import parse_date
 @permission_required('usermanage.store_rights',raise_exception=True)
 def index(request, error=''):
     user = request.user
-    tickets = Ticket.objects.filter(store=user)
+    tickets = Ticket.objects.filter(store=user, available=True)
     return render(request,'store/index.html', {
         'user': user,
         'tickets': tickets,
@@ -108,7 +108,6 @@ def ticketEdit(request, ticket_id):
         setattr(ticket, 'is_limit', True)
     else:
         setattr(ticket, 'is_limit', False)    
-
     ticket.save()
     return redirect('store:index')
 
@@ -119,5 +118,6 @@ def ticketDelete(request, ticket_id):
     ticket = Ticket.objects.get(pk=ticket_id)
     if ticket.store != user:
         return index(request, 'ไม่มีสิทธิในการเข้าถึง ticket นี้')
-    ticket.delete()
+    setattr(ticket, 'available', False)
+    ticket.save()
     return redirect('store:index')
