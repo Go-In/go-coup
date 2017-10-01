@@ -10,9 +10,13 @@ def index(request):
     })
 
 def detail(request, ticket_id):
+    success = request.session.get('success')
+    if success:
+        request.session['success'] = False
     ticket = Ticket.objects.get(pk=ticket_id)
     return render(request, 'index/detail.html', {
-        'ticket' : ticket
+        'ticket' : ticket,
+        'success': success
     })
 
 def cart(request):

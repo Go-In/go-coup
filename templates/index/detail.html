@@ -60,5 +60,13 @@
       </div>
     </div>
   </div>
-
+{% if success %}
+  <script>
+    swal({
+      title: 'Success!',
+      text: "add {{ ticket.name }} to your wallet.",
+      type: 'success',
+    })
+  </script>
+{% endif %}
 {% include 'components/footer.html' %}

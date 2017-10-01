@@ -1,6 +1,7 @@
 from django.db import transaction
 from django.shortcuts import render, get_object_or_404, redirect
 from storemanage.models import Currency, Ticket
+from index.views import detail
 from usermanage.models import Store
 from customermanage.models import Wallet, Coupon
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
@@ -35,6 +36,7 @@ def purchase(request):
                 ticket.save()
             coupon = Coupon(user = user, ticket = ticket)
             coupon.save()
+    request.session['success'] = True
     return redirect('index:detail',ticket_id = ticket_id)
 
 def checkout(request):
