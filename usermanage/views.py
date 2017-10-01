@@ -112,11 +112,7 @@ def userProfileContextGenerate(user):
         customer = models.Customer.objects.get(user=user)
         data['first_name']=customer.first_name
         data['last_name']=customer.last_name
-<<<<<<< HEAD
-        data['birthdate']=customer.birthdate.strftime('%Y-%m-%d')
-=======
         data['birthdate']=customer.birthdate.strftime('%Y-%m-%d') if customer.birthdate is not None else None
->>>>>>> 7784571801874689f09a2d67ddadb1b0bd4700d9
     return {k:v for k,v in data.items() if v is not None}
 
 @login_required()
@@ -147,6 +143,9 @@ def customerSetting(request):
 @login_required()
 @permission_required('usermanage.customer_rights',raise_exception=True)
 def customerCoupon(request):
+    user = request.user
+    coupons = Coupon.objects.filter(user=user)
+    printf([c.ticket for c in coupons])
     return render(request, 'index/coupon.html')
 
 @login_required()
