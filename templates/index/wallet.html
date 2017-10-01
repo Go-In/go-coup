@@ -5,15 +5,15 @@
   <div class="container">
     {% include 'components/tabbar.html' %}
     <div class="row table-header">
-      <div class="col-md-6">Name</div>
-      <div class="col-md-6">Price</div>
-
+      <div class="col-md-4">Name</div>
+      <div class="col-md-4">Amount</div>
+      <div class="col-md-4">Redeem</div>      
     </div>
     {% for wallet in wallets %}
       <div class="row table-content">
-        <div class="col-md-6">{{ wallet.name }}</div>
-        <div class="col-md-6">{{ wallet.amount }}</div>
-
+        <div class="col-md-4">{{ wallet.name }}</div>
+        <div class="col-md-4">{{ wallet.amount }}</div>
+        <div class="col-md-4"><a href="{% url 'customer:motherload' %}">redeem</a></div>        
       </div>
     {% endfor %}
   </div>
