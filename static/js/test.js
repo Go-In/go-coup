@@ -18,17 +18,18 @@ describe('getCartItem test', () => {
       getItem: () => '{"1": 2, "2": 2}'
     }
     const items = getCartItem(mockStorage);
+    expect(Object.keys(items).length).to.equal(2);
     expect(items['1']).to.equal(2);
     expect(items['2']).to.equal(2);
   })
 
-  // it('should show empty array when cart empty', () => {
-  //   const mockStorage = {
-  //     getItem: () => undefined
-  //   }
-  //   const items = getCartItem(mockStorage);
-  //   expect(items.length).to.equal(0);
-  // })
+  it('should show empty array when cart empty', () => {
+    const mockStorage = {
+      getItem: () => null
+    }
+    const items = getCartItem(mockStorage);
+    expect(Object.keys(items).length).to.equal(0);    
+  })
 })
 
 // describe('getCartUrl test', () => {
