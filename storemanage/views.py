@@ -108,7 +108,7 @@ def ticketEdit(request, ticket_id):
         setattr(ticket, 'is_limit', True)
     else:
         setattr(ticket, 'is_limit', False)    
-
+    setattr(ticket, 'available', True)
     ticket.save()
     return redirect('store:index')
 
@@ -119,5 +119,6 @@ def ticketDelete(request, ticket_id):
     ticket = Ticket.objects.get(pk=ticket_id)
     if ticket.store != user:
         return index(request, 'ไม่มีสิทธิในการเข้าถึง ticket นี้')
-    ticket.delete()
+    setattr(ticket, 'available', False)
+    ticket.save()
     return redirect('store:index')
