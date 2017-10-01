@@ -137,7 +137,8 @@ def customerSetting(request):
     for k,v in customer_attrib.items():
         setattr(customer,k,v)
     customer.save()
-    user.email = customer_attrib['email']
+    if 'email' in customer_attrib:
+        user.email = customer_attrib['email']
     user.save()
     return render(request,'index/setting.html',{'data':customer_attrib})
 
