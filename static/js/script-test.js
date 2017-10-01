@@ -26,12 +26,11 @@ export const cartItemToObject = (storage = localStorage) => {
 }
 
 
-function decrementTicket(cart, ticket_id) {
-  var item = cart.find(c => Object.keys(c)[0] === String(ticket_id));
-  item[ticket_id]--;
-  return [...cart, item];
+export function decrementTicket(cart, ticket_id) {
+  cart[ticket_id]--;
+  return cart;
 }
 
-function ticketLeft(cart, ticket_id) {
-  return cart.find(c => c[String(ticket_id)] > 0);
+export function ticketLeft(cart, ticket_id) {
+  return cart[ticket_id] > 0;
 }

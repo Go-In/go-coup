@@ -64,7 +64,7 @@ function ticketLeft(cart, ticket_id) {
 }
 
 function handlerDelete(ticket_id) {
-  var cart = decrementTicket(getCartItem(), ticket_id);
+  var cart = decrementTicket(ticket_id);
   if (ticketLeft(cart, ticket_id)) {  
     localStorage.setItem('gocoup-cart', JSON.stringify(cart));
     renderTicket(ticket_id, cart[ticket_id]);
@@ -82,9 +82,8 @@ function deleteTicketFromCart(ticket_id) {
     cancelButtonText: 'ไม่',
   }).then(function() {
     var cartItems = getCartItem();
-    cartItems = cartItems.filter(c => Object.keys(c)[0] !== String(ticket_id));
-    var cartString = cartItems.map(c => JSON.stringify(c));
-    localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
+    delete cartItems[ticket_id]
+    localStorage.setItem('gocoup-cart', JSON.stringify(cartItems));
     document.getElementById('row_' + ticket_id).remove();
     history.pushState(null, '', getCartUrl());
   })

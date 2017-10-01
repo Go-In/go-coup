@@ -4,7 +4,8 @@ import {
   addItemToCart,
   getCartUrl,
   cartItemToObject,
-  decrementTicket
+  decrementTicket,
+  ticketLeft
 } from './script-test';
 
 describe('simple test', () => {
@@ -87,15 +88,26 @@ describe('cartItemToObject test', () => {
   })
 })
 
-// // describe('decrement ticket from cart', () => {
-// //   it('should return cart with decrement ticket', () => {
-// //     const cart = [
-// //       { '1': 2 }, { '2': 3 }
-// //     ]
-// //     const expected = [
-// //       { '1': 1 }, {'2': 3 } 
-// //     ]
-// //     const newCart = decrementTicket(cart, 1);
-// //     expect(newCart.length).to.equal(expected.length);
-// //   })
-// // })
+describe('decrement ticket from cart', () => {
+  it('should return cart with decrement ticket', () => {
+    const cart = {
+      '1': 2 ,
+      '2': 3
+    }
+    const expected = {
+      '1': 1,
+      '2': 3
+    }
+    const newCart = decrementTicket(cart, 1);
+    expect(newCart.length).to.equal(expected.length);
+    expect(newCart['1']).to.equal(1);
+    expect(newCart['2']).to.equal(3);    
+  })
+})
+
+describe('ticket left', () => {
+  it('should return ticket left true', () => {
+    const cart = { '1': 2 }
+    expect(ticketLeft(cart, '1')).to.equal(true);
+  })
+})
