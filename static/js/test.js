@@ -110,4 +110,9 @@ describe('ticket left', () => {
     const cart = { '1': 2 }
     expect(ticketLeft(cart, '1')).to.equal(true);
   })
+  it('should return ticket left false', () => {
+    const cart = {}
+    expect(ticketLeft(cart, '1')).to.equal(false);
+  })
 })
+
