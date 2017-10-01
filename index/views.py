@@ -22,3 +22,9 @@ def cart(request):
     return render(request, 'index/cart.html', {
         'tickets': tickets
     })
+
+def catalog(request):
+    tickets = Ticket.objects.all()
+    return render(request, 'index/catalog.html', {
+        'tickets': tickets
+    })
