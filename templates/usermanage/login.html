@@ -22,6 +22,15 @@
             </form>
               <a href="{% url 'user:customer-register' %}" class="btn btn-gocoup signup-btn">register</a></br>
               <a href="#" style="font-size:12px;">Forget password?</a>
+              {% if error %}
+                            <script>
+                                swal({
+                                  title: 'Invalid username/password',
+                                  text: "",
+                                  type: 'error',
+                                })
+                            </script>
+              {% endif %}
             </center>
             <br>
           </div>
