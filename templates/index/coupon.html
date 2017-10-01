@@ -16,9 +16,7 @@
             <p>Exp: {{c.exp}}</p>
             <p>Description: {{c.detail}}</p>
           </div>
-          <div class="coupon-img">
-            <img class="coupon-image" src="{{c.image_url}}" alt="">
-          </div>
+          <div id="qr_{{ forloop.counter }}"></div>
         </div>
       </div>
      {% endfor %}
@@ -26,4 +24,13 @@
   </div>
 
 </div>
+{% for c in coupon %}
+  <script>
+    new QRCode(document.getElementById("qr_{{ forloop.counter }}"), {
+      text: "http://jindo.dev.naver.com/collie",
+      width: 128,
+      height: 128,
+    });
+  </script>
+{% endfor %}
 {% include 'components/footer.html' %}
