@@ -1,22 +1,36 @@
 export const getCartItem = (storage = localStorage) => {
-  const data = storage.getItem('gocoup-cart') || '';
-  const currentItems = data.split(',').filter(d => d !== '');
-  console.log(currentItems);
-  return currentItems;
+  return JSON.parse(storage.getItem('gocoup-cart')) || {};
 }
 
-const addItemToCart = (itemId) => {
-  const cartItems = getCartItem();
-  cartItems.push(itemId.toString());
-  localStorage.setItem('gocoup-cart', [...new Set(cartItems)]);
+export const addItemToCart = (cart, itemId) => {
+  cart[itemId] = cart[itemId] ? cart[itemId] + 1 : 1;
+  return cart;
 }
 
 export const getCartUrl = (storage = localStorage) => {
   const cartItems = getCartItem(storage);
-  return `/cart?cart=${cartItems}`;
+  const keyItems = Object.keys(cartItems)
+  return `/cart?cart=${keyItems}`;
 }
 
-const goToCart = () => {
-  const url = getCartUrl();
-  document.location = url;
+export const cartItemToObject = (storage = localStorage) => {
+  const cartItems = getCartItem(storage);
+  const keyItems = Object.keys(cartItems)
+  const obj = keyItems.map(k => {
+    return { 
+      id: k,
+      count: cartItems[k]
+    }
+  })
+  return obj;
+}
+
+
+export function decrementTicket(cart, ticket_id) {
+  cart[ticket_id]--;
+  return cart;
+}
+
+export function ticketLeft(cart, ticket_id) {
+  return cart[ticket_id] > 0;
 }

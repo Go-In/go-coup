@@ -4,10 +4,11 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from django.contrib.auth.forms import UserCreationForm
-
+from customermanage.models import Coupon, Wallet
+from storemanage.models import Ticket
 # Create your views here.
 from . import views, models
-def customerRegister(request, error = '', no_fill = ''):
+def customerRegister(request):
     if request.user.is_authenticated:
         return redirect('index:index')
     if request.method == 'GET':
@@ -29,7 +30,7 @@ def customerRegister(request, error = '', no_fill = ''):
     g.user_set.add(user)
     user.save()
     g.save()
-    customerprofile = models.Customer(user = user, first_name = user.first_name, last_name = user.last_name, birthdate = data['birthdate'], tel = data['tel'])
+    customerprofile = models.Customer(user = user)
     customerprofile.save()
     return redirect('index:index')
 
@@ -53,21 +54,7 @@ def storeRegister(request):
     storeprofile.save()
     return redirect_after_login(user)
 
-def validateForm(data):
-    error = ''
-    if not data['first_name']:
-        error = True
-    if not data['last_name']:
-        error = True
-    if not data['birthdate']:
-        error = True
-    if not data['tel']:
-        error = True
-    if not data['email']:
-        error = True
-    return error
-
-def singin(request, error = ''):
+def singin(request):
     user = request.user
     if request.user.is_authenticated:
         return redirect_after_login(user)
@@ -80,12 +67,6 @@ def singin(request, error = ''):
             if request.GET.get("next") is not None:
                 return HttpResponseRedirect(request.GET["next"])
             return redirect_after_login(user)
-        else:
-            error = True
-            return render(request, 'usermanage/login.html', {
-            'error' : error
-            })
-
     return render(request,'usermanage/login.html')
 
 def redirect_after_login(user):
@@ -156,22 +137,38 @@ def customerSetting(request):
 
     user = request.user
     data = request.POST
-    customer_attrib = {k:v for k,v in data.items()}
+    customer_attrib = {k:v for k,v in data.items() if v != ''}
     customer_attrib.pop('csrfmiddlewaretoken', None)
     customer = models.Customer.objects.get(user=user)
     for k,v in customer_attrib.items():
         setattr(customer,k,v)
     customer.save()
-    user.email = customer_attrib['email']
+    if 'email' in customer_attrib:
+        user.email = customer_attrib['email']
     user.save()
     return render(request,'index/setting.html',{'data':customer_attrib})
 
 @login_required()
 @permission_required('usermanage.customer_rights',raise_exception=True)
 def customerCoupon(request):
-    return render(request, 'index/coupon.html')
+    user = request.user
+    coupons = Coupon.objects.filter(user=user)
+    context = {
+        'coupon':[{
+                'name':c.ticket.name,
+                'store':c.ticket.store.store.store_name,
+                'exp':c.ticket.expire_date.strftime('%Y-%m-%d'),
+                'active':c.active,
+                'detail':c.ticket.detail,
+                'image_url':c.ticket.ticket_image_url
+            } for c in coupons]
+    }
+    return render(request, 'index/coupon.html',context)
 
 @login_required()
 @permission_required('usermanage.customer_rights',raise_exception=True)
 def customerWallet(request):
-    return render(request, 'index/wallet.html')
+    user = request.user
+    wallets = [{'name':w.currency.name,'amount':w.amount} for w in Wallet.objects.filter(user=user)]
+    print(wallets)
+    return render(request, 'index/wallet.html',{'wallets':wallets})
