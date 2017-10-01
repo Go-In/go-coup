@@ -31,7 +31,7 @@ class usermanageViewsTestCase(TestCase):
         self.assertEqual(resp.templates[0].name, 'usermanage/login.html')
 
 
-class customerViewsTestCase(TestCase):
+class customerUsermanageViewsTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user('testing_user', password = 'testing_password')
         self.group = Group.objects.create(name = 'customer')
@@ -58,7 +58,7 @@ class customerViewsTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.templates[0].name, 'index/profile.html')
 
-class storeViewsTestCase(TestCase):
+class storeUsermanageViewsTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user('testing_user', password = 'testing_password')
         self.group = Group.objects.create(name = 'store')
