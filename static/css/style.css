@@ -1,6 +1,12 @@
-body {
+html, body {
   font-family: 'Kanit', sans-serif !important;
+  height: 100%;  
 }
+
+.full-container {
+  min-height: 70%;
+}
+
 #myCarousel {
   margin-top: -20px;
 }
