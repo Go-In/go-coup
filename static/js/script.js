@@ -21,7 +21,7 @@ const handlerAddToCart = (itemId, name) => {
 
 const getCartUrl = (storage = localStorage) => {
   const cartItems = getCartItem(storage);
-  const keyItems = cartItems.map(c => Object.keys(c)[0])
+  const keyItems = Object.keys(cartItems)
   return `/cart?cart=${keyItems}`;
 }
 

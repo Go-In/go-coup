@@ -46,22 +46,22 @@ describe('add item to cart', () => {
   })
 })
 
-// describe('getCartUrl test', () => {
-//   it('should return url with queryString', () => {
-//     const mockStorage = {
-//       getItem: () => '{"1":1},{"2":2}'
-//     }
-//     const url = getCartUrl(mockStorage);
-//     expect(url).to.equal('/cart?cart=1,2');
-//   })
-//   it('should return url with empty queryString', () => {
-//     const mockStorage = {
-//       getItem: () => undefined
-//     }
-//     const url = getCartUrl(mockStorage);
-//     expect(url).to.equal('/cart?cart=');
-//   })
-// });
+describe('getCartUrl test', () => {
+  it('should return url with queryString', () => {
+    const mockStorage = {
+      getItem: () => '{"1": 2, "2": 2}'
+    }
+    const url = getCartUrl(mockStorage);
+    expect(url).to.equal('/cart?cart=1,2');
+  })
+  it('should return url with empty queryString', () => {
+    const mockStorage = {
+      getItem: () => null
+    }
+    const url = getCartUrl(mockStorage);
+    expect(url).to.equal('/cart?cart=');
+  })
+});
 
 // describe('cartItemToObject test', () => {
 //   it('should return object of cart', () => {
