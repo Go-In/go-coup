@@ -18,9 +18,9 @@
                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </a>
               </div>
-              <p id='ticket_{{ ticket.id }}'>amount: 0</p>
+              <p id='ticket_{{ ticket.id }}'>quantity: 0</p>
               <button class='add-btn btn btn-default' onclick="incrementTicket({{ ticket.id }})">+</button>
-              <button class='add-btn btn btn-default' onclick="decrementTicket({{ ticket.id }})">-</button>
+              <button class='add-btn btn btn-default' onclick="handlerDelete({{ ticket.id }})">-</button>
             </div>
           </div>
         </div>
@@ -38,61 +38,12 @@
   </div>
 </div>
 <script>
-  var cartItems = getCartItem();
   $('#buy-btn').val(JSON.stringify(cartItemToObject()))
-
-  cartItems.forEach(c => {
-    var ticket_id = Object.keys(c)[0];
-    var numElement = document.getElementById('ticket_' + ticket_id);
-    numElement.innerText = 'จำนวน:' + c[ticket_id];
+  var tickets = cartItemToObject()
+  tickets.forEach(t => {
+    var numElement = document.getElementById('ticket_' + t.id);
+    numElement.innerText = 'quantity: ' + t.count;
   });
-
-  function renderTicket(ticket_id, quantity) {
-    var numElement = document.getElementById('ticket_' + ticket_id);
-    numElement.innerText = 'จำนวน:' + quantity;
-    $('#buy-btn').val(JSON.stringify(cartItemToObject()))
-  }
-
-  function incrementTicket(ticket_id) {
-    var cartItems = getCartItem();
-    var item = cartItems.find(c => Object.keys(c)[0] === String(ticket_id))
-    item[ticket_id]++;
-    cartItems = [...cartItems, item];
-    var cartString = cartItems.map(c => JSON.stringify(c))
-    localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
-    renderTicket(ticket_id, item[ticket_id]);
-  }
-
-  function decrementTicket(ticket_id) {
-    var cartItems = getCartItem();
-    var item = cartItems.find(c => Object.keys(c)[0] === String(ticket_id))
-    if (item[ticket_id] > 2) {
-      item[ticket_id]--;
-      cartItems = [...cartItems, item];
-      var cartString = cartItems.map(c => JSON.stringify(c))
-      localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
-      renderTicket(ticket_id, item[ticket_id]);
-    } else {
-      deleteTicketFromCart(ticket_id)
-    }
-  }
-
-  function deleteTicketFromCart(ticket_id) {
-    swal({
-      title: 'เอา ticket นี้ออกจาก cart !',
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'ใช่',
-      cancelButtonText: 'ไม่',
-    }).then(function() {
-      var cartItems = getCartItem();
-      cartItems = cartItems.filter(c => Object.keys(c)[0] !== String(ticket_id))
-      var cartString = cartItems.map(c => JSON.stringify(c));
-      localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
-      document.getElementById('row_' + ticket_id).remove();
-      history.pushState(null, '', getCartUrl());
-    })
-  }
 </script>
 
 {% include 'components/footer.html' %}
