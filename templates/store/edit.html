@@ -49,7 +49,7 @@
         </div>
         <div class="col-md-12 col-xs-12" style="margin-top:10px;">
             <label>Currency*:</label>
-            <select name="currency" class="selectpicker">
+            <select name="currency">
             {% for c in currency_list %}
                 <option value="{{ c.pk }}" {% if c.pk == ticket.currency %} selected {% endif %}>{{ c.name }}</option>
             {% endfor %}

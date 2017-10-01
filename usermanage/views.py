@@ -4,7 +4,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from django.contrib.auth.forms import UserCreationForm
-
+from customermanage.models import Coupon, Wallet
+from storemanage.models import Ticket
 # Create your views here.
 from . import views, models
 def customerRegister(request):
@@ -130,22 +131,38 @@ def customerSetting(request):
 
     user = request.user
     data = request.POST
-    customer_attrib = {k:v for k,v in data.items()}
+    customer_attrib = {k:v for k,v in data.items() if v != ''}
     customer_attrib.pop('csrfmiddlewaretoken', None)
     customer = models.Customer.objects.get(user=user)
     for k,v in customer_attrib.items():
         setattr(customer,k,v)
     customer.save()
-    user.email = customer_attrib['email']
+    if 'email' in customer_attrib:
+        user.email = customer_attrib['email']
     user.save()
     return render(request,'index/setting.html',{'data':customer_attrib})
 
 @login_required()
 @permission_required('usermanage.customer_rights',raise_exception=True)
 def customerCoupon(request):
-    return render(request, 'index/coupon.html')
+    user = request.user
+    coupons = Coupon.objects.filter(user=user)
+    context = {
+        'coupon':[{
+                'name':c.ticket.name,
+                'store':c.ticket.store.store.store_name,
+                'exp':c.ticket.expire_date.strftime('%Y-%m-%d'),
+                'active':c.active,
+                'detail':c.ticket.detail,
+                'image_url':c.ticket.ticket_image_url
+            } for c in coupons]
+    }
+    return render(request, 'index/coupon.html',context)
 
 @login_required()
 @permission_required('usermanage.customer_rights',raise_exception=True)
 def customerWallet(request):
-    return render(request, 'index/wallet.html')
+    user = request.user
+    wallets = [{'name':w.currency.name,'amount':w.amount} for w in Wallet.objects.filter(user=user)]
+    print(wallets)
+    return render(request, 'index/wallet.html',{'wallets':wallets})
