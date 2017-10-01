@@ -16,7 +16,6 @@ def customerRegister(request, error = '', no_fill = ''):
 
     # check user already exits
     if User.objects.filter(username=data['username']).exists():
-        first_name = data['first_name']
         return render(request, 'usermanage/register-customer.html', {
                 'error' : True,
                 })
