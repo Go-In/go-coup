@@ -25,7 +25,6 @@ class customerStoremanageViewsTestCase(TestCase):
         self.group = Group.objects.create(name = 'customer')
         self.userProfile = models.Customer(user = self.user)
 
-
         customer_rights = Permission.objects.get(name = 'customer_rights')
 
         self.group.permissions.add(customer_rights)
@@ -60,7 +59,6 @@ class storeStoremanageViewsTestCase(TestCase):
         self.user = User.objects.create_user('testing_user', password = 'testing_password')
         self.group = Group.objects.create(name = 'store')
         self.userProfile = models.Store(user = self.user)
-
 
         store_rights = Permission.objects.get(name = 'store_rights')
 
