@@ -2,26 +2,21 @@ const getCartItem = (storage = localStorage) => {
   return JSON.parse(localStorage.getItem('gocoup-cart')) || {};
 }
 
-const addItemToCart = (itemId, name) => {
-  const cart = getCartItem();
-  cart[itemId]++;
-  localStorage.setItem('gocoup-cart', JSON.stringify(cart));
+const addItemToCart = (cart, itemId) => {
+  cart[itemId] = cart[itemId] ? cart[itemId] + 1 : 1;
+  return cart;
+}
 
-  // let cartItems = getCartItem();
-  // const item = cartItems.find(c => Object.keys(c)[0] === String(itemId))
-  // if (item) {
-  //   item[itemId]++;
-  //   cartItems = [...cartItems, item];
-  // } else {
-  //   cartItems.push({[itemId]: 1})
-  // }
-  // const cartString = cartItems.map(c => JSON.stringify(c))
-  // localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
-  // swal(
-  //   'Add Success !',
-  //   ((item ? item[itemId] : 1) + ' ' + name + ' ' + (item ? ' tickets ' : ' ticket ') + 'in cart'),
-  //   'success'
-  // )
+const handlerAddToCart = (itemId, name) => {
+  const cart = getCartItem();
+  const AddedCart = addItemToCart(cart, itemId);
+  console.log(AddedCart);
+  localStorage.setItem('gocoup-cart', JSON.stringify(cart));
+  swal(
+    'Add Success !',
+    (AddedCart[itemId] + ' ' + name + ' ' + (AddedCart[itemId] ? ' tickets ' : ' ticket ') + 'in cart'),
+    'success'
+  )
 }
 
 const getCartUrl = (storage = localStorage) => {
