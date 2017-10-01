@@ -1,9 +1,15 @@
+{% load staticfiles %}
   <div class="footer">
       <div class="container">
-          <div class="footer-right">
-              <div class="nav-btn">contact us</div>
+          <div class="row">
+            <div class="col-sm-4 col-sm-offset-8 col-xs-12">
+              <h3>Contact us</h3>
+              <p>Dev: <a class="footer-link" href="https://twitter.com/monthol8th">@monthol8th</a></p>
+              <p>CEO: <a class="footer-link" href="https://www.facebook.com/evee.monpriya">evee.monpriya</a></p>
+            </div>
           </div>
       </div>
   </div>
+  <img alt="ribbon" src="{% static 'images/black_ribbon_bottom_left.png' %}" class="black-ribbon stick-bottom stick-left"/>
 </body>
 </html>

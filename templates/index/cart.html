@@ -1,34 +1,98 @@
 {% include 'components/header.html' %}
-<div class="full-container">
-  
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6 col-sm-offset-3 col-xs-12">
-        <div class="list">
-          <img class="list-image" src="https://assets.kfc.co.uk/3f040df6-0c9cdd0f/wicked-variety-bucket-320w.jpeg" alt="detail content">
-          <div class="list-content">
-            <p>name: KFC</p>
-            <p>name: KFC</p>
-            <p>name: KFC</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6 col-sm-offset-3 col-xs-12">
-        <div class="list">
-          <img class="list-image" src="https://assets.kfc.co.uk/3f040df6-0c9cdd0f/wicked-variety-bucket-320w.jpeg" alt="detail content">
-          <div class="list-content">
-            <p>name: KFC</p>
-            <p>name: KFC</p>
-            <p>name: KFC</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button class="btn btn-gocoup">shop</button>
-    <button class="btn btn-gocoup">pay</button>
-  </div>
 
+<div class="full-container">
+  <div class="cart-wrapper container">
+    {% for ticket in tickets %}
+      <div class="row" id="row_{{ ticket.id }}">
+        <div class="col-sm-6 col-sm-offset-3 col-xs-12">
+          <div class="list">
+            <img
+              onError="this.onerror=null;this.src='https://assets.kfc.co.uk/3f040df6-0c9cdd0f/wicked-variety-bucket-320w.jpeg'"
+              class="list-image" src="{{ ticket.content_image_url }}"
+              alt="detail content"
+            >
+            <div class="list-content">
+              <div style="display: flex; justify-content: space-between;">
+                <p>name: {{ ticket.name }}</p>
+                <a class="btn" onclick="deleteTicketFromCart({{  ticket.id }})">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </a>
+              </div>
+              <p id='ticket_{{ ticket.id }}'>amount: 0</p>
+              <button class='add-btn btn btn-default' onclick="incrementTicket({{ ticket.id }})">+</button>
+              <button class='add-btn btn btn-default' onclick="decrementTicket({{ ticket.id }})">-</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    <div class="row cart-btn-wrapper">
+      <div class="col-xs-12">
+        <button class="btn btn-gocoup">shop</button>
+        <form class="buy-btn-form" method="POST" action="{% url 'market:checkout' %}">
+            {% csrf_token %}
+            <button id="buy-btn" class="btn btn-gocoup" type="submit" name="cart" value="">Buy</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
+<script>
+  var cartItems = getCartItem();
+  $('#buy-btn').val(JSON.stringify(cartItemToObject()))
+
+  cartItems.forEach(c => {
+    var ticket_id = Object.keys(c)[0];
+    var numElement = document.getElementById('ticket_' + ticket_id);
+    numElement.innerText = 'จำนวน:' + c[ticket_id];
+  });
+
+  function renderTicket(ticket_id, quantity) {
+    var numElement = document.getElementById('ticket_' + ticket_id);
+    numElement.innerText = 'จำนวน:' + quantity;
+    $('#buy-btn').val(JSON.stringify(cartItemToObject()))
+  }
+
+  function incrementTicket(ticket_id) {
+    var cartItems = getCartItem();
+    var item = cartItems.find(c => Object.keys(c)[0] === String(ticket_id))
+    item[ticket_id]++;
+    cartItems = [...cartItems, item];
+    var cartString = cartItems.map(c => JSON.stringify(c))
+    localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
+    renderTicket(ticket_id, item[ticket_id]);
+  }
+
+  function decrementTicket(ticket_id) {
+    var cartItems = getCartItem();
+    var item = cartItems.find(c => Object.keys(c)[0] === String(ticket_id))
+    if (item[ticket_id] > 2) {
+      item[ticket_id]--;
+      cartItems = [...cartItems, item];
+      var cartString = cartItems.map(c => JSON.stringify(c))
+      localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
+      renderTicket(ticket_id, item[ticket_id]);
+    } else {
+      deleteTicketFromCart(ticket_id)
+    }
+  }
+
+  function deleteTicketFromCart(ticket_id) {
+    swal({
+      title: 'เอา ticket นี้ออกจาก cart !',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'ใช่',
+      cancelButtonText: 'ไม่',
+    }).then(function() {
+      var cartItems = getCartItem();
+      cartItems = cartItems.filter(c => Object.keys(c)[0] !== String(ticket_id))
+      var cartString = cartItems.map(c => JSON.stringify(c));
+      localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
+      document.getElementById('row_' + ticket_id).remove();
+      history.pushState(null, '', getCartUrl());
+    })
+  }
+</script>
+
 {% include 'components/footer.html' %}

@@ -1,13 +1,16 @@
-.login-wrapper {
-  margin-top: 11%;
-  margin-bottom: 11%;
-}
 .login {
   border: 1px solid #f1457c;
   -webkit-transition: background 0.5s; /* Safari */
   -moz-transition: background 0.5s; /* Safari */
   -o-transition: background 0.5s; /* Safari */
   transition: background 0.5s;
+}
+.signup {
+  margin: 0 -15px 20px -15px;
+}
+.login-wrapper {
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .login-header {
@@ -35,4 +38,13 @@
 	background-color: white;
 	color: #f51c61;
 	border-color: #f51c61;
+}
+
+a.button {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  text-decoration: none;
+  color: initial;
 }
