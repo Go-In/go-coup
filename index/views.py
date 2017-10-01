@@ -5,7 +5,7 @@ from django.http import JsonResponse
 
 # Create your views here.
 def index(request):
-    tickets = Ticket.objects.all()
+    tickets = Ticket.objects.filter(available=True)
     return render(request, 'index/index.html', {
         'tickets': tickets
     })
@@ -15,6 +15,8 @@ def detail(request, ticket_id):
     if success:
         request.session['success'] = False
     ticket = Ticket.objects.get(pk=ticket_id)
+    if ticket.available == False:
+        return redirect('index:index')
     return render(request, 'index/detail.html', {
         'ticket' : ticket,
         'success': success
@@ -31,7 +33,7 @@ def cart(request):
     })
 
 def catalog(request):
-    tickets = Ticket.objects.all()
+    tickets = Ticket.objects.filter(available=True)
     return render(request, 'index/catalog.html', {
         'tickets': tickets
     })
