@@ -4,7 +4,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from django.contrib.auth.forms import UserCreationForm
-
+from customermanage.models import Coupon
+from storemanage.models import Ticket
 # Create your views here.
 from . import views, models
 def customerRegister(request):
@@ -145,8 +146,10 @@ def customerSetting(request):
 def customerCoupon(request):
     user = request.user
     coupons = Coupon.objects.filter(user=user)
-    printf([c.ticket for c in coupons])
-    return render(request, 'index/coupon.html')
+    context = {
+        'coupon':[{'Name':c.ticket.name,'store':c.ticket.store.store.store_name,'exp':c.ticket.expire_date.strftime('%Y-%m-%d'),'active':c.active,'exp':c.ticket.expire_date,'active':c.active} for c in coupons]
+    }
+    return render(request, 'index/coupon.html',context)
 
 @login_required()
 @permission_required('usermanage.customer_rights',raise_exception=True)
