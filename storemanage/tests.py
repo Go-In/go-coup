@@ -4,8 +4,13 @@ from django.contrib.auth.models import User, Group, Permission
 from usermanage import models
 
 class storemanageViewsTestCase(TestCase):
-    def test_not_loged_user_currency_add_view_test(self):
+    def test_not_loged_user_currency_add_view(self):
         resp = self.client.get('/store/currency/add', follow = True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.templates[0].name, 'usermanage/login.html')
+
+    def test_not_loged_user_ticket_add_view(self):
+        resp = self.client.get('/store/add', follow = True)
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.templates[0].name, 'usermanage/login.html')
 
@@ -30,9 +35,14 @@ class customerStoremanageViewsTestCase(TestCase):
         self.group.delete()
         self.userProfile.delete()
 
-    def test_loged_customer_profile_view(self):
+    def test_loged_customer_currency_add_view(self):
         resp = self.client.login(username = 'testing_user', password = 'testing_password')
         resp = self.client.get('/store/currency/add', follow = True)
+        self.assertEqual(resp.status_code, 403)
+
+    def test_loged_customer_ticket_add_view(self):
+        resp = self.client.login(username = 'testing_user', password = 'testing_password')
+        resp = self.client.get('/store/add', follow = True)
         self.assertEqual(resp.status_code, 403)
 
 class storeStoremanageViewsTestCase(TestCase):
@@ -56,8 +66,14 @@ class storeStoremanageViewsTestCase(TestCase):
         self.group.delete()
         self.userProfile.delete()
 
-    def test_loged_store_profile_view(self):
+    def test_loged_store_currency_add_view(self):
         resp = self.client.login(username = 'testing_user', password = 'testing_password')
         resp = self.client.get('/store/currency/add', follow = True)
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.templates[0].name, 'storemanage/currency-form.html')
+
+    def test_loged_store_ticket_add_view(self):
+        resp = self.client.login(username = 'testing_user', password = 'testing_password')
+        resp = self.client.get('/store/add', follow = True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.templates[0].name, 'store/add.html')
