@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from storemanage.models import Ticket
 from django.http import JsonResponse
 
@@ -17,6 +17,8 @@ def detail(request, ticket_id):
 
 def cart(request):
     data = request.GET
+    if 'cart' not in data:
+        return redirect('index:index')
     items = data['cart'].split(',') if data['cart'] else []
     tickets = Ticket.objects.filter(pk__in=items)
     return render(request, 'index/cart.html', {
