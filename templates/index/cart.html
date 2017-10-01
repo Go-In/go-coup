@@ -53,9 +53,19 @@
     $('#buy-btn').val(JSON.stringify(cartItemToObject()))
   }
 
+  function decrementTicket(cart, ticket_id) {
+    var item = cart.find(c => Object.keys(c)[0] === String(ticket_id));
+    item[ticket_id]--;
+    return [...cart, item];
+  }
+
+  function ticketLeft(cart, ticket_id) {
+    return cart.find(c => c[String(ticket_id)] > 0);
+  }
+
   function incrementTicket(ticket_id) {
     var cartItems = getCartItem();
-    var item = cartItems.find(c => Object.keys(c)[0] === String(ticket_id))
+    var item = cartItems.find(c => Object.keys(c)[0] === String(ticket_id));
     item[ticket_id]++;
     cartItems = [...cartItems, item];
     var cartString = cartItems.map(c => JSON.stringify(c))
@@ -63,19 +73,16 @@
     renderTicket(ticket_id, item[ticket_id]);
   }
 
-  function decrementTicket(ticket_id) {
-    var cartItems = getCartItem();
-    var item = cartItems.find(c => Object.keys(c)[0] === String(ticket_id))
-    if (item[ticket_id] > 2) {
-      item[ticket_id]--;
-      cartItems = [...cartItems, item];
-      var cartString = cartItems.map(c => JSON.stringify(c))
-      localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
-      renderTicket(ticket_id, item[ticket_id]);
-    } else {
-      deleteTicketFromCart(ticket_id)
-    }
-  }
+  // function handlerDelete(ticket_id) {
+  //   var cart = decrementTicket(getCartItem(), ticket_id);
+  //   if (ticketLeft(cart, ticket_id)) {  
+  //     var cartString = cartItems.map(c => JSON.stringify(c));
+  //     localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
+  //     renderTicket(ticket_id, item[ticket_id]);
+  //   } else {
+  //     deleteTicketFromCart(ticket_id)
+  //   }
+  // }
 
   function deleteTicketFromCart(ticket_id) {
     swal({
@@ -86,7 +93,7 @@
       cancelButtonText: 'ไม่',
     }).then(function() {
       var cartItems = getCartItem();
-      cartItems = cartItems.filter(c => Object.keys(c)[0] !== String(ticket_id))
+      cartItems = cartItems.filter(c => Object.keys(c)[0] !== String(ticket_id));
       var cartString = cartItems.map(c => JSON.stringify(c));
       localStorage.setItem('gocoup-cart', [...new Set(cartString)]);
       document.getElementById('row_' + ticket_id).remove();

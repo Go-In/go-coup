@@ -3,6 +3,7 @@ import {
   getCartItem,
   getCartUrl,
   cartItemToObject,
+  decrementTicket
 } from './script-test';
 
 describe('simple test', () => {
@@ -70,3 +71,16 @@ describe('cartItemToObject test', () => {
     expect(obj[1].count).to.equal(expected[1].count);
   })
 })
+
+// describe('decrement ticket from cart', () => {
+//   it('should return cart with decrement ticket', () => {
+//     const cart = [
+//       { '1': 2 }, { '2': 3 }
+//     ]
+//     const expected = [
+//       { '1': 1 }, {'2': 3 } 
+//     ]
+//     const newCart = decrementTicket(cart, 1);
+//     expect(newCart.length).to.equal(expected.length);
+//   })
+// })
