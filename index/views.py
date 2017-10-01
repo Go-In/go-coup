@@ -39,7 +39,7 @@ def catalog(request):
     })
 
 def search(request):
-    return render(request, 'index/search.html', {})
+    return render(request, 'index/search.html')
 
 def searchDemo(request):
     data = request.POST
