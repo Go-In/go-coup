@@ -1,5 +1,5 @@
 const getCartItem = (storage = localStorage) => {
-  return JSON.parse(localStorage.getItem('gocoup-cart')) || {};
+  return JSON.parse(storage.getItem('gocoup-cart')) || {};
 }
 
 const addItemToCart = (cart, itemId) => {

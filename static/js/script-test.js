@@ -1,20 +1,10 @@
 export const getCartItem = (storage = localStorage) => {
-  const data = storage.getItem('gocoup-cart') || '';
-  const currentItems = data.split(',').filter(d => d !== '').map(d => JSON.parse(d));
-  return currentItems;
+  return JSON.parse(storage.getItem('gocoup-cart')) || {};
 }
 
-export const cartItemToObject = (storage = localStorage) => {
-  const cartItems = getCartItem(storage);
-  const obj = cartItems.reduce((prev, curr) => {
-    const ticket = {};
-    const key = Object.keys(curr)[0];
-    ticket.id = key;
-    ticket.count = curr[key];
-    prev.push(ticket);
-    return prev;
-  }, [])
-  return obj;
+export const addItemToCart = (cart, itemId) => {
+  cart[itemId] = cart[itemId] ? cart[itemId] + 1 : 1;
+  return cart;
 }
 
 export const getCartUrl = (storage = localStorage) => {
