@@ -54,32 +54,37 @@
 
     <div class="content row">
         {% for ticket in tickets %}
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <a class="coup-link" href="{% url 'index:detail' ticket.id %}">
-                    <div class="coupon-sell">
+            {% if forloop.counter < 10 %}
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <a class="coup-link" href="{% url 'index:detail' ticket.id %}">
+                        <div class="coupon-sell">
 
-                        <img
-                            class="coup-img"
-                            src="{{ ticket.ticket_image_url }}"
-                            onError="this.onerror=null;this.src='https://kfcbd.com/wp-content/uploads/2016/11/kfc-logo.png'"
-                        >
-                        <div class="coup-text-wrapper">
-                        <div class="coup-left">
-                            <p class="coup-text">name: {{ ticket.name }}</p>
-                            <p class="coup-text">exp: {{ ticket.expire_date }}</p>
+                            <img
+                                class="coup-img"
+                                src="{{ ticket.ticket_image_url }}"
+                                onError="this.onerror=null;this.src='https://kfcbd.com/wp-content/uploads/2016/11/kfc-logo.png'"
+                            >
+                            <div class="coup-text-wrapper">
+                            <div class="coup-left">
+                                <p class="coup-text">name: {{ ticket.name }}</p>
+                                <p class="coup-text">exp: {{ ticket.expire_date }}</p>
+                            </div>
+                            <div class="coup-right">
+                                <p class="coup-text">{{ ticket.price }} {{ ticket.currency }}</p>
+                            </div>
+                            </div>
                         </div>
-                        <div class="coup-right">
-                            <p class="coup-text">{{ ticket.price }} {{ ticket.currency }}</p>
-                        </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+                    </a>
+                </div>
+            {% endif %}
             {% if forloop.counter|divisibleby:"3" %}
                 </div><div class="content row">
             {% endif %}
         {% endfor %}
     </div>
+    </div>
+    <div style="text-align: center;">
+    <a href="{% url 'index:catalog' %}"><input type="button" style="width:200px; height:60px; font-size:24px;" value="view all"></a>
     </div>
 </div>
 
