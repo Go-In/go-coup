@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import {
   getCartItem,
+  addItemToCart,
   getCartUrl,
   cartItemToObject,
   decrementTicket
@@ -29,6 +30,19 @@ describe('getCartItem test', () => {
     }
     const items = getCartItem(mockStorage);
     expect(Object.keys(items).length).to.equal(0);    
+  })
+})
+
+describe('add item to cart', () => {
+  it('should add item to cart', () => {
+    let cart = {"1": 0, "2": 0}
+    cart = addItemToCart(cart, 1);
+    expect(cart['1']).to.equal(1);
+    expect(cart['2']).to.equal(0);    
+    cart = addItemToCart(cart, 1);
+    cart = addItemToCart(cart, 2);    
+    expect(cart['1']).to.equal(2);
+    expect(cart['2']).to.equal(1);        
   })
 })
 
