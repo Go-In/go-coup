@@ -54,11 +54,19 @@
                 {% csrf_token %}
                 <button class="btn buy-btn" type="submit" name="ticket_id" value="{{ticket.pk}}">Buy</button>
             </form>
-            <button class="btn buy-btn" onclick="addItemToCart({{ ticket.id }}, '{{ ticket.name }}')">add to cart</button>
+            <button class="btn buy-btn" onclick="handlerAddToCart({{ ticket.id }}, '{{ ticket.name }}')">add to cart</button>
           {% endif %}
         </div>
       </div>
     </div>
   </div>
-
+{% if success %}
+  <script>
+    swal({
+      title: 'Success!',
+      text: "add {{ ticket.name }} to your wallet.",
+      type: 'success',
+    })
+  </script>
+{% endif %}
 {% include 'components/footer.html' %}
