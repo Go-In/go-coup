@@ -30,6 +30,11 @@ class usermanageViewsTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.templates[0].name, 'usermanage/login.html')
 
+    def test_not_loged_user_setting_view(self):
+        resp = self.client.get('/user/setting', follow = True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.templates[0].name, 'usermanage/login.html')
+
 
 class customerUsermanageViewsTestCase(TestCase):
     def setUp(self):
@@ -58,6 +63,12 @@ class customerUsermanageViewsTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.templates[0].name, 'index/profile.html')
 
+    def test_loged_customer_setting_view(self):
+        resp = self.client.login(username = 'testing_user', password = 'testing_password')
+        resp = self.client.get('/user/setting', follow = True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.templates[0].name, 'index/setting.html')
+
 class storeUsermanageViewsTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user('testing_user', password = 'testing_password')
@@ -82,6 +93,11 @@ class storeUsermanageViewsTestCase(TestCase):
     def test_loged_store_profile_view(self):
         resp = self.client.login(username = 'testing_user', password = 'testing_password')
         resp = self.client.get('/user/profile', follow = True)
+        self.assertEqual(resp.status_code, 403)
+
+    def test_loged_store_setting_view(self):
+        resp = self.client.login(username = 'testing_user', password = 'testing_password')
+        resp = self.client.get('/user/setting', follow = True)
         self.assertEqual(resp.status_code, 403)
 
 class usermanageFunctionTestCase(TestCase):
