@@ -24,7 +24,7 @@ def currencyRegister(request):
     data = request.POST
     currency = Currency(store=user,name=data['name'])
     currency.save()
-    return redirect('index:index')
+    return redirect('store:index')
 
 def validateForm(data):
     error = {}
