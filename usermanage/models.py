@@ -26,7 +26,7 @@ class Store(models.Model):
     available = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.user
+        return self.store_name
 
 class RightsSupport(models.Model):
 
