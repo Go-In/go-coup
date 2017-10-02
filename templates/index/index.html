@@ -78,14 +78,36 @@
                 </div>
             {% endif %}
             {% if forloop.counter|divisibleby:"3" %}
-                </div><div class="content row">
+                </div><div class="row">
             {% endif %}
         {% endfor %}
-    </div>
-    </div>
-    <div style="text-align: center;">
-    <a href="{% url 'index:catalog' %}"><input type="button" style="width:200px; height:60px; font-size:24px;" value="view all"></a>
+      </div>
+        <div class="row">
+          <div class="col-xs-12 text-right" style="margin-top:20px;">
+            <a href="{% url 'index:catalog' %}">
+              <button class="btn btn-gocoup">Show more</button>
+            </a>
+          </div>
+        </div>
     </div>
 </div>
+{% if success %}
+<script>
+  swal({
+    title: 'Success!',
+    text: "add {{ ticket.name }} to your wallet.",
+    type: 'success',
+  })
+</script>
+{% endif %}
+{% if fail %}
+<script>
+swal({
+  title: 'Fail!',
+  text: "not enough currency",
+  type: 'error',
+})
+</script>
+{% endif %}
 
 {% include 'components/footer.html' %}
