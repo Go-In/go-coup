@@ -21,12 +21,12 @@ def customerRegister(request):
                 'error' : True,
                 })
 
-    user = User.objects.create_user(username = data['username'], password = data['password'], email = data['email'], first_name = data['first_name'], last_name = data['last_name'])
+    user = User.objects.create_user(username = data['username'], password = data['password'], email = data['email'])
     g = Group.objects.get(name='customer')
     g.user_set.add(user)
     user.save()
     g.save()
-    customerprofile = models.Customer(user = user)
+    customerprofile = models.Customer(user = user, first_name = data['first_name'], last_name = data['last_name'])
     customerprofile.save()
     return redirect('index:index')
 
