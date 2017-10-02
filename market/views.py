@@ -36,7 +36,9 @@ def purchase(request):
                 ticket.save()
             coupon = Coupon(user = user, ticket = ticket)
             coupon.save()
-    request.session['success'] = True
+            request.session['success'] = True
+        else:
+            request.session['fail'] = True
     return redirect('index:detail',ticket_id = ticket_id)
 
 def checkout(request):
@@ -54,4 +56,7 @@ def checkout(request):
                     ticket.save()
                 coupon = Coupon(user = user, ticket = ticket)
                 coupon.save()
+                request.session['success'] = True
+            else:
+                request.session['fail'] = True
     return redirect('index:index')

@@ -5,21 +5,33 @@ from django.http import JsonResponse
 
 # Create your views here.
 def index(request):
+    success = request.session.get('success')
+    fail = request.session.get('fail')
+    if success:
+        request.session['success'] = False
+    if fail:
+        request.session['fail'] = False
     tickets = Ticket.objects.filter(available=True)
     return render(request, 'index/index.html', {
-        'tickets': tickets
+        'tickets': tickets,
+        'success': success,
+        'fail': fail
     })
 
 def detail(request, ticket_id):
     success = request.session.get('success')
+    fail = request.session.get('fail')
     if success:
         request.session['success'] = False
+    if fail:
+        request.session['fail'] = False
     ticket = Ticket.objects.get(pk=ticket_id)
     if ticket.available == False:
         return redirect('index:index')
     return render(request, 'index/detail.html', {
         'ticket' : ticket,
-        'success': success
+        'success': success,
+        'fail': fail
     })
 
 def cart(request):

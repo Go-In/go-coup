@@ -69,4 +69,13 @@
     })
   </script>
 {% endif %}
+{% if fail %}
+<script>
+  swal({
+    title: 'Fail!',
+    text: "not enough currency",
+    type: 'error',
+  })
+</script>
+{% endif %}
 {% include 'components/footer.html' %}
