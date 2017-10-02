@@ -12,14 +12,18 @@ def index(request):
 
 def detail(request, ticket_id):
     success = request.session.get('success')
+    fail = request.session.get('fail')
     if success:
         request.session['success'] = False
+    if fail:
+        request.session['fail'] = False
     ticket = Ticket.objects.get(pk=ticket_id)
     if ticket.available == False:
         return redirect('index:index')
     return render(request, 'index/detail.html', {
         'ticket' : ticket,
-        'success': success
+        'success': success,
+        'fail': fail
     })
 
 def cart(request):
