@@ -43,3 +43,16 @@
 .hilight {
   color: #f51c61;
 }
+@media (max-width: 470px) {
+  .profile-image {
+    width: 60px;
+    height: 60px;
+  }
+  .profile-nav-btn {
+    font-size: 18px;
+    height: 40px;
+  }
+  .profile-image-wrapper {
+    margin: 0 5px;
+  }
+}
