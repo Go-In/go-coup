@@ -5,9 +5,19 @@
   <div class="container">
     {% include 'components/tabbar.html' %}
     <div class="container">
-      <p>Name: {% if 'first_name' in data %}{{ data.first_name }}{% endif %}</p>
-      <p>Last Name: {% if 'last_name' in data %}{{ data.last_name }}{% endif %}</p>
-      <p>Email: {% if 'email' in data %}{{ data.email }}{% endif %}</p>
+      <div class="row">
+        <div class="col-xs-12">
+          <h3>
+            <span class="hilight">Name:</span> {% if 'first_name' in data %}{{ data.first_name }}{% endif %}
+          </h3>
+          <h3>
+            <span class="hilight">Last Name:</span> {% if 'last_name' in data %}{{ data.last_name }}{% endif %}
+          </h3>
+          <h3>
+            <span class="hilight">Email:</span> {% if 'email' in data %}{{ data.email }}{% endif %}
+          </h3>
+        </div>
+      </div>
     </div>
   </div>
 </div>

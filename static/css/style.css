@@ -1,6 +1,6 @@
 html, body {
   font-family: 'Kanit', sans-serif !important;
-  height: 100%;  
+  height: 100%;
 }
 
 .full-container {
@@ -99,6 +99,7 @@ html, body {
   border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  margin-bottom: 30px;
 }
 .coupon-sell:hover {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
@@ -195,10 +196,10 @@ html, body {
 .table-content {
   color: #f1457c;
   font-size: 15px;
-  text-align: center;  
+  text-align: center;
 }
 .table-content > a {
-  cursor: pointer;  
+  cursor: pointer;
 }
 
 .table-content > div {
