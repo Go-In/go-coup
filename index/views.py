@@ -43,6 +43,8 @@ def search(request):
 
 def searchDemo(request):
     data = request.POST
+    if not 'search_name' in data:
+        return redirect('index:index')
     name = data['search_name']
     tickets = Ticket.objects.filter(name__search=name)
     for i in tickets:
