@@ -56,4 +56,7 @@ def checkout(request):
                     ticket.save()
                 coupon = Coupon(user = user, ticket = ticket)
                 coupon.save()
+                request.session['success'] = True
+            else:
+                request.session['fail'] = True
     return redirect('index:index')

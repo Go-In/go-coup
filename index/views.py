@@ -5,9 +5,17 @@ from django.http import JsonResponse
 
 # Create your views here.
 def index(request):
+    success = request.session.get('success')
+    fail = request.session.get('fail')
+    if success:
+        request.session['success'] = False
+    if fail:
+        request.session['fail'] = False
     tickets = Ticket.objects.filter(available=True)
     return render(request, 'index/index.html', {
-        'tickets': tickets
+        'tickets': tickets,
+        'success': success,
+        'fail': fail
     })
 
 def detail(request, ticket_id):
