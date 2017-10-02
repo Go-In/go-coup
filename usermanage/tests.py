@@ -30,13 +30,26 @@ class usermanageViewsTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.templates[0].name, 'usermanage/login.html')
 
+    def test_not_loged_user_setting_view(self):
+        resp = self.client.get('/user/setting', follow = True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.templates[0].name, 'usermanage/login.html')
 
-class customerViewsTestCase(TestCase):
+    def test_not_loged_user_ticket_view(self):
+        resp = self.client.get('/user/coupon', follow = True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.templates[0].name, 'usermanage/login.html')
+
+    def test_not_loged_user_wallet_view(self):
+        resp = self.client.get('/user/wallet', follow = True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.templates[0].name, 'usermanage/login.html')
+
+class customerUsermanageViewsTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user('testing_user', password = 'testing_password')
         self.group = Group.objects.create(name = 'customer')
         self.userProfile = models.Customer(user = self.user)
-
 
         customer_rights = Permission.objects.get(name = 'customer_rights')
 
@@ -58,12 +71,29 @@ class customerViewsTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.templates[0].name, 'index/profile.html')
 
-class storeViewsTestCase(TestCase):
+    def test_loged_customer_setting_view(self):
+        resp = self.client.login(username = 'testing_user', password = 'testing_password')
+        resp = self.client.get('/user/setting', follow = True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.templates[0].name, 'index/setting.html')
+
+    def test_loged_customer_ticket_view(self):
+        resp = self.client.login(username = 'testing_user', password = 'testing_password')
+        resp = self.client.get('/user/coupon', follow = True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.templates[0].name, 'index/coupon.html')
+
+    def test_loged_customer_wallet_view(self):
+        resp = self.client.login(username = 'testing_user', password = 'testing_password')
+        resp = self.client.get('/user/wallet', follow = True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.templates[0].name, 'index/wallet.html')
+
+class storeUsermanageViewsTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user('testing_user', password = 'testing_password')
         self.group = Group.objects.create(name = 'store')
         self.userProfile = models.Store(user = self.user)
-
 
         store_rights = Permission.objects.get(name = 'store_rights')
 
@@ -82,6 +112,21 @@ class storeViewsTestCase(TestCase):
     def test_loged_store_profile_view(self):
         resp = self.client.login(username = 'testing_user', password = 'testing_password')
         resp = self.client.get('/user/profile', follow = True)
+        self.assertEqual(resp.status_code, 403)
+
+    def test_loged_store_setting_view(self):
+        resp = self.client.login(username = 'testing_user', password = 'testing_password')
+        resp = self.client.get('/user/setting', follow = True)
+        self.assertEqual(resp.status_code, 403)
+
+    def test_loged_store_ticket_view(self):
+        resp = self.client.login(username = 'testing_user', password = 'testing_password')
+        resp = self.client.get('/user/coupon', follow = True)
+        self.assertEqual(resp.status_code, 403)
+
+    def test_loged_store_wallet_view(self):
+        resp = self.client.login(username = 'testing_user', password = 'testing_password')
+        resp = self.client.get('/user/wallet', follow = True)
         self.assertEqual(resp.status_code, 403)
 
 class usermanageFunctionTestCase(TestCase):
