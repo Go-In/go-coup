@@ -8,6 +8,7 @@ from customermanage.models import Coupon, Wallet
 from storemanage.models import Ticket
 # Create your views here.
 from usermanage import models
+from . import redirect_after_login
 
 def singin(request, error = ''):
     user = request.user

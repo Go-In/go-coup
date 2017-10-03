@@ -8,6 +8,7 @@ from customermanage.models import Coupon, Wallet
 from storemanage.models import Ticket
 # Create your views here.
 from usermanage import models
+from . import userProfileContextGenerate
 
 @login_required()
 @permission_required('usermanage.customer_rights',raise_exception=True)
