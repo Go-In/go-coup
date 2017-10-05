@@ -1,3 +1,3 @@
-form .motherload import motherload
+from .motherload import motherload
 
 __all__ = ['motherload']
