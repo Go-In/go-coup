@@ -1,17 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
+from .Currency import Currency
 
 # Create your models here.
-
-class Currency(models.Model):
-    name = models.CharField(max_length=30)
-    store = models.ForeignKey(User, on_delete=models.CASCADE)
-    attribute = JSONField(default = dict())
-    available = models.BooleanField(default=True)
-
-    def __str__(self):
-        return self.name
 
 class Ticket(models.Model):
     name = models.CharField(max_length=127)
