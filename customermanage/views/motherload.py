@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from storemanage.models import Currency
-from .models import Wallet
+from customermanage.models import Wallet
 # Create your views here.
 def motherload(request):
     if request.method == 'GET':
