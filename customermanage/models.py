@@ -1,5 +1,6 @@
 from django.db import models
-from storemanage.models import Currency, Ticket
+from storemanage.models.Currency import Currency
+from storemanage.models.Ticket import Ticket
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
 # Create your models here.
