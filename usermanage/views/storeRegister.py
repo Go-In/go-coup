@@ -8,6 +8,7 @@ from customermanage.models import Coupon, Wallet
 from storemanage.models import Ticket
 # Create your views here.
 from usermanage import models
+from .redirect_after_login import redirect_after_login
 
 def storeRegister(request):
     if request.user.is_authenticated:
