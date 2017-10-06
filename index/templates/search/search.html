@@ -19,6 +19,7 @@
 
            {% for result in page.object_list %}
                <p>
+                   FOUND
                    <a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
                </p>
            {% empty %}

@@ -9,6 +9,6 @@ urlpatterns = [
     url(r'^detail/(?P<ticket_id>[0-9]+)/$', views.detail, name='detail'),
     url(r'^cart/$', views.cart, name='cart'),
     url(r'^catalog/$', views.catalog, name='catalog'),
-    # url(r'^search/', include('haystack.urls')),
+    url(r'^search/', include('haystack.urls'), name='search'),
     url(r'^search-demo/$', views.searchDemo, name='search-demo'),
 ]
