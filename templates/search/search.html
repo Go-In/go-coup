@@ -1,0 +1,74 @@
+{% load staticfiles %}
+{% include 'components/header.html' %}
+
+{% block content %}
+<div class="full-container">
+  <div class="container">  
+    <h2>Search</h2>
+    <div class="row search-wrapper">            
+        <div class="col-sm-8 col-sm-offset-2 col-xs-12">
+            <div class="search-box">
+                <form method="get" action=".">
+                    <input id="id_q" type="text" name="q" maxlength="127" class="form-control search-input" placeholder="find coupon here.."/>
+                    <button class="btn btn-link search-btn">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                        <!--checklist when has many models
+                        <li>
+                            <label for="id_models_0">
+                                <input type="checkbox" name="models" value="storemanage.ticket" id="id_models_0">Tickets</label>
+                        </li>-->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="content row">
+        {% if query %}
+            <h3>Results</h3>
+
+            {% for ticket in page.object_list %}
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <a class="coup-link" href="{% url 'index:detail' ticket.pk %}">
+                        <div class="coupon-sell">
+
+                            <img
+                                class="coup-img"
+                                src="{{ ticket.ticket_image_url }}"
+                                onError="this.onerror=null;this.src='https://kfcbd.com/wp-content/uploads/2016/11/kfc-logo.png'"
+                            >
+                            <div class="coup-text-wrapper">
+                            <div class="coup-left">
+                                <p class="coup-text">name: {{ ticket.name }}</p>
+                                <p class="coup-text">exp: {{ ticket.expire_date }}</p>
+                            </div>
+                            <div class="coup-right">
+                                <p class="coup-text">{{ ticket.price }} {{ ticket.currency }}</p>
+                            </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% if forloop.counter|divisibleby:"3" %}
+                    </div><div class="content row">
+                {% endif %}
+            {% empty %}
+                <p>No results found.</p>
+            {% endfor %}
+
+            {% if page.has_previous or page.has_next %}
+                <div>
+                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                    |
+                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                </div>
+            {% endif %}
+        {% else %}
+            {# Show some example queries to run, maybe query syntax, something else? #}
+        {% endif %}
+    <!--</form>-->
+  </div>
+</div>
+{% endblock %}
+
+{% include 'components/footer.html' %}
