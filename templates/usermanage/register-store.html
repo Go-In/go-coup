@@ -46,6 +46,24 @@
                 })
             </script>
             {% endif %}
+            {% if user_len %}
+            <script>
+                swal({
+                  title: 'Username must 30 characters in length',
+                  text: "",
+                  type: 'error',
+                })
+            </script>
+            {% endif %}
+            {% if store_len %}
+            <script>
+                swal({
+                  title: 'Storename must 30 characters in length',
+                  text: "",
+                  type: 'error',
+                })
+            </script>
+            {% endif %}
             </center>
             <br>
           </div>

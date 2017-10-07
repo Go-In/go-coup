@@ -17,10 +17,30 @@ def storeRegister(request):
         return render(request,'usermanage/register-store.html')
     data = request.POST
 
-     # check user already exits
+     # check user already exists
     if User.objects.filter(username=data['username']).exists():
         return render(request,'usermanage/register-store.html', {
         'user_error' : True,
+        })
+    
+    # check storename already exists
+    if models.Store.objects.filter(store_name=data['storename']).exists():
+        return render(request,'usermanage/register-store.html', {
+        'store_error' : True,
+        })
+
+    #check username out of range
+
+    if len(data['username']) > 30:
+        return render(request, 'usermanage/register-store.html', {
+            'user_len' : True,
+        })
+    
+    #check storename out of range
+
+    if len(data['storename']) > 30:
+        return render(request, 'usermanage/register-store.html', {
+            'store_len' : True,
         })
 
     user = User.objects.create_user(data['username'], password = data['password'])
