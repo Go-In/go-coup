@@ -26,7 +26,7 @@ function getCartUrl(storage) {
   return '/cart?cart=' + keyItems;
 }
 
-var goToCart = function() {
+function goToCart() {
   var url = getCartUrl();
   document.location = url;
 }
