@@ -98,6 +98,7 @@
     text: "add {{ ticket.name }} to your wallet.",
     type: 'success',
   })
+  localStorage.removeItem('gocoup-cart');
 </script>
 {% endif %}
 {% if fail %}
