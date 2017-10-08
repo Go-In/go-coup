@@ -25,8 +25,6 @@
 
     <div class="content row">
         {% if query %}
-            <h3>Results</h3>
-
             {% for ticket in page.object_list %}
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <a class="coup-link" href="{% url 'index:detail' ticket.pk %}">
