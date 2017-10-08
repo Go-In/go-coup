@@ -54,8 +54,9 @@ def checkout(request):
                 if ticket.is_limit:
                     ticket.remain -= ticketData[index]['count']
                     ticket.save()
-                coupon = Coupon(user = user, ticket = ticket)
-                coupon.save()
+                for i in range(ticketData[index]['count']): 
+                    coupon = Coupon(user = user, ticket = ticket)
+                    coupon.save()
                 request.session['success'] = True
             else:
                 request.session['fail'] = True
