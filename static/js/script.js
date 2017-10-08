@@ -1,15 +1,16 @@
-const getCartItem = (storage = localStorage) => {
+function getCartItem(storage) {
+  storage = storage || localStorage;
   return JSON.parse(storage.getItem('gocoup-cart')) || {};
 }
 
-const addItemToCart = (cart, itemId) => {
+function addItemToCart(cart, itemId) {
   cart[itemId] = cart[itemId] ? cart[itemId] + 1 : 1;
   return cart;
 }
 
-const handlerAddToCart = (itemId, name) => {
-  const cart = getCartItem();
-  const AddedCart = addItemToCart(cart, itemId);
+function handlerAddToCart(itemId, name) {
+  var cart = getCartItem();
+  var AddedCart = addItemToCart(cart, itemId);
   localStorage.setItem('gocoup-cart', JSON.stringify(cart));
   swal(
     'Add Success !',
@@ -18,21 +19,23 @@ const handlerAddToCart = (itemId, name) => {
   )
 }
 
-const getCartUrl = (storage = localStorage) => {
-  const cartItems = getCartItem(storage);
-  const keyItems = Object.keys(cartItems)
-  return `/cart?cart=${keyItems}`;
+function getCartUrl(storage) {
+  storage = storage || localStorage;  
+  var cartItems = getCartItem(storage);
+  var keyItems = Object.keys(cartItems)
+  return '/cart?cart=' + keyItems;
 }
 
-const goToCart = () => {
-  const url = getCartUrl();
+var goToCart = function() {
+  var url = getCartUrl();
   document.location = url;
 }
 
-const cartItemToObject = (storage = localStorage) => {
-  const cartItems = getCartItem(storage);
-  const keyItems = Object.keys(cartItems)
-  const obj = keyItems.map(k => {
+function cartItemToObject(storage) {
+  storage = storage || localStorage;    
+  var cartItems = getCartItem(storage);
+  var keyItems = Object.keys(cartItems)
+  var obj = keyItems.map(function(k) {
     return { 
       id: k,
       count: cartItems[k]
@@ -82,7 +85,7 @@ function deleteTicketFromCart(ticket_id) {
     cancelButtonText: 'ไม่',
   }).then(function() {
     var cartItems = getCartItem();
-    delete cartItems[ticket_id]
+    delete cartItems[ticket_id];
     localStorage.setItem('gocoup-cart', JSON.stringify(cartItems));
     document.getElementById('row_' + ticket_id).remove();
     history.pushState(null, '', getCartUrl());
