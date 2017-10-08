@@ -41,9 +41,9 @@
     <div class="row search-wrapper">
       <div class="col-sm-8 col-sm-offset-2 col-xs-12">
         <div class="search-box">
-          <form action="{% url 'index:search-demo' %}" method="POST" class="search-form">
+          <form action="/search" method="GET" class="search-form">
             {% csrf_token %}
-            <input id="id_name" type="text" name="search_name" maxlength="127" class="form-control search-input" placeholder="find coupon here.."/>
+            <input id="id_q" type="text" name="q" maxlength="127" class="form-control search-input" placeholder="find coupon here.."/>
             <button class="btn btn-link search-btn">
                 <i class="glyphicon glyphicon-search"></i>
             </button>
