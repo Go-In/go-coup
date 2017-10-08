@@ -17,26 +17,32 @@
     </button>
   </a>
   </div>
-  <div class="row table-header">
-    <div class="col-xs-12 col-md-2">Name</div>
-    <div class="col-xs-12 col-md-2">Price</div>
-    <div class="col-xs-12 col-md-2">Detail</div>
-    <div class="col-xs-12 col-md-2">Date</div>
-    <div class="col-xs-12 col-md-2">Edit</div>
-    <div class="col-xs-12 col-md-2">Delete</div>      
-  </div>
-  {% for ticket in tickets %}
-    <div class="row table-content">
-      <div class="col-xs-12 col-md-2">{{ ticket.name }}</div>
-      <div class="col-xs-12 col-md-2">{{ ticket.price }} {{ ticket.currency }}</div>
-      <div class="col-xs-12 col-md-2">{{ ticket.detail }}</div>
-      <div class="col-xs-12 col-md-2">{{ ticket.expire_date }}</div>
-      <div class="col-xs-12 col-md-2"><a href="{% url 'store:ticket-edit' ticket.id %}">edit</a></div>
-      <div class="col-xs-12 col-md-2">
-        <a onclick="deleteTicket('{% url 'store:ticket-delete' ticket.id %}')">delete</a>
-      </div>
-    </div>
-  {% endfor %}
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Detail</th>
+        <th>Date</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ticket in tickets %}
+        <tr>
+          <td>{{ ticket.name }}</td>
+          <td>{{ ticket.price }} {{ ticket.currency }}</td>
+          <td>{{ ticket.detail }}</td>
+          <td>{{ ticket.expire_date }}</td>
+          <td><a href="{% url 'store:ticket-edit' ticket.id %}">edit</a></td>
+          <td>
+            <a onclick="deleteTicket('{% url 'store:ticket-delete' ticket.id %}')">delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 <script>
   function deleteTicket(ticketUrl) {
