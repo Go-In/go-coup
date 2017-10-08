@@ -40,7 +40,7 @@
 <script>
   $('#buy-btn').val(JSON.stringify(cartItemToObject()))
   var tickets = cartItemToObject()
-  tickets.forEach(t => {
+  tickets.forEach(function(t) {
     var numElement = document.getElementById('ticket_' + t.id);
     numElement.innerText = 'quantity: ' + t.count;
   });
