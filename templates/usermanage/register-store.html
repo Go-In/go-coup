@@ -28,22 +28,38 @@
             <center>
               <button type="submit" value="Signup" class="btn btn-gocoup login-btn" style="margin-top:20px;">submit</button>
             </form>
-            {% if user_error %}
+            {% if error.user_exist %}
             <script>
-                swal({
-                  title: 'Username is already exists',
-                  text: "",
-                  type: 'error',
-                })
+                msg = "Username is already exists"
             </script>
             {% endif %}
-            {% if store_error %}
+            {% if error.store_exist %}
             <script>
-                swal({
-                  title: 'Storename is already exists',
-                  text: "",
-                  type: 'error',
-                })
+                msg = "Storename is already exists"
+            </script>
+            {% endif %}
+            {% if error.user_len %}
+            <script>
+                msg = "Username must be a maximum of 30 characters"
+            </script>
+            {% endif %}
+            {% if error.store_len %}
+            <script>
+                msg = "Storename must be a maximum of 30 characters"
+            </script>
+            {% endif %}
+            <!-- {% if error.url %}
+            <script>
+                msg = "URL is invalid"
+            </script>
+            {% endif %} -->
+            {% if error %}
+            <script>
+              swal({
+                title: msg,
+                text: "",
+                type: 'error',
+              })
             </script>
             {% endif %}
             </center>
