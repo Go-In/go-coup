@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from storemanage.models import Currency, Ticket
 from django.utils.dateparse import parse_date
 
-from .validateForm import validateForm
+from .validateForm import validateTicketForm
 
 @login_required()
 @permission_required('usermanage.store_rights',raise_exception=True)
@@ -22,7 +22,7 @@ def ticketEdit(request, ticket_id):
             'currency_list':currency_list
         })
     data = request.POST
-    error = validateForm(data)
+    error = validateTicketForm(data)
     if error:
         return render(request,'store/edit.html', {
             'error': error,
