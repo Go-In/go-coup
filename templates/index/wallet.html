@@ -4,18 +4,24 @@
 <div class="full-container">
   <div class="container">
     {% include 'components/tabbar.html' %}
-    <div class="row table-header">
-      <div class="col-md-4">Name</div>
-      <div class="col-md-4">Amount</div>
-      <div class="col-md-4">Redeem</div>      
-    </div>
-    {% for wallet in wallets %}
-      <div class="row table-content">
-        <div class="col-md-4">{{ wallet.name }}</div>
-        <div class="col-md-4">{{ wallet.amount }}</div>
-        <div class="col-md-4"><a href="{% url 'customer:motherload' %}">redeem</a></div>        
-      </div>
-    {% endfor %}
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th class="text-center">Name</th>
+          <th class="text-center">Amount</th>
+          <th class="text-center">Redeem</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for wallet in wallets %}
+          <tr>
+            <td>{{ wallet.name }}</td>
+            <td>{{ wallet.amount }}</td>
+            <td><a href="{% url 'customer:motherload' %}">redeem</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
 
