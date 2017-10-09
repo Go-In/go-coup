@@ -48,6 +48,11 @@
                 msg = "Storename must be a maximum of 30 characters"
             </script>
             {% endif %}
+            {% if error.tel_len %}
+            <script>
+                msg = "tel is too long"
+            </script>
+            {% endif %}
             <!-- {% if error.url %}
             <script>
                 msg = "URL is invalid"

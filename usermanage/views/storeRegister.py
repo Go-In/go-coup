@@ -9,7 +9,7 @@ from storemanage.models import Ticket
 # Create your views here.
 from usermanage import models
 from .redirect_after_login import redirect_after_login
-from .validateForm import validateForm
+from .validateForm import validateStoreForm
 
 def storeRegister(request):
     if request.user.is_authenticated:
@@ -18,7 +18,7 @@ def storeRegister(request):
         return render(request,'usermanage/register-store.html')
     data = request.POST
 
-    error = validateForm(data)
+    error = validateStoreForm(data)
     
     if error:
         return render(request, 'usermanage/register-store.html', {
