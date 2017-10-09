@@ -8,6 +8,7 @@ from customermanage.models import Coupon, Wallet
 from storemanage.models import Ticket
 # Create your views here.
 from usermanage import models
+from .validateForm import validateCustomerForm
 
 def customerRegister(request):
     if request.user.is_authenticated:
@@ -16,11 +17,12 @@ def customerRegister(request):
         return render(request,'usermanage/register-customer.html')
     data = request.POST
 
-    # check user already exits
-    if User.objects.filter(username=data['username']).exists():
-        return render(request, 'usermanage/register-customer.html', {
-                'error' : True,
-                })
+    error = validateCustomerForm(data)
+    
+    if error:
+        return render(request,'usermanage/register-customer.html', {
+            'error' : error
+        })
 
     user = User.objects.create_user(username = data['username'], password = data['password'], email = data['email'])
     g = Group.objects.get(name='customer')

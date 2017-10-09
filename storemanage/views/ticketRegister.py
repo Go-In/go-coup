@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from storemanage.models import Currency, Ticket
 from django.utils.dateparse import parse_date
 
-from .validateForm import validateForm
+from .validateForm import validateTicketForm
 
 @login_required()
 @permission_required('usermanage.store_rights',raise_exception=True)
@@ -16,13 +16,13 @@ def ticketRegister(request):
             'currency_list': currency_list
         })
     data = request.POST
-    error = validateForm(data)
+    error = validateTicketForm(data)
     if error:
         return render(request,'store/add.html', {
             'error': error,
             'currency_list':currency_list
-        })
-    print(data.items())
+        })  
+    # print(data.items())
     ticket_attrib = {k:v for k,v in data.items() if v != ''}
     ticket_attrib.pop('csrfmiddlewaretoken')
     ticket_attrib['is_period'] = True if 'is_period' in ticket_attrib else False
