@@ -54,7 +54,7 @@
             <center>
               <button class="btn btn-gocoup login-btn" style="margin-top:20px;">submit</button>
             </form>
-            {% if error %}
+            {% if username_error %}
                         <script>
                             swal({
                               title: 'Username is already exists',
@@ -63,6 +63,67 @@
                             })
                         </script>
             {% endif %}
+
+            {% if firstname_len_error %}
+                        <script>
+                            swal({
+                              title: 'Firstname has more than 30 characters',
+                              text: "",
+                              type: 'error',
+                            })
+                        </script>
+            {% endif %}
+
+            {% if lastname_len_error %}
+                        <script>
+                            swal({
+                              title: 'Lastname has more than 30 characters',
+                              text: "",
+                              type: 'error',
+                            })
+                        </script>
+            {% endif %}
+
+            {% if short_password_error %}
+                        <script>
+                            swal({
+                              title: 'Password is too short',
+                              text: "",
+                              type: 'error',
+                            })
+                        </script>
+            {% endif %}
+
+            {% if long_password_error %}
+                        <script>
+                            swal({
+                              title: 'Password is too long',
+                              text: "",
+                              type: 'error',
+                            })
+                        </script>
+            {% endif %}
+
+            {% if tel_len_error %}
+                        <script>
+                            swal({
+                              title: 'Telephone number has more than 12 digits',
+                              text: "",
+                              type: 'error',
+                            })
+                        </script>
+            {% endif %}
+
+            {% if email_error %}
+                        <script>
+                            swal({
+                              title: 'email is incorrect',
+                              text: "",
+                              type: 'error',
+                            })
+                        </script>
+            {% endif %}
+
             </center>
             <br>
           </div>
