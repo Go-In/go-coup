@@ -4,6 +4,7 @@
 
 * [Docker](https://docs.docker.com/engine/installation/)
 * [Docker-Compose](https://docs.docker.com/compose/install/)
+* ในกรณีที่จะรัน elasticsearch ระบบต้องมี RAM อย่างน้อย 1gb
 
 ### Build and run container(s)
 
@@ -24,3 +25,6 @@ docker-compose build
 ```shell
 docker-compose exec web python manage.py migrate
 ```
+
+* คำสั่งที่ต้องการให้รัทุกครั้งที่ทำการรัน Docker container ให้นำไปเพิ่มในไฟล์ entrypoint.sh
+* ในกรณีที่จะรันร่วมกับ nginx ให้รันโดยใช้ uwsgi หรือ gunicorn
