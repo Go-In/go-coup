@@ -12,11 +12,8 @@
 ```shell
 docker-compose up
 ```
-
-* รันคำสั่งนี้บน terminal ใน project dir หลังจากทำการ git pull เพื่อทำการลง package หรือรัน migration ที่เพิ่มเข้ามาใหม่
-```shell
-docker-compose build
-```
+* ในกรณีที่อยู่ในระหว่างการ development ให้ใช้ django built-in server เป็นหลัก และใช้ uwsgi ร่วมกับ nginx ในระหว่างช่วง deployment
+* uwsgi ถูก config ไว้ให้สื่อสารกับ nginx ผ่านทาง socket ถ้าต้องการจะทดสอบการเข้าเว็บผ่าน uwsgi โดยตรง จะต้องเข้าไปแก้ไฟล์ config ก่อน
 
 ### Rule
 * ในกรณีที่ต้องการใช้ Python package เพิ่มเติม ให้เพิ่มชื่อ package ใน requirements.txt ด้วย
@@ -27,4 +24,4 @@ docker-compose exec web python manage.py migrate
 ```
 
 * คำสั่งที่ต้องการให้รัทุกครั้งที่ทำการรัน Docker container ให้นำไปเพิ่มในไฟล์ entrypoint.sh
-* ในกรณีที่จะรันร่วมกับ nginx ให้รันโดยใช้ uwsgi หรือ gunicorn
+* ในกรณีที่จะรันร่วมกับ nginx ให้รันโดยใช้ uwsgi
