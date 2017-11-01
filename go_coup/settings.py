@@ -147,12 +147,12 @@ STATICFILES_DIRS = [
 
 LOGIN_URL = '/user/login'
 
-CACHEOPS_REDIS = {
-    'host': 'localhost', # redis-server is on same machine
-    'port': 6379,        # default redis port
-    'db': 1
-}
-
-CACHEOPS = {
-    '*.*': {'ops': 'get', 'timeout': 60},
-}
+# CACHEOPS_REDIS = {
+#     'host': 'localhost', # redis-server is on same machine
+#     'port': 6379,        # default redis port
+#     'db': 1
+# }
+#
+# CACHEOPS = {
+#     '*.*': {'ops': 'get', 'timeout': 60},
+# }
