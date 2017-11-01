@@ -66,6 +66,35 @@
         <center>
             <input style="margin:20px; width:50%;" class="btn btn-gocoup" type="submit" value="submit" />
         </center>
+        {% if error.name_len %}
+        <script>
+            msg = "Ticket name is too long"
+        </script>
+        {% endif %}
+        {% if error.price_neg %}
+        <script>
+            msg = "Price must be positive"
+        </script>
+        {% endif %}
+        {% if error.detail_len %}
+        <script>
+            msg = "Detail is too long"
+        </script>
+        {% endif %}
+        {% if error.remain_neg %}
+        <script>
+            msg = "Remaining days must be positive"
+        </script>
+        {% endif %}
+        {% if error %}
+        <script>
+          swal({
+            title: msg,
+            text: "",
+            type: 'error',
+          })
+        </script>
+        {% endif %}
     </form>
 </div>
 {% include 'components/store/footer.html' %}

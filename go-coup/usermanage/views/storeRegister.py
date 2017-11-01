@@ -9,6 +9,7 @@ from storemanage.models import Ticket
 # Create your views here.
 from usermanage import models
 from .redirect_after_login import redirect_after_login
+from .validateForm import validateStoreForm
 
 def storeRegister(request):
     if request.user.is_authenticated:
@@ -17,11 +18,13 @@ def storeRegister(request):
         return render(request,'usermanage/register-store.html')
     data = request.POST
 
-     # check user already exits
-    if User.objects.filter(username=data['username']).exists():
-        return render(request,'usermanage/register-store.html', {
-        'user_error' : True,
+    error = validateStoreForm(data)
+    
+    if error:
+        return render(request, 'usermanage/register-store.html', {
+            'error' : error
         })
+    
 
     user = User.objects.create_user(data['username'], password = data['password'])
     g = Group.objects.get(name='store')
@@ -31,3 +34,4 @@ def storeRegister(request):
     storeprofile = models.Store(user = user, store_name=data['storename'], profile_image_url=data['profile_image_url'])
     storeprofile.save()
     return redirect_after_login(user)
+

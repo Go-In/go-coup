@@ -54,14 +54,44 @@
             <center>
               <button class="btn btn-gocoup login-btn" style="margin-top:20px;">submit</button>
             </form>
+            {% if error.user_exist %}
+            <script>
+                msg = "Username is already exists"
+            </script>
+            {% endif %}
+            {% if error.user_len %}
+            <script>
+                msg = "Username must be a maximum of 30 characters"
+            </script>
+            {% endif %}
+            {% if error.firstname_len %}
+            <script>
+                msg = "Firstname is too long"
+            </script>
+            {% endif %}
+            {% if error.lastname_len %}
+            <script>
+                msg = "Lastname is too long"
+            </script>
+            {% endif %}
+            {% if error.tel_len %}
+            <script>
+                msg = "tel is too long"
+            </script>
+            {% endif %}
+            {% if error.email %}
+            <script>
+                msg = "email is incorrect"
+            </script>
+            {% endif %}
             {% if error %}
-                        <script>
-                            swal({
-                              title: 'Username is already exists',
-                              text: "",
-                              type: 'error',
-                            })
-                        </script>
+            <script>
+              swal({
+                title: msg,
+                text: "",
+                type: 'error',
+              })
+            </script>
             {% endif %}
             </center>
             <br>
