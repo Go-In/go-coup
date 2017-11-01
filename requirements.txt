@@ -4,5 +4,4 @@ django-querycount
 uwsgi
 django-haystack==2.6
 elasticsearch==1.8
-pip install django-cacheops
-
+django-cacheops
