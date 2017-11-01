@@ -1,0 +1,72 @@
+{% include 'components/store/header.html' %}
+<div class="container" style="margin-bottom:50px;">
+    <h1>EDIT TICKET</h1>
+    <form method="POST" action="" style="border:2px solid pink;">
+    {% csrf_token %}
+        <div class="col-md-12 col-xs-12">
+            <label>Name*:</label>
+            <input type="text" class="form-control" name="name" value="{{ ticket.name }}" />
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label>Detail*:</label>
+            <input type="text" class="form-control" name="detail" value="{{ ticket.detail }}" />
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label>Price*:</label>
+            <input type="number" class="form-control" name="price" value="{{ ticket.price }}" />
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label>Expire date*:</label>
+            <input type="date" class="form-control" name="expire_date" value="{{ ticket.expire_date|date:"Y-m-d" }}" />
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label class="checkbox">
+            Is period? *
+            <input type="checkbox" value="period" data-toggle="checkbox" class="custom-checkbox" name="is_period" {% if ticket.is_period %} checked {% endif %}>
+            <span class="icons">
+                <span class="icon-unchecked"></span>
+                <span class="icon-checked"></span>
+            </span>
+            </label>
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label>Remaning day*:</label>
+            <input type="number" class="form-control" name="remaining_day" value="{{ ticket.remaining_day }}" />
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label class="checkbox">
+            Is limit? *
+            <input type="checkbox" value="limit" data-toggle="checkbox" class="custom-checkbox" name="is_limit" {% if ticket.is_limit %} checked {% endif %}>
+            <span class="icons">
+                <span class="icon-unchecked"></span>
+                <span class="icon-checked"></span>
+            </span>
+            </label>
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label>Remaining*:</label>
+            <input type="number" class="form-control" name="remain" value="{{ ticket.remain }}" />
+        </div>
+        <div class="col-md-12 col-xs-12" style="margin-top:10px;">
+            <label>Currency*:</label>
+            <select name="currency">
+            {% for c in currency_list %}
+                <option value="{{ c.pk }}" {% if c.pk == ticket.currency %} selected {% endif %}>{{ c.name }}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label>Ticket image url*:</label>
+            <input type="text" class="form-control" name="ticket_image_url" value="{{ ticket.ticket_image_url }}" />
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <label>Content image url*:</label>
+            <input type="text" class="form-control" name="content_image_url" value="{{ ticket.content_image_url }}" />
+        </div>
+        <center>
+            <input style="margin:20px; width:50%;" class="btn btn-gocoup" type="submit" value="submit" />
+        </center>
+    </form>
+</div>
+{% include 'components/store/footer.html' %}
+    
