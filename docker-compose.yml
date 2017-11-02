@@ -19,7 +19,7 @@ services:
         command: /bin/bash -c "sleep 7;python3 manage.py runserver 0.0.0.0:8000"
         #command: /bin/bash -c "sleep 7;uwsgi uwsgi.ini"
         volumes:
-            - .:/code
+            - ./go-coup:/code
         ports:
             - "8000:8000"
             - "9091:9091"
@@ -42,3 +42,7 @@ services:
         ports:
             - "9200:9200"
             - "9300:9300"
+    redis:
+        image: redis:alpine
+        ports:
+            - "6379:6379"
