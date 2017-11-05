@@ -1,0 +1,8 @@
+{% load staticfiles %}
+{% load qr_code %}
+{% include 'components/store/header.html' %}
+
+<h3>A medium "google" QR code (default size)</h3>
+<div>{% qr_from_text "http://google.com" size="M" %}</div>
+
+{% include 'components/store/footer.html' %}

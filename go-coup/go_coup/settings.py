@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'storemanage.apps.StoremanageConfig',
     'customermanage.apps.CustomermanageConfig',
     'haystack',
+    'qr_code',
 ]
 
 MIDDLEWARE = [
