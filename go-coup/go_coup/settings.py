@@ -163,8 +163,13 @@ LOGIN_URL = '/user/login'
 # }
 
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.facebook.FacebookOAuth2'
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
 
     'django.contrib.auth.backends.ModelBackend',
 )
+
+SOCIAL_AUTH_FACEBOOK_KEY = '504951239878757'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'd6e8030eb8a53f82a34c169139993bd4'  # App Secret
 
