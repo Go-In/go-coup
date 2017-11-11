@@ -17,6 +17,10 @@ from django.conf.urls import url, include
 from . import views
 
 app_name = 'user'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'
+
 urlpatterns = [
     url(r'^register/$', views.customerRegister, name='customer-register'),
     url(r'^store-register/$', views.storeRegister, name='store-register'),
@@ -29,4 +33,5 @@ urlpatterns = [
     url(r'^customertest/$',views.customertest, name='customertest'),
     url(r'^storetest/$',views.storetest, name='storetest'),
     url(r'^setting/$',views.customerSetting, name='customer-setting'),
+    url(r'^oauth/', include('social_django.urls', namespace='social'))
 ]

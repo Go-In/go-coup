@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'usermanage.apps.UsermanageConfig',
     'storemanage.apps.StoremanageConfig',
     'customermanage.apps.CustomermanageConfig',
+    'social_django',
     'haystack',
 ]
 
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'querycount.middleware.QueryCountMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
 ROOT_URLCONF = 'go_coup.urls'
@@ -69,7 +71,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'go_coup.context_processors.groups'
+                'go_coup.context_processors.groups',
+                'social_django.context_processors.login_redirect',
+                'social_django.context_processors.backends'
+
             ],
         },
     },
@@ -156,3 +161,10 @@ LOGIN_URL = '/user/login'
 # CACHEOPS = {
 #     '*.*': {'ops': 'get', 'timeout': 60},
 # }
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2'
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+

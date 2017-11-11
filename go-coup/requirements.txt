@@ -5,3 +5,4 @@ uwsgi
 django-haystack==2.6
 elasticsearch==1.8
 django-cacheops
+social-auth-app-django
