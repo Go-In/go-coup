@@ -64,3 +64,8 @@ def searchDemo(request):
     return render(request, 'index/search-demo.html', {
         'tickets' : tickets
     })
+
+def getPoint(request):
+    return render(request, 'index/get-point.html', {
+        
+    })
