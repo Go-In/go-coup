@@ -1,6 +1,6 @@
 {% load staticfiles %}
 {% load qr_code %}
-{% include 'components/store/header.html' %}
+{% include 'components/header.html' %}
 
 <div class="container" style="margin-bottom:50px;">
     <h1>CREATE QR CODE</h1>
@@ -26,8 +26,10 @@
                     swal({
                     title: 'Redeem code',
                     type: 'info',
-                    html: '<h3>Get {{point}} {{currency}}</h3>' +
-                            '<div>{% qr_from_text "http://google.com" size="M" %}</div>'
+                    html: '<h3>Get {{point}} {{currency}} from QR code</h3>' +
+                          '<div>{% qr_from_text "http://google.com" size="M" %}</div>' +
+                          '<h3>or get from this link<h3>' +
+                          '<h3>google.com<h3>'
                     })
                 </script>
             {% endif %}

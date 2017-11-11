@@ -9,9 +9,11 @@ from django.utils.dateparse import parse_date
 def createQr(request):
     user = request.user
     currency_list = [{'pk':c.pk,'name':c.name} for c in Currency.objects.filter(store=user)]
+    qr = False
     if request.method == 'GET':
         return render(request,'store/create-qr.html', {
-            'currency_list': currency_list
+            'currency_list': currency_list,
+            'qr': qr
         })
 
     data = request.POST
