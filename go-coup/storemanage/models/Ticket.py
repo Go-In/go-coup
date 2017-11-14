@@ -18,7 +18,7 @@ class Ticket(models.Model):
     store = models.ForeignKey(User, on_delete=models.CASCADE)
     ticket_image_url = models.CharField(max_length=1023, null=True)
     content_image_url = models.CharField(max_length=1023, null=True)
-    attribute = JSONField(default = dict())
+    attribute = JSONField(default=dict())
     available = models.BooleanField(default=True)
     stat = JSONField(default=dict())
     raw_stat = JSONField(default=dict())
