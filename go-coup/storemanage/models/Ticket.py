@@ -20,3 +20,5 @@ class Ticket(models.Model):
     content_image_url = models.CharField(max_length=1023, null=True)
     attribute = JSONField(default = dict())
     available = models.BooleanField(default=True)
+    stat = JSONField(default=dict())
+    raw_stat = JSONField(default=dict())
