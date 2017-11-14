@@ -1,0 +1,78 @@
+{% load staticfiles %}
+{% include 'components/store/header.html' %}
+<div class="container">
+  <div class="store-header" style="display:flex; justify-content: space-between;">
+    <h1>STORE MANAGE</h1>
+    <h1>You are : {{ user.username }}</h1>
+  </div>
+  <div style="text-align: right;">
+  <a href="{% url 'store:ticket-register' %}">
+    <button class="btn btn-gocoup" style="margin-bottom:20px;">
+      add new ticket
+    </button>
+  </a>
+  <a href="{% url 'store:currency-register' %}">
+    <button class="btn btn-gocoup" style="margin-bottom:20px;">
+      add new currency
+    </button>
+  </a>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Detail</th>
+        <th>Date</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ticket in tickets %}
+        <tr>
+          <td>{{ ticket.name }}</td>
+          <td>{{ ticket.price }} {{ ticket.currency }}</td>
+          <td>{{ ticket.detail }}</td>
+          <td>{{ ticket.expire_date }}</td>
+          <td><a href="{% url 'store:ticket-edit' ticket.id %}">edit</a></td>
+          <td>
+            <a onclick="deleteTicket('{% url 'store:ticket-delete' ticket.id %}')">delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<script>
+  function deleteTicket(ticketUrl) {
+    swal({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(function () {
+      swal(
+        'Deleted!',
+        'Your row has been deleted.',
+        'success',
+      )
+    }).then(function () {
+      window.location.assign(ticketUrl);
+    })
+  }
+</script>
+{% if error %}
+<script>
+  swal(
+    'Error !',
+    '{{ error }}',
+    'error'
+  )
+  window.history.replaceState(null ,null, '/store')
+</script>
+{% endif %}
+{% include 'components/store/footer.html' %}

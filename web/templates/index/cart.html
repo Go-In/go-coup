@@ -1,0 +1,49 @@
+{% include 'components/header.html' %}
+
+<div class="full-container">
+  <div class="cart-wrapper container">
+    {% for ticket in tickets %}
+      <div class="row" id="row_{{ ticket.id }}">
+        <div class="col-sm-6 col-sm-offset-3 col-xs-12">
+          <div class="list">
+            <img
+              onError="this.onerror=null;this.src='https://assets.kfc.co.uk/3f040df6-0c9cdd0f/wicked-variety-bucket-320w.jpeg'"
+              class="list-image" src="{{ ticket.content_image_url }}"
+              alt="detail content"
+            >
+            <div class="list-content">
+              <div style="display: flex; justify-content: space-between;">
+                <p>name: {{ ticket.name }}</p>
+                <a class="btn" onclick="deleteTicketFromCart({{  ticket.id }})">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </a>
+              </div>
+              <p id='ticket_{{ ticket.id }}'>quantity: 0</p>
+              <button class='add-btn btn btn-default' onclick="incrementTicket({{ ticket.id }})">+</button>
+              <button class='add-btn btn btn-default' onclick="handlerDelete({{ ticket.id }})">-</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    <div class="row cart-btn-wrapper">
+      <div class="col-xs-12">
+        <button class="btn btn-gocoup">shop</button>
+        <form class="buy-btn-form" method="POST" action="{% url 'market:checkout' %}">
+            {% csrf_token %}
+            <button id="buy-btn" class="btn btn-gocoup" type="submit" name="cart" value="">Buy</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $('#buy-btn').val(JSON.stringify(cartItemToObject()))
+  var tickets = cartItemToObject()
+  tickets.forEach(function(t) {
+    var numElement = document.getElementById('ticket_' + t.id);
+    numElement.innerText = 'quantity: ' + t.count;
+  });
+</script>
+
+{% include 'components/footer.html' %}
