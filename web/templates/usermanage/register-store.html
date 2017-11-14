@@ -1,0 +1,77 @@
+{% load staticfiles %}
+{% include 'components/header.html' %}
+
+<div class="full-container">
+
+      <div class="content row">
+        <div class="login col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12 login-wrapper">
+          <div class="login-header signup">STORE SIGN UP</div>
+          <div class="">
+            <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="usr">Storename:</label>
+              <input type="text" class="form-control" id="storename" name="storename" placeholder="storename" required>
+            </div>
+            <div class="form-group">
+              <label for="usr">Username:</label>
+              <input type="username" class="form-control" id="username" name="username" placeholder="username" required>
+            </div>
+            <div class="form-group">
+              <label for="usr">Password:</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+            </div>
+            <div class="form-group">
+              <label for="usr">Image url:</label>
+              <input type="text" class="form-control" name="profile_image_url" placeholder="url">
+            </div>
+            <center>
+              <button type="submit" value="Signup" class="btn btn-gocoup login-btn" style="margin-top:20px;">submit</button>
+            </form>
+            {% if error.user_exist %}
+            <script>
+                msg = "Username is already exists"
+            </script>
+            {% endif %}
+            {% if error.store_exist %}
+            <script>
+                msg = "Storename is already exists"
+            </script>
+            {% endif %}
+            {% if error.user_len %}
+            <script>
+                msg = "Username must be a maximum of 30 characters"
+            </script>
+            {% endif %}
+            {% if error.store_len %}
+            <script>
+                msg = "Storename must be a maximum of 30 characters"
+            </script>
+            {% endif %}
+            {% if error.tel_len %}
+            <script>
+                msg = "tel is too long"
+            </script>
+            {% endif %}
+            <!-- {% if error.url %}
+            <script>
+                msg = "URL is invalid"
+            </script>
+            {% endif %} -->
+            {% if error %}
+            <script>
+              swal({
+                title: msg,
+                text: "",
+                type: 'error',
+              })
+            </script>
+            {% endif %}
+            </center>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% include 'components/footer.html' %}
