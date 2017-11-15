@@ -1,9 +1,11 @@
 package main
 
 import "fmt"
-import "os"
+import "time"
 
 func main() {
 	fmt.Println("Hello World")
-	os.Exit(0)
+	for true {
+		time.Sleep(10)
+	}
 }
