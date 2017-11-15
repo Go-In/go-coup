@@ -4,3 +4,4 @@ WORKDIR /go/src/codegen
 RUN apk update
 RUN apk add git
 ADD . /go/src/codegen
+RUN go-wrapper download
