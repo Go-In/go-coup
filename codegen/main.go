@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -8,8 +9,17 @@ import (
 	"github.com/golang/example/stringutil"
 )
 
+type Message struct {
+	Name string
+	Body string
+	Time int64
+}
+
 func homePage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "root")
+	m := Message{"Alice", "Hello", 1294706395881547000}
+	b, _ := json.Marshal(m)
+
+	fmt.Fprintf(w, string(b))
 	fmt.Println("get request at root endpoint")
 }
 
