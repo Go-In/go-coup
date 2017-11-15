@@ -2,7 +2,7 @@ version: '3'
 
 services:
     # nginx:
-    #     image: nginx:latest
+    #     image: nginx:alpine
     #     ports:
     #         - "8080:80"
     #     volumes:
@@ -11,15 +11,15 @@ services:
     #     depends_on:
     #         - web
     db:
-        image: postgres
+        image: postgres:alpine
         ports:
             - "5432:5432"
     web:
-        build: .
+        build: ./web
         command: /bin/bash -c "sleep 7;python3 manage.py runserver 0.0.0.0:8000"
         #command: /bin/bash -c "sleep 7;uwsgi uwsgi.ini"
         volumes:
-            - ./go-coup:/code
+            - ./web:/code
         ports:
             - "8000:8000"
             - "9091:9091"
@@ -27,7 +27,7 @@ services:
             - db
         entrypoint: /code/entrypoint.sh
     es:
-        image: elasticsearch:2.4
+        image: elasticsearch:2.4-alpine
         environment:
             - cluster.name=docker-cluster
             - bootstrap.memory_lock=true

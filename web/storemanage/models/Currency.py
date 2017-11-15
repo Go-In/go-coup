@@ -7,8 +7,10 @@ from django.contrib.postgres.fields import JSONField
 class Currency(models.Model):
     name = models.CharField(max_length=30)
     store = models.ForeignKey(User, on_delete=models.CASCADE)
-    attribute = JSONField(default = dict())
+    attribute = JSONField(default=dict())
     available = models.BooleanField(default=True)
+    stat = JSONField(default=dict())
+    raw_stat = JSONField(default=dict())
 
     def __str__(self):
         return self.name

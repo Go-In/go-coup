@@ -21,8 +21,10 @@
   <title>Go Coup</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.css">
+  <script src="{% static 'sw-toolbox/companion.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
   <script src="{% static 'js/script.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/qrcode.min.js' %}"></script>    
+  <script type="text/javascript" src="{% static 'js/qrcode.min.js' %}"></script>
 </head>
 <body>
   <nav class="navbar navbar-default header">
@@ -46,7 +48,7 @@
           {% if user.is_authenticated %}
             {% if is_store %}
               <li><a href="{% url 'store:index' %}">Go to Store</a></li>
-              <li><a href="{% url 'user:logout' %}">logout</a></li>              
+              <li><a href="{% url 'user:logout' %}">logout</a></li>
             {% else %}
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>
