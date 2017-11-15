@@ -15,7 +15,7 @@ services:
         ports:
             - "5432:5432"
     web:
-        build: .
+        build: ./web
         command: /bin/bash -c "sleep 7;python3 manage.py runserver 0.0.0.0:8000"
         #command: /bin/bash -c "sleep 7;uwsgi uwsgi.ini"
         volumes:
