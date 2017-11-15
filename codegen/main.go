@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/golang/example/stringutil"
 )
 
 func homePage(w http.ResponseWriter, r *http.Request) {
@@ -17,6 +19,6 @@ func handleRequests() {
 }
 
 func main() {
-	fmt.Println("Hello")
+	fmt.Println(stringutil.Reverse("HI"))
 	handleRequests()
 }
