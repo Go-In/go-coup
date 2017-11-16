@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/go-redis/redis"
 	"github.com/golang/example/stringutil"
 )
 
@@ -15,9 +16,23 @@ type Message struct {
 	Time int64
 }
 
+func NewClient() {
+	client := redis.NewClient(&redis.Options{
+		Addr:     "redis:6379",
+		Password: "", // no password set
+		DB:       0,  // use default DB
+	})
+
+	pong, err := client.Ping().Result()
+	fmt.Println(pong, err)
+	// Output: PONG <nil>
+}
+
 func homePage(w http.ResponseWriter, r *http.Request) {
 	m := Message{"Alice", "Hello", 1294706395881547000}
 	b, _ := json.Marshal(m)
+
+	fmt.Println(r.PostFormValue("a"))
 
 	w.Header().Set("Content-Type", "application/json")
 
@@ -31,6 +46,7 @@ func handleRequests() {
 }
 
 func main() {
+	NewClient()
 	fmt.Println(stringutil.Reverse("HI"))
 	handleRequests()
 }

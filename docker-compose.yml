@@ -42,10 +42,10 @@ services:
     #     ports:
     #         - "9200:9200"
     #         - "9300:9300"
-    # redis:
-    #     image: redis:alpine
-    #     ports:
-    #         - "6379:6379"
+    redis:
+        image: redis:alpine
+        ports:
+            - "6379:6379"
     codegen:
         build: ./codegen
         ports:
