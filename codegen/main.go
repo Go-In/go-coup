@@ -19,6 +19,8 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 	m := Message{"Alice", "Hello", 1294706395881547000}
 	b, _ := json.Marshal(m)
 
+	w.Header().Set("Content-Type", "application/json")
+
 	fmt.Fprintf(w, string(b))
 	fmt.Println("get request at root endpoint")
 }
