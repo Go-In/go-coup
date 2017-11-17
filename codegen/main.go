@@ -16,9 +16,9 @@ type Message struct {
 }
 
 type Data struct {
-	price    string
-	currency string
-	reuse    string
+	Price    string
+	Currency string
+	Reuse    string
 }
 
 type Payload struct {
@@ -54,13 +54,8 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 }
 
 func save(w http.ResponseWriter, r *http.Request) {
-	// cipher, _ := blowfish.NewCipher([]byte("MM"))
 	data := Data{r.PostFormValue("price"), r.PostFormValue("currency"), r.PostFormValue("reuse")}
 	key := data.currency + "-" + data.price
-	// encrypted := make([]byte, 128)
-	// fmt.Println(key)
-	// cipher.Encrypt(encrypted, []byte(key))
-	// fmt.Println(string(encrypted))
 
 	dataToStr, _ := json.Marshal(data)
 	err := client.Set(key, string(dataToStr), 0).Err()
