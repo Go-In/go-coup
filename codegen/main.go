@@ -76,11 +76,11 @@ func save(w http.ResponseWriter, r *http.Request) {
 func handleRequests() {
 	http.HandleFunc("/", homePage)
 	http.HandleFunc("/save", save)
+	fmt.Println("Listen and serve on PORT 8081")
 	log.Fatal(http.ListenAndServe(":8081", nil))
 }
 
 func main() {
 	NewClient()
-	fmt.Println("HI")
 	handleRequests()
 }
