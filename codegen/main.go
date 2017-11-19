@@ -58,20 +58,15 @@ func NewClient() {
 func homePage(w http.ResponseWriter, r *http.Request) {
 	m := Message{"Alice", "Hello", 1294706395881547000}
 	b, _ := json.Marshal(m)
-	fmt.Println(b)
-	fmt.Println(string(b))
-	fmt.Println(r.PostFormValue("a"))
 
 	w.Header().Set("Content-Type", "application/json")
 
 	fmt.Fprintf(w, string(b))
-	fmt.Println("get request at root endpoint")
 }
 
 func save(w http.ResponseWriter, r *http.Request) {
 	data := Data{r.PostFormValue("price"), r.PostFormValue("currency"), r.PostFormValue("reuse")}
 	key := RandStringRunes(13)
-	fmt.Printf(key)
 	dataToStr, _ := json.Marshal(data)
 	err := client.Set(key, string(dataToStr), 0).Err()
 	if err != nil {
@@ -80,9 +75,6 @@ func save(w http.ResponseWriter, r *http.Request) {
 
 	resPayload := Payload{string(key), data, "OK"}
 	res, err := json.Marshal(resPayload)
-	fmt.Println(resPayload)
-	fmt.Println(res)
-	fmt.Println(string(res))
 
 	w.Header().Set("Content-Type", "application/json")
 	fmt.Fprintf(w, string(res))
@@ -101,7 +93,6 @@ func load(w http.ResponseWriter, r *http.Request) {
 	} else {
 		error := json.Unmarshal([]byte(val), &data)
 		if error != nil {
-			fmt.Println("error")
 			panic(error)
 		}
 		resPayload.Value = data
