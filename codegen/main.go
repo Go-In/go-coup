@@ -24,9 +24,9 @@ type Data struct {
 }
 
 type Payload struct {
+	Status string
 	Key    string
 	Value  Data
-	Status string
 }
 
 func init() {
@@ -56,7 +56,8 @@ func NewClient() {
 }
 
 func homePage(w http.ResponseWriter, r *http.Request) {
-	m := Message{"Alice", "Hello", 1294706395881547000}
+	var m Payload
+	m.Status = "OK"
 	b, _ := json.Marshal(m)
 
 	w.Header().Set("Content-Type", "application/json")
@@ -73,7 +74,8 @@ func save(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	resPayload := Payload{string(key), data, "OK"}
+	resPayload := Payload{"OK", string(key), data}
+
 	res, err := json.Marshal(resPayload)
 
 	w.Header().Set("Content-Type", "application/json")
@@ -87,16 +89,16 @@ func load(w http.ResponseWriter, r *http.Request) {
 
 	resPayload := Payload{Key: key}
 	if err == redis.Nil {
-		resPayload.Status = "notfound"
+		resPayload.Status = "NOT_FOUND"
 	} else if err != nil {
-		resPayload.Status = "servererror"
+		resPayload.Status = "INTERNAL_SERVER_ERROR"
 	} else {
 		error := json.Unmarshal([]byte(val), &data)
 		if error != nil {
 			panic(error)
 		}
 		resPayload.Value = data
-		resPayload.Status = "ok"
+		resPayload.Status = "OK"
 
 	}
 	res, err := json.Marshal(resPayload)
