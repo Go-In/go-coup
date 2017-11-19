@@ -11,12 +11,6 @@ import (
 	"github.com/go-redis/redis"
 )
 
-type Message struct {
-	Name string
-	Body string
-	Time int64
-}
-
 type Data struct {
 	Price    string
 	Currency string
@@ -30,6 +24,7 @@ type Payload struct {
 }
 
 func init() {
+	NewClient()
 	rand.Seed(time.Now().UnixNano())
 }
 
@@ -116,6 +111,5 @@ func handleRequests() {
 }
 
 func main() {
-	NewClient()
 	handleRequests()
 }
