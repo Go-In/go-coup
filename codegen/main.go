@@ -88,9 +88,36 @@ func save(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, string(res))
 }
 
+func load(w http.ResponseWriter, r *http.Request) {
+	key := r.PostFormValue("key")
+	val, err := client.Get(key).Result()
+	var data Data
+
+	resPayload := Payload{Key: key}
+	if err == redis.Nil {
+		resPayload.Status = "notfound"
+	} else if err != nil {
+		resPayload.Status = "servererror"
+	} else {
+		error := json.Unmarshal([]byte(val), &data)
+		if error != nil {
+			fmt.Println("error")
+			panic(error)
+		}
+		resPayload.Value = data
+		resPayload.Status = "ok"
+
+	}
+	res, err := json.Marshal(resPayload)
+	w.Header().Set("Content-Type", "application/json")
+	fmt.Fprintf(w, string(res))
+
+}
+
 func handleRequests() {
 	http.HandleFunc("/", homePage)
 	http.HandleFunc("/save", save)
+	http.HandleFunc("/load", load)
 	fmt.Println("Listen and serve on PORT 8081")
 	log.Fatal(http.ListenAndServe(":8081", nil))
 }
