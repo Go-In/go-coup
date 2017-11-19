@@ -24,8 +24,8 @@ type Data struct {
 }
 
 type Payload struct {
-	Key string
-	// data   Data
+	Key    string
+	Value  Data
 	Status string
 }
 
@@ -78,7 +78,7 @@ func save(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	resPayload := Payload{string(key), "OK"}
+	resPayload := Payload{string(key), data, "OK"}
 	res, err := json.Marshal(resPayload)
 	fmt.Println(resPayload)
 	fmt.Println(res)
