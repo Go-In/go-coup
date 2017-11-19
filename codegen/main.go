@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
+	"time"
 
 	"github.com/go-redis/redis"
 )
@@ -27,7 +29,20 @@ type Payload struct {
 	Status string
 }
 
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
+
+var letterRunes = []rune("01234567890ABCDEF")
 var client *redis.Client
+
+func RandStringRunes(n int) string {
+	b := make([]rune, n)
+	for i := range b {
+		b[i] = letterRunes[rand.Intn(len(letterRunes))]
+	}
+	return string(b)
+}
 
 func NewClient() {
 	client = redis.NewClient(&redis.Options{
@@ -55,8 +70,8 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 
 func save(w http.ResponseWriter, r *http.Request) {
 	data := Data{r.PostFormValue("price"), r.PostFormValue("currency"), r.PostFormValue("reuse")}
-	key := data.currency + "-" + data.price
-
+	key := RandStringRunes(13)
+	fmt.Printf(key)
 	dataToStr, _ := json.Marshal(data)
 	err := client.Set(key, string(dataToStr), 0).Err()
 	if err != nil {
