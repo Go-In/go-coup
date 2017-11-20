@@ -29,7 +29,7 @@ def createQr(request):
     #generate redeem code url
     req = requests.post(url_gencode, data=payload)
     key = req.json()['Key']
-    url_redeem = 'http:localhost:8000/get-point/' + key
+    url_redeem = "http://localhost:8000/get-point/" + key + "/"
     
     print(req.json())
     print(url_redeem)
