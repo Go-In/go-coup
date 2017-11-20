@@ -6,13 +6,23 @@
     
     {% if user.is_authenticated %}
         {% if not is_store %}
-            <script>
-                swal({
-                title: 'Success',
-                type: 'success',
-                html: '<h3>Get 120 Yen</h3>'
-                })
-            </script>
+            {% if can_redeem %}
+                <script>
+                    swal({
+                    title: 'Success',
+                    type: 'success',
+                    html: '<h3>Get {{price}} {{currency}}</h3>'
+                    })
+                </script>
+            {% else %}
+                <script>
+                    swal({
+                    title: 'Error',
+                    type: 'error',
+                    html: '<h3>Not found key</h3>'
+                    })
+                </script>
+            {% endif %}
         {% else %}
             <script>
                 swal({

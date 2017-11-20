@@ -4,6 +4,8 @@ from storemanage.models import Ticket
 
 from django.http import JsonResponse
 
+import requests
+
 # Create your views here.
 def index(request):
     success = request.session.get('success')
@@ -68,7 +70,25 @@ def searchDemo(request):
         'tickets' : tickets
     })
 
-def getPoint(request):
-    return render(request, 'index/get-point.html', {
-        
-    })
+def getPoint(request, key):
+    url_redeem = 'http://codegen:8081/load'
+    payload = {'key': key}
+    req = requests.post(url_redeem, data=payload)
+    print(req.json())
+    can_redeem = False
+    if req.json()['Status'] != 'NOT_FOUND':
+        price = req.json()['Value']['Price']
+        currency = req.json()['Value']['Currency']
+        reuse = req.json()['Value']['Reuse']
+        can_redeem = True
+
+        return render(request, 'index/get-point.html', {
+            'price': price,
+            'currency': currency,
+            'reuse': reuse,
+            'can_redeem': can_redeem
+        })
+    else:
+        return render(request, 'index/get-point.html', {
+            'can_redeem': can_redeem
+        })
