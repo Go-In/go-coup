@@ -24,5 +24,4 @@ urlpatterns = [
     url(r'^customer/',include('customermanage.urls', namespace='customer')),
     url(r'^shopping/',include('market.urls', namespace='market')),
     url(r'^search/', include('haystack.urls')),
-
 ]

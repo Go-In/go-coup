@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from storemanage.models import Ticket
+from usermanage.models import Store
 
 from django.http import JsonResponse
 
@@ -28,8 +29,9 @@ def detail(request, ticket_id):
     ticket = Ticket.objects.get(pk=ticket_id)
     if ticket.available == False:
         return redirect('index:index')
+    print('store: ', ticket.store.id)
     return render(request, 'index/detail.html', {
-        'ticket' : ticket,
+        'ticket': ticket,
         'success': success,
         'fail': fail
     })
@@ -63,4 +65,21 @@ def searchDemo(request):
         print(i.detail)
     return render(request, 'index/search-demo.html', {
         'tickets' : tickets
+    })
+
+def store(request, store_id):
+    user = request.user
+    print('store id:', store_id)
+    store = Store.objects.get(pk=store_id)
+    tickets = Ticket.objects.filter(store=user)
+    return render(request, 'index/store.html', {
+        'tickets': tickets,
+        'store': store,
+    })
+
+def brand_list(request):
+    user = request.user
+    stores = Store.objects.filter(available=True)
+    return render(request, 'index/brand-list.html', {
+        'stores' : stores,
     })

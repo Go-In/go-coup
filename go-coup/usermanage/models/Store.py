@@ -12,5 +12,5 @@ class Store(models.Model):
     profile_image_url = models.CharField(max_length=1023, null=True)
     available = models.BooleanField(default=True)
 
-    def __str__(self):
-        return self.store_name
+    # def __str__(self):
+    #     return self.store_name

@@ -8,7 +8,9 @@
           <div class="detail-head">
             <img class="detail-head-image" src="{{ ticket.ticket_image_url }}" alt="head">
             <div class="detail-head-title">
-              <h1>{{ ticket.store }}</h1>
+              <a class="link-to-store" href="{% url 'index:store' ticket.store.id %}">  
+                <h1>{{ ticket.store }}</h1>
+              </a>
               <p>exp: {{ ticket.expire_date }}</p>
             </div>
             <hr>
