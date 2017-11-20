@@ -54,4 +54,4 @@ services:
             - "8081:8081"
         volumes:
             - ./codegen:/go/src/codegen
-        command: go run main.go
+        command: /bin/ash -c "go build; ./codegen"
