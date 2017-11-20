@@ -46,3 +46,12 @@ services:
         image: redis:alpine
         ports:
             - "6379:6379"
+    codegen:
+        build: ./codegen
+        depends_on:
+            - redis
+        ports:
+            - "8081:8081"
+        volumes:
+            - ./codegen:/go/src/codegen
+        command: go run main.go
