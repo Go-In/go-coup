@@ -42,16 +42,16 @@ services:
         ports:
             - "9200:9200"
             - "9300:9300"
-    redis:
-        image: redis:alpine
-        ports:
-            - "6379:6379"
-    codegen:
-        build: ./codegen
-        depends_on:
-            - redis
-        ports:
-            - "8081:8081"
-        volumes:
-            - ./codegen:/go/src/codegen
-        command: /bin/ash -c "go build; ./codegen"
+    # redis:
+    #     image: redis:alpine
+    #     ports:
+    #         - "6379:6379"
+    # codegen:
+    #     build: ./codegen
+    #     depends_on:
+    #         - redis
+    #     ports:
+    #         - "8081:8081"
+    #     volumes:
+    #         - ./codegen:/go/src/codegen
+    #     command: /bin/ash -c "go build; ./codegen"
