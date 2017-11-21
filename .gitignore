@@ -6,3 +6,4 @@ node_modules
 
 esdata/nodes
 esdata/elasticsearch
+codegen/codegen

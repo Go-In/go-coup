@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.staticfiles.views import serve
 from storemanage.models import Ticket
 
 from django.http import JsonResponse
@@ -17,6 +18,8 @@ def index(request):
         'success': success,
         'fail': fail
     })
+def sw(request):
+    return serve(request, '../static/sw.js')
 
 def detail(request, ticket_id):
     success = request.session.get('success')
