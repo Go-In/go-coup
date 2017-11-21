@@ -8,7 +8,9 @@
           <div class="detail-head">
             <img class="detail-head-image" src="{{ ticket.ticket_image_url }}" alt="head">
             <div class="detail-head-title">
-              <h1>{{ ticket.store }}</h1>
+              <a class="link-to-store" href="{% url 'index:store' store.pk %}">
+                <h1>{{ ticket.store }}</h1>
+              </a>
               <p>exp: {{ ticket.expire_date }}</p>
             </div>
             <hr>
@@ -24,6 +26,9 @@
       <div class="col-md-6 col-xs-12">
         <div class="detail">
           <div class="detail-discription">
+            <a class="coup-link" href="{% url 'index:store' store.pk %}">
+              <img class="detail-head-image" src="{{ store.profile_image_url}}" alt="head">
+            </a>
             <table class="detail-table">
               <tr class="detail-tr">
                 <td class="align-left">Name:</td>

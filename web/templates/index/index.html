@@ -83,12 +83,23 @@
         {% endfor %}
       </div>
         <div class="row">
+          <!-- <div class="col-xs-12 text-right" style="margin-top:20px;">
+            <a href="{% url 'index:store_list' %}">
+              <button class="btn btn-gocoup">Show Store</button>
+            </a>
+          </div>
           <div class="col-xs-12 text-right" style="margin-top:20px;">
             <a href="{% url 'index:catalog' %}">
               <button class="btn btn-gocoup">Show more</button>
             </a>
-          </div>
+          </div> -->
+          <form class="buy-btn-form" method="POST" action="{% url 'index:store_list' %}">
+              {% csrf_token %}
+              <button class="text-right" type="submit" name="ticket_id" value="{{ticket.pk}}">Show Store</button>
+          </form>
+          <button class="text-right" onclick="handlerAddToCart({{ ticket.id }}, '{{ ticket.name }}')">Show more</button>
         </div>
+
     </div>
 </div>
 {% if success %}
