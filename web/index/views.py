@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.staticfiles.views import serve
-from storemanage.models import Ticket
+from storemanage.models import Ticket, Currency
+from customermanage.models import Wallet
 
 from django.http import JsonResponse
 
@@ -70,16 +71,32 @@ def searchDemo(request):
         'tickets' : tickets
     })
 
-def getPoint(request, key):
+def getPoint(request, store, key):
+    user = request.user
+    print(user)
+
     url_redeem = 'http://codegen:8081/load'
     payload = {'key': key}
     req = requests.post(url_redeem, data=payload)
     print(req.json())
     can_redeem = False
+
     if req.json()['Status'] != 'NOT_FOUND':
         price = req.json()['Value']['Price']
-        currency = req.json()['Value']['Currency']
+        pk_currency = req.json()['Value']['Currency']
         reuse = req.json()['Value']['Reuse']
+        currency = Currency.objects.get(pk=pk_currency)
+
+        if not Wallet.objects.filter(currency=pk_currency):
+            print('Not found')
+            wallet = Wallet(user=user, currency=currency, amount=price)
+            wallet.save()
+        else:
+            print('Found')
+            wallet,create = Wallet.objects.get_or_create(user=user, currency=currency)
+            wallet.amount = (wallet.amount if not create else 0) + int(price)
+            wallet.save()
+
         can_redeem = True
 
         return render(request, 'index/get-point.html', {
