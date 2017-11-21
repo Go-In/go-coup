@@ -7,13 +7,23 @@
     {% if user.is_authenticated %}
         {% if not is_store %}
             {% if can_redeem %}
-                <script>
-                    swal({
-                    title: 'Success',
-                    type: 'success',
-                    html: '<h3>Get {{price}} {{currency}}</h3>'
-                    })
-                </script>
+                {% if not already_redeem %}
+                    <script>
+                        swal({
+                        title: 'Success',
+                        type: 'success',
+                        html: '<h3>Get {{price}} {{currency}}</h3>'
+                        })
+                    </script>
+                {% else %}
+                    <script>
+                        swal({
+                        title: 'Error',
+                        type: 'error',
+                        html: '<h3>Already redeem</h3>'
+                        })
+                    </script>
+                {% endif %}
             {% else %}
                 <script>
                     swal({

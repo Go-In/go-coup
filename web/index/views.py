@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.staticfiles.views import serve
 from storemanage.models import Ticket, Currency
-from customermanage.models import Wallet
+from customermanage.models import Wallet, Qrcode
 
 from django.http import JsonResponse
 
@@ -87,18 +87,32 @@ def getPoint(request, store, key):
         reuse = req.json()['Value']['Reuse']
         currency = Currency.objects.get(pk=pk_currency)
 
-        wallet,create = Wallet.objects.get_or_create(user=user, currency=currency)
-        wallet.amount = (wallet.amount if not create else 0) + int(price)
-        wallet.save()
-
         can_redeem = True
 
-        return render(request, 'index/get-point.html', {
-            'price': price,
-            'currency': currency,
-            'reuse': reuse,
-            'can_redeem': can_redeem
-        })
+        if not Qrcode.objects.filter(qrcode=key, user=user):
+            wallet,create = Wallet.objects.get_or_create(user=user, currency=currency)
+            wallet.amount = (wallet.amount if not create else 0) + int(price)
+            wallet.save()
+
+            qrcode,create = Qrcode.objects.get_or_create(qrcode=key, user=user)
+            qrcode.save()
+
+            already_redeem = False
+
+            return render(request, 'index/get-point.html', {
+                'price': price,
+                'currency': currency,
+                'reuse': reuse,
+                'can_redeem': can_redeem,
+                'already_redeem': already_redeem,
+            })
+        else:            
+            already_redeem = True
+
+            return render(request, 'index/get-point.html', {
+                'can_redeem': can_redeem,
+                'already_redeem': already_redeem,
+            })
     else:
         return render(request, 'index/get-point.html', {
             'can_redeem': can_redeem
