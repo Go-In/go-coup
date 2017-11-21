@@ -24,21 +24,14 @@ def createQr(request):
     pk_currency = data['currency']
     currency = Currency.objects.get(pk=pk_currency)
     payload = {'price':point, 'currency':pk_currency, 'reuse':'true'}
-    url_gencode = 'http://codegen:8081/save'
-    url_redeem = 'http://codegen:8081/load'
 
     #generate redeem code url
+    url_gencode = 'http://codegen:8081/save'
     req = requests.post(url_gencode, data=payload)
     key = req.json()['Key']
     url_redeem = "http://localhost:8000/get-point/" + str(user) + "/" + key + "/"
-    
-    print(req.status_code)
-    print(req.json())
-    print(url_redeem)
 
-    # req_redeem = requests.post(url_redeem, data=key)
-    # print(req_redeem.status_code)
-    
+    # show qr code alert
     qr = True
 
     if qr:
