@@ -16,19 +16,33 @@ def test_handler(sender, **kwargs):
 @receiver(post_save, sender = Coupon)
 def coupon_handler(sender, instance, **kwargs):
     ticket = instance.ticket
-    if 'purchase_all' not in ticket.stat:
-        ticket.stat['purchase_all'] = 0
-    ticket.stat['purchase_all'] += 1
+    if instance.active:
+        if 'purchase_all' not in ticket.stat:
+            ticket.stat['purchase_all'] = 0
+        ticket.stat['purchase_all'] += 1
 
-    if 'purchase_by_date' not in ticket.stat:
-        ticket.stat['purchase_by_date'] = dict()
+        if 'purchase_by_date' not in ticket.stat:
+            ticket.stat['purchase_by_date'] = dict()
 
-    today = datetime.date.today().strftime("%Y-%m-%d")
+        today = datetime.date.today().strftime("%Y-%m-%d")
 
-    if today not in ticket.stat['purchase_by_date']:
-        ticket.stat['purchase_by_date'][today] = 0
+        if today not in ticket.stat['purchase_by_date']:
+            ticket.stat['purchase_by_date'][today] = 0
 
-    ticket.stat['purchase_by_date'][today] += 1
+        ticket.stat['purchase_by_date'][today] += 1
+    else:
+        if 'use_all' not in ticket.stat:
+            ticket.stat['use_all'] = 0
+        ticket.stat['use_all'] += 1
+
+        if 'use_by_date' not in ticket.stat:
+            ticket.stat['use_by_date'] = dict()
+
+        today = datetime.date.today().strftime("%Y-%m-%d")
+
+        if today not in ticket.stat['use_by_date']:
+            ticket.stat['use_by_date'][today] = 0
+
+        ticket.stat['use_by_date'][today] += 1
 
     ticket.save()
-    print(ticket)
