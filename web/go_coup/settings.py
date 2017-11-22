@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'usermanage.apps.UsermanageConfig',
     'storemanage.apps.StoremanageConfig',
     'customermanage.apps.CustomermanageConfig',
+    'signaldetect.apps.SignaldetectConfig',
     'haystack',
     'qr_code',
     'requests',
