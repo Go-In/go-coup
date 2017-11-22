@@ -1,15 +1,14 @@
 {% load staticfiles %}
 {% include 'components/header.html' %}
 <div class="full-container">
-      <div class="container">
-        <div class="container">
-          <img class="profile-image" src="{{ store.profile_image_url }}" alt="profile">
-          <div class="profile-title">
-            <p>Store's Name: {{store.store_name}}</p>
-            <p>Tel: {{store.tel}}</p>
-          </div>
+    <div class="container" align=middle>
+        <div class="profile-image">
+            <img class="profile-image" src="{{ store.profile_image_url }}" alt="profile">
         </div>
-      </div>
+        <div class="profile-title">
+            <p style="font-size:160%;">Store's Name: {{store.store_name}}</p>
+            <p style="font-size:160%;">Tel: {{store.tel}}</p>
+        </div>
     </div>
     <div class="content row">
         {% for ticket in tickets %}
