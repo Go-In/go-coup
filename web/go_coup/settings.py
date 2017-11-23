@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     'storemanage.apps.StoremanageConfig',
     'customermanage.apps.CustomermanageConfig',
     'social_django',
+    'signaldetect.apps.SignaldetectConfig',
     'haystack',
+    'qr_code',
+    'requests',
 ]
 
 MIDDLEWARE = [

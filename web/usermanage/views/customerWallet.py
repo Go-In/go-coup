@@ -14,5 +14,5 @@ from usermanage import models
 def customerWallet(request):
     user = request.user
     wallets = [{'name':w.currency.name,'amount':w.amount} for w in Wallet.objects.filter(user=user)]
-    print(wallets)
+    print('kkk',wallets)
     return render(request, 'index/wallet.html',{'wallets':wallets})

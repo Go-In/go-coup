@@ -6,4 +6,7 @@ node_modules
 
 esdata/nodes
 esdata/elasticsearch
+
 codegen/codegen
+coupon-qr-gen/coupon-qr-gen
+
