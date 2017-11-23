@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^create-qr/$', views.createQr, name='create-qr'),
     url(r'^(?P<ticket_id>[0-9]+)/edit/$', views.ticketEdit, name='ticket-edit'),
     url(r'^(?P<ticket_id>[0-9]+)/delete/$', views.ticketDelete, name='ticket-delete'),
+    url(r'^get-coupon/$', views.getCoupon, name='get-coupon'),
 ]
