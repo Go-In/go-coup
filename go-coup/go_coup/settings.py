@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'querycount.middleware.QueryCountMiddleware',
-    'social_django.middleware.SocialAuthExceptionMiddleware'
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'go_coup.urls'
@@ -73,7 +73,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'go_coup.context_processors.groups',
                 'social_django.context_processors.login_redirect',
-                'social_django.context_processors.backends'
+                'social_django.context_processors.backends',
 
             ],
         },
@@ -151,6 +151,8 @@ STATICFILES_DIRS = [
 #auth
 
 LOGIN_URL = '/user/login'
+LOGIN_REDIRECT_URL = '/'
+
 
 # CACHEOPS_REDIS = {
 #     'host': 'localhost', # redis-server is on same machine

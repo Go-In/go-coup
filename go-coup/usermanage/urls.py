@@ -35,5 +35,4 @@ urlpatterns = [
     url(r'^customertest/$',views.customertest, name='customertest'),
     url(r'^storetest/$',views.storetest, name='storetest'),
     url(r'^setting/$',views.customerSetting, name='customer-setting'),
-    url(r'^oauth/', include('social_django.urls', namespace='social'))
 ]
