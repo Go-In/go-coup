@@ -10,16 +10,6 @@ html, body {
 #myCarousel {
   margin-top: -20px;
 }
-.black-ribbon {
-  position: fixed;
-  z-index: 9999;
-  width: 70px;
-}
-@media only all and (min-width: 768px) {
-  .black-ribbon {
-    width: auto;
-  }
-}
 .navbar-nav>li>.dropdown-menu {
   background: #f1457c !important;
 }
