@@ -10,48 +10,57 @@ services:
     #         - ./config/nginx:/etc/nginx/conf.d
     #     depends_on:
     #         - web
-    db:
-        image: postgres:alpine
-        ports:
-            - "5432:5432"
-    web:
-        build: ./web
-        command: /bin/bash -c "sleep 7;python3 manage.py runserver 0.0.0.0:8000"
-        #command: /bin/bash -c "sleep 7;uwsgi uwsgi.ini"
-        volumes:
-            - ./web:/code
-        ports:
-            - "8000:8000"
-            - "9091:9091"
-        depends_on:
-            - db
-        entrypoint: /code/entrypoint.sh
-    es:
-        image: elasticsearch:2.4-alpine
-        environment:
-            - cluster.name=docker-cluster
-            - bootstrap.memory_lock=true
-            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-        ulimits:
-            memlock:
-                soft: -1
-                hard: -1
-            mem_limit: 1g
-        volumes:
-            - ./esdata:/usr/share/elasticsearch/data
-        ports:
-            - "9200:9200"
-            - "9300:9300"
+    # db:
+    #     image: postgres:alpine
+    #     ports:
+    #         - "5432:5432"
+    # web:
+    #     build: ./web
+    #     command: /bin/bash -c "sleep 7;python3 manage.py runserver 0.0.0.0:8000"
+    #     #command: /bin/bash -c "sleep 7;uwsgi uwsgi.ini"
+    #     volumes:
+    #         - ./web:/code
+    #     ports:
+    #         - "8000:8000"
+    #         - "9091:9091"
+    #     depends_on:
+    #         - db
+    #     entrypoint: /code/entrypoint.sh
+    # es:
+    #     image: elasticsearch:2.4-alpine
+    #     environment:
+    #         - cluster.name=docker-cluster
+    #         - bootstrap.memory_lock=true
+    #         - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    #     ulimits:
+    #         memlock:
+    #             soft: -1
+    #             hard: -1
+    #         mem_limit: 1g
+    #     volumes:
+    #         - ./esdata:/usr/share/elasticsearch/data
+    #     ports:
+    #         - "9200:9200"
+    #         - "9300:9300"
     redis:
         image: redis:alpine
         ports:
             - "6379:6379"
-    codegen:
-        build: ./codegen
+    # codegen:
+    #     build: ./codegen
+    #     depends_on:
+    #         - redis
+    #     ports:
+    #         - "8081:8081"
+    #     volumes:
+    #         - ./codegen:/go/src/codegen
+    #     command: /bin/ash -c "go build; ./codegen"
+    coupon-qr-gen:
+        build: ./coupon-qr-gen
         depends_on:
             - redis
         ports:
             - "8081:8081"
         volumes:
-            - ./codegen:/go/src/codegen
-        command: /bin/ash -c "go build; ./codegen"
+            - ./coupon-qr-gen:/go/src/coupon-qr-gen
+        command: /bin/ash -c "go build; ./coupon-qr-gen"
