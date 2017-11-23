@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from storemanage.models import Currency
 from django.utils.dateparse import parse_date
 
+from .validateForm import validateQR
+
 import requests
 
 @login_required()
@@ -20,6 +22,20 @@ def createQr(request):
 
     #get data from input
     data = request.POST
+
+    #validate point
+    error = validateQR(data)
+
+    if not currency_list:
+        error['currency'] = True
+
+    if error:
+        return render(request, 'store/create-qr.html', {
+        'error': error,
+        'currency_list': currency_list
+    })
+
+
     point = data['point']
     pk_currency = data['currency']
     currency = Currency.objects.get(pk=pk_currency)
