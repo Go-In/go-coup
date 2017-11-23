@@ -59,6 +59,6 @@ func handleRequests() {
 	http.HandleFunc("/", homePage)
 	http.HandleFunc("/save", save)
 	http.HandleFunc("/load", load)
-	fmt.Println("Listen and serve on PORT 8081")
-	log.Fatal(http.ListenAndServe(":8081", nil))
+	fmt.Println("coupon-qr-gen is listening and serving on PORT 8082")
+	log.Fatal(http.ListenAndServe(":8082", nil))
 }

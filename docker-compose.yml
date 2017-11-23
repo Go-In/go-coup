@@ -60,7 +60,7 @@ services:
         depends_on:
             - redis
         ports:
-            - "8081:8081"
+            - "8082:8082"
         volumes:
             - ./coupon-qr-gen:/go/src/coupon-qr-gen
         command: /bin/ash -c "go build; ./coupon-qr-gen"
