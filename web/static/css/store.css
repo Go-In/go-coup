@@ -144,7 +144,7 @@ html , body{
     padding: 0 0 4px 0
 }
 .left_col {
-    background: #2A3F54
+    background: #d4286a;
 }
 .nav-sm .container.body .col-md-3.left_col {
     min-height: 100%;
@@ -326,7 +326,7 @@ html , body{
 }
 .nav_menu {
     float: left;
-    background: #ed4c7b;
+    background: white;
     border-bottom: 1px solid #ed4c7b;
     margin-bottom: 10px;
     width: 100%;
@@ -677,7 +677,7 @@ a:focus {
     margin-bottom: 0
 }
 .navbar-header {
-    background: #34495E
+    background: #f51c61;
 }
 .navbar-right {
     margin-right: 0
@@ -831,13 +831,13 @@ a:focus {
     text-decoration: none
 }
 .nav.navbar-nav>li>a {
-    color: #515356 !important
+    color: #f51c61 !important
 }
 .nav.top_menu>li>a {
     position: relative;
     display: block;
     padding: 10px 15px;
-    color: #34495E !important
+    color: #f51c61 !important
 }
 .nav>li>a:hover,
 .nav>li>a:focus {
