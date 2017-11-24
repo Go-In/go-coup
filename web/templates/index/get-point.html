@@ -1,0 +1,56 @@
+{% load staticfiles %}
+{% load qr_code %}
+{% include 'components/header.html' %}
+
+<div class="container" style="margin-bottom:50px;">
+    
+    {% if user.is_authenticated %}
+        {% if not is_store %}
+            {% if can_redeem %}
+                {% if not already_redeem %}
+                    <script>
+                        swal({
+                        title: 'Success',
+                        type: 'success',
+                        html: '<h3>Get {{price}} {{currency}}</h3>'
+                        })
+                    </script>
+                {% else %}
+                    <script>
+                        swal({
+                        title: 'Error',
+                        type: 'error',
+                        html: '<h3>Already redeem</h3>'
+                        })
+                    </script>
+                {% endif %}
+            {% else %}
+                <script>
+                    swal({
+                    title: 'Error',
+                    type: 'error',
+                    html: '<h3>Not found key</h3>'
+                    })
+                </script>
+            {% endif %}
+        {% else %}
+            <script>
+                swal({
+                title: 'Error',
+                type: 'error',
+                html: '<h3>For user only</h3>'
+                })
+            </script>
+        {% endif %}
+    {% else %}
+        <script>
+            swal({
+            title: 'Error',
+            type: 'error',
+            html: '<h3>Please login for redeem point</h3>'
+            })
+        </script>
+    {% endif %}
+</div>
+
+{% include 'components/store/footer.html' %}

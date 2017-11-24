@@ -55,3 +55,12 @@ services:
         volumes:
             - ./codegen:/go/src/codegen
         command: /bin/ash -c "go build; ./codegen"
+    coupon-qr-gen:
+        build: ./coupon-qr-gen
+        depends_on:
+            - redis
+        ports:
+            - "8082:8082"
+        volumes:
+            - ./coupon-qr-gen:/go/src/coupon-qr-gen
+        command: /bin/ash -c "go build; ./coupon-qr-gen"
