@@ -54,4 +54,12 @@ services:
             - "8081:8081"
         volumes:
             - ./codegen:/go/src/codegen
-        command: /bin/ash -c "go build; ./codegen" 
+        command: /bin/ash -c "go build; ./codegen"
+    # notification:
+    #     build: './notification_server'
+    #     ports:
+    #         - '8080:8080'
+    #     volumes:
+    #         - .:/application
+    #     command: node server.js
+    #     entrypoint: /application/entrypoint.sh

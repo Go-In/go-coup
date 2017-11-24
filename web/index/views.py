@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.staticfiles.views import serve
 from storemanage.models import Ticket
-
 from django.http import JsonResponse
 
 # Create your views here.
@@ -12,6 +11,7 @@ def index(request):
         request.session['success'] = False
     if fail:
         request.session['fail'] = False
+
     tickets = Ticket.objects.filter(available=True)
     return render(request, 'index/index.html', {
         'tickets': tickets,
