@@ -1,13 +1,12 @@
 {% load staticfiles %}
 {% include 'components/header.html' %}
-<div class="full-container">
-    <div class="container">
+<div class="container">
+
     <div class="content row">
         {% for store in stores %}
-                <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="col-md-4 col-sm-6 col-xs-12">
                     <a class="coup-link" href="{% url 'index:store' store.id %}">
-                        <div class="brand-sell">
-
+                        <div class="coupon-sell">
                             <img
                                 class="coup-img"
                                 src="{{ store.profile_image_url }}"
@@ -18,12 +17,11 @@
                             </div>
                         </div>
                     </a>
-                </div>
+            </div>
             {% if forloop.counter|divisibleby:"3" %}
                 </div><div class="row">
             {% endif %}
         {% endfor %}
-    </div>
     </div>
 </div>
 

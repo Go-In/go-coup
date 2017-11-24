@@ -66,19 +66,20 @@
                                 onError="this.onerror=null;this.src='https://kfcbd.com/wp-content/uploads/2016/11/kfc-logo.png'"
                             >
                             <div class="coup-text-wrapper">
-                            <div class="coup-left">
-                                <img
-                                    class="coup-left"
-                                    src="{{ store.profile_image_url }}"
-                                >
-                            </div>
-                            <div class="coup-left">
-                                <p class="coup-text">name: {{ ticket.name }}</p>
-                                <p class="coup-text">exp: {{ ticket.expire_date }}</p>
-                            </div>
-                            <div class="coup-right">
-                                <p class="coup-text">{{ ticket.price }} {{ ticket.currency }}</p>
-                            </div>
+                                <div class="coup-mini-logo">
+                                        <img
+                                            class="profile-mini-logo"
+                                            src="{{ ticket.store.profile_image_url }}"
+                                            onError="this.onerror=null;this.src='https://kfcbd.com/wp-content/uploads/2016/11/kfc-logo.png'"
+                                        >
+                                </div>
+                                <div class="coup-left">
+                                    <p class="coup-text">name: {{ ticket.name }}</p>
+                                    <p class="coup-text">exp: {{ ticket.expire_date }}</p>
+                                </div>
+                                <div class="coup-right">
+                                    <p class="coup-text">{{ ticket.price }} {{ ticket.currency }}</p>
+                                </div>
                             </div>
                         </div>
                     </a>
