@@ -14,8 +14,8 @@ def getCoupon(request, key):
     pk = req.json()['Pk']
 
     coupon = Coupon.objects.get(id=pk)
-    print(coupon.id)
-    # print(coupon.ticket.ticket_image_url)
+    coupon.active = False
+    coupon.save()
 
     return render(request, 'store/get-coupon.html', {
             'coupon': coupon

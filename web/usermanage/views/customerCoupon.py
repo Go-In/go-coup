@@ -15,7 +15,7 @@ import requests
 @permission_required('usermanage.customer_rights',raise_exception=True)
 def customerCoupon(request):
     user = request.user
-    coupons = Coupon.objects.filter(user=user)
+    coupons = Coupon.objects.filter(user=user, active=True)
     coupon_url = []
     for c in coupons:
         #generate redeem code url

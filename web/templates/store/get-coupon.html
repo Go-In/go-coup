@@ -1,12 +1,24 @@
 {% include 'components/header.html' %}
+{% if coupon.active %}
+    <script>
+        swal({
+        title: 'Success',
+        type: 'success',
+        html:'<h3>Get coupon from QR code</h3>' + 
+            '<img src={{ coupon.ticket.ticket_image_url }}>' +
+            '<h3>{{ coupon.ticket.name }}</h3>'
+        })
+    </script>
+{% else %}
 <script>
     swal({
-    title: 'Success',
-    type: 'success',
-    html:'<h3>Get coupon from QR code</h3>' + 
-         '<img src={{ coupon.ticket.ticket_image_url }}>' +
-         '<h3>{{ coupon.ticket.name }}</h3>'
+    title: 'Error',
+    type: 'error',
+    html:'<h3>Coupon already used</h3>' + 
+        '<img src={{ coupon.ticket.ticket_image_url }}>' +
+        '<h3>{{ coupon.ticket.name }}</h3>'
     })
 </script>
+{% endif %}
 {% include 'components/store/footer.html' %}
     
