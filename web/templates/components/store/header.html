@@ -57,10 +57,18 @@
                 <div class="menu_section">
                   <h3>General</h3>
                   <ul class="nav side-menu">
+                  {% if request.path == '/store/' %}
+                    <li style="background-color:rgb(255, 113, 139);"><a href="/store"><i class="fa fa-home"></i> Home </a></li>
+                  {% else %}
                     <li><a href="/store"><i class="fa fa-home"></i> Home </a></li>
+                  {% endif %}
                     <li><a><i class="fa fa-edit"></i> Edit profile</a></li>
                     <li><a href="{% url 'store:currency-register' %}"><i class="fa fa-money"></i> Add currecy</a></li>
+                  {% if request.path == '/store/add/' %}
+                    <li style="background-color:rgb(255, 113, 139);"><a href="{% url 'store:ticket-register' %}"><i class="fa fa-ticket"></i> Add ticket</a></li>
+                  {% else %}
                     <li><a href="{% url 'store:ticket-register' %}"><i class="fa fa-ticket"></i> Add ticket</a></li>
+                  {% endif %}
                   </ul>
                 </div>
   
@@ -107,3 +115,6 @@
           </div>
           <!-- /top navigation -->
       
+<script>
+  $()
+</script>
