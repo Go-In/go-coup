@@ -1,3 +1,5 @@
+var publicKey = 'BAjY5Vq4p2wwLa-tdde3ip7uBxP02MN_4GTvQv4FDQTCs3b_tWl-eZoqtLhhtp_gPmvnk-CtS4zL4kRyeSb6f6I'
+
 function askPermission() {
   return new Promise(function(resolve, reject) {
     const permissionResult = Notification.requestPermission(function(result) {
@@ -23,13 +25,37 @@ function subscribeStore(storeId, userId) {
   .then(function(reg) {
     const subscribeOptions = {
       userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array('BAjY5Vq4p2wwLa-tdde3ip7uBxP02MN_4GTvQv4FDQTCs3b_tWl-eZoqtLhhtp_gPmvnk-CtS4zL4kRyeSb6f6I')
+      applicationServerKey: urlBase64ToUint8Array(publicKey)
     }
     return reg.pushManager.subscribe(subscribeOptions)
   })
-  .then(function() {
-    console.log('sucess')
+  .then(function(subscription) {
+    var endpoint = subscription.endpoint;
+    var key = subscription.getKey('p256dh');
+    var auth = subscription.getKey('auth');
+    sendSubscriptionToServer(endpoint, key, auth);
   })
+}
+
+function sendSubscriptionToServer(endpoint, key, auth) {
+  var encodedKey = btoa(String.fromCharCode.apply(null, new Uint8Array(key)));
+  var encodedAuth = btoa(String.fromCharCode.apply(null, new Uint8Array(auth)));
+  $.ajax({
+      type: 'POST',
+      url: 'http://localhost:8080/subscribe',
+      data: {
+        publicKey: encodedKey, 
+        auth: encodedAuth, 
+        endpoint: endpoint,        
+      },
+      success: function (response) {
+          console.log('Subscribed successfully! ' + JSON.stringify(response));
+      },
+      error: function (err) {
+        console.log('err', err)
+      },
+      dataType: 'json'
+  });
 }
 
 function urlBase64ToUint8Array(base64String) {
