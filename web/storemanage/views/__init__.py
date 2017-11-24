@@ -5,5 +5,6 @@ from .ticketEdit import ticketEdit
 from .ticketRegister import ticketRegister
 from .validateForm import validateTicketForm
 from .ticketDashboard import ticketDashboard
+from .dashboard import dashboard
 
-__all__ = ['index','currencyRegister','ticketEdit','ticketRegister','ticketDelete','validateForm', 'ticketDashboard']
+__all__ = ['index','currencyRegister','ticketEdit','ticketRegister','ticketDelete','validateForm', 'ticketDashboard', 'dashboard']

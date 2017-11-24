@@ -79,7 +79,7 @@
                   {% if '/dashboard/' in request.path %}
                     <li class="disabled" style="background-color:rgb(255, 113, 139);"><a><i class="fa fa-bar-chart"></i> Dashboard</a></li>
                   {% else %}
-                    <li class="disabled"><a><i class="fa fa-bar-chart"></i> Dashboard</a></li>
+                    <li><a href="{% url 'store:dashboard' %}"><i class="fa fa-bar-chart"></i> Dashboard</a></li>
                   {% endif %}
                   </ul>
                 </div>
