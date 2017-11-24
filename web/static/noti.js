@@ -34,21 +34,20 @@ function subscribeStore(storeId, userId) {
     var key = subscription.getKey('p256dh');
     var auth = subscription.getKey('auth');
     console.log(subscription)
-    sendSubscriptionToServer(endpoint, key, auth);
+    sendSubscriptionToServer({
+      endpoint,
+      publicKey: btoa(String.fromCharCode.apply(null, new Uint8Array(key))),
+      auth: btoa(String.fromCharCode.apply(null, new Uint8Array(auth))),
+      userId
+    });
   })
 }
 
-function sendSubscriptionToServer(endpoint, key, auth) {
-  var encodedKey = btoa(String.fromCharCode.apply(null, new Uint8Array(key)));
-  var encodedAuth = btoa(String.fromCharCode.apply(null, new Uint8Array(auth)));
+function sendSubscriptionToServer(data) {
   $.ajax({
     type: 'POST',
     url: 'http://localhost:8080/subscribe',
-    data: {
-      publicKey: encodedKey, 
-      auth: encodedAuth, 
-      endpoint: endpoint,        
-    },
+    data,
     success: function (response) {
       console.log('Subscribed successfully! ' + JSON.stringify(response));
     },

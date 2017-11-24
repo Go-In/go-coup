@@ -49,8 +49,24 @@ app.post('/subscribe', (req, res) => {
       auth: req.body.auth
     }
   }
-  console.log(newSubscriber)
-  res.send({ success: true, message: 'add success' })
+  userSub.findOne({ 'userId': req.body.userId }, (err, user) => {
+    if (err) {
+      return res.send({ success: false })
+    }
+    if (user) {
+      return res.send({ success: true, message: 'already subscribe' })      
+    }
+    
+    userSub.create({
+      userId: req.body.userId,
+      endpoint: req.body.endpoint,
+      publicKey: req.body.publicKey,
+      auth: req.body.auth
+    }).then(() => {
+      res.send({ success: true, message: 'add success' })    
+    })
+  })
+  
 })
 
 const PORT = process.env.PORT || 8080;
