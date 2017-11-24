@@ -7,19 +7,14 @@ const config = require('config')
 
 mongoose.connect(config.get('DB_URL'))
 const Schema = mongoose.Schema
-const userSubSchema = Schema({
+const subSchema = Schema({
   userId: String,
+  storeId: String,
   endpoint: String,
   publicKey: String,
   auth: String,
 })
-const userSub = mongoose.model('UserSub', userSubSchema)
-
-const storeSubSchema = Schema({
-  storeId: String,
-  userIdList: [String]
-})
-const storeSub = mongoose.model('StoreSub', storeSubSchema)
+const Subscribe = mongoose.model('Subscribe', subSchema)
 
 const app = express()
 app.use(bodyParser.json())
@@ -49,25 +44,28 @@ app.post('/subscribe', (req, res) => {
       auth: req.body.auth
     }
   }
-  userSub.findOne({ 'userId': req.body.userId }, (err, user) => {
-    if (err) {
-      return res.send({ success: false })
-    }
-    if (user) {
-      return res.send({ success: true, message: 'already subscribe' })      
-    }
-    
-    userSub.create({
-      userId: req.body.userId,
+
+  const { storeId, userId } = req.body
+   
+  Subscribe.update(
+    { userId, storeId },
+    {
+      storeId,
+      userId,
       endpoint: req.body.endpoint,
       publicKey: req.body.publicKey,
       auth: req.body.auth
-    }).then(() => {
-      res.send({ success: true, message: 'add success' })    
-    })
+    },
+    { upsert: true } 
+  )
+  .then(() => { 
+    res.send({ success: true, message: 'add success' })    
   })
-  
+  .catch(e => {
+    res.send({ success: false, message: 'something worng' })
+  })
 })
+
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, function () {

@@ -38,7 +38,8 @@ function subscribeStore(storeId, userId) {
       endpoint,
       publicKey: btoa(String.fromCharCode.apply(null, new Uint8Array(key))),
       auth: btoa(String.fromCharCode.apply(null, new Uint8Array(auth))),
-      userId
+      userId,
+      storeId
     });
   })
 }
