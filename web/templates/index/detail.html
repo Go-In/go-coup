@@ -49,6 +49,14 @@
           <div class="detail-discription">
             <p>{{ ticket.detail }}</p>
           </div>
+          <div>
+            <button 
+              class="btn btn-primary"
+              onclick="subscribeStore({{ ticket.store.id }}, {{ user.id }})"
+            >
+              subscribe this store
+            </button>
+          </div>            
           {% if not is_store and user.is_authenticated %}
             <form class="buy-btn-form" method="POST" action="{% url 'market:purchase' %}">
                 {% csrf_token %}

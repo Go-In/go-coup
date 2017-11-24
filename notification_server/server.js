@@ -1,5 +1,7 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const webpush = require('web-push')
 const cors = require('cors')
 const config = require('config')
 
@@ -23,6 +25,18 @@ webpush.setVapidDetails(
 
 app.get('/status', (req, res) => {
   res.send('Server is running')
+})
+
+app.post('/subscribe', (req, res) => {
+  const newSubscriber = {
+    endpoint: req.body.endpoint,
+    keys: {
+      p256dh: req.body.publicKey,
+      auth: req.body.auth
+    }
+  }
+  console.log(newSubscriber)
+  res.send({ success: true, message: 'add success' })
 })
 
 const PORT = process.env.PORT || 8080;
