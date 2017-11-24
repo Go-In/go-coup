@@ -1,4 +1,12 @@
 {% include 'components/header.html' %}
-
+<script>
+    swal({
+    title: 'Success',
+    type: 'success',
+    html:'<h3>Get coupon from QR code</h3>' + 
+         '<img src={{ coupon.ticket.ticket_image_url }}>' +
+         '<h3>{{ coupon.ticket.name }}</h3>'
+    })
+</script>
 {% include 'components/store/footer.html' %}
     
