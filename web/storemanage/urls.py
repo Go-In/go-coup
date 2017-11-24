@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^add/$', views.ticketRegister, name='ticket-register'),
     url(r'^(?P<ticket_id>[0-9]+)/edit/$', views.ticketEdit, name='ticket-edit'),
     url(r'^(?P<ticket_id>[0-9]+)/delete/$', views.ticketDelete, name='ticket-delete'),
-    url(r'^(?P<ticket_id>[0-9]+)/dashboard/$', views.ticketDashboard, nane='ticket-dashboard'),
+    url(r'^(?P<ticket_id>[0-9]+)/dashboard/$', views.ticketDashboard, name='ticket-dashboard'),
 ]
