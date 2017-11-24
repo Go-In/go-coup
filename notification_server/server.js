@@ -54,7 +54,10 @@ app.get('/notify/all', (req, res) => {
           auth
         }
       }
-      const payload = JSON.stringify({})
+      const payload = JSON.stringify({
+        title: 'Hello World',
+        message: 'Event from GoCoup !'
+      })
       webpush.sendNotification(pushSub, payload, {})
     })
     res.send('noti send')

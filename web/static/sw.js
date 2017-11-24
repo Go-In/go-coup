@@ -16,11 +16,11 @@ toolbox.router.get('/user/coupon', toolbox.networkFirst);
 
 
 self.addEventListener('push', function(event) {
-  const title = 'Push Codelab';
+  const data = event.data.json()
+  const { title, message } = data
   const options = {
-    body: 'Yay it works.',
-    icon: 'images/icon.png',
-    badge: 'images/badge.png'
+    body: message,
+    // icon: 'https://i.pinimg.com/originals/d0/54/89/d054890aa6a20fe5273d24feff7acc79.jpg',
   };
   event.waitUntil(self.registration.showNotification(title, options));
 });
