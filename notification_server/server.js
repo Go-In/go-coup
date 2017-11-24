@@ -6,6 +6,20 @@ const cors = require('cors')
 const config = require('config')
 
 mongoose.connect(config.get('DB_URL'))
+const Schema = mongoose.Schema
+const userSubSchema = Schema({
+  userId: String,
+  endpoint: String,
+  publicKey: String,
+  auth: String,
+})
+const userSub = mongoose.model('UserSub', userSubSchema)
+
+const storeSubSchema = Schema({
+  storeId: String,
+  userIdList: [String]
+})
+const storeSub = mongoose.model('StoreSub', storeSubSchema)
 
 const app = express()
 app.use(bodyParser.json())
@@ -13,8 +27,8 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 const vapidKeys = {
-  publicKey: 'BAjY5Vq4p2wwLa-tdde3ip7uBxP02MN_4GTvQv4FDQTCs3b_tWl-eZoqtLhhtp_gPmvnk-CtS4zL4kRyeSb6f6I',
-  privateKey: 'UndF242-KapDVhm0nd2qzJaB9BCI7GO7JpJ4vzWgMII'
+  publicKey: config.get('PUBLIC_KEY'),
+  privateKey: config.get('SECRET_KEY')
 }
 
 webpush.setVapidDetails(
