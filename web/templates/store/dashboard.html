@@ -1,0 +1,54 @@
+{% load staticfiles %}
+{% include 'components/store/header.html' %}
+<div class="row top_tiles" style="display: flex; justify-content: space-between; margin-top: 20px;">
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-shopping-cart"></i></div>
+            <div class="count">112</div>
+            <h3>Sold</h3>
+            <p>Total sold of this ticket.</p>
+        </div>
+    </div>
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-eye"></i></div>
+            <div class="count">190</div>
+            <h3>Views</h3>
+            <p>Total view of this ticket.</p>
+        </div>
+    </div>
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-heart"></i></div>
+            <div class="count">179</div>
+            <h3>Subscribes</h3>
+            <p>Total subscribes of this store.</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-9 col-sm-12 col-xs-12" style="width:100%; padding: 30px 20% 0 20%;">
+<canvas id="myChart" style="display:flex"></canvas>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [{
+            label: "Buy",
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 11, 5, 6],
+        },
+        {
+            label: "View",
+            borderColor: 'rgb(30, 190, 165)',
+            data: [0, 11, 9, 5, 13, 8, 10],
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+</script>
+</div>
+{% include 'components/store/footer.html' %}

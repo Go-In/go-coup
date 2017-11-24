@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 
   <title>Store Management</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.js"></script>
@@ -62,12 +64,22 @@
                   {% else %}
                     <li><a href="/store"><i class="fa fa-home"></i> Home </a></li>
                   {% endif %}
-                    <li><a><i class="fa fa-edit"></i> Edit profile</a></li>
+                    <li class="disabled"><a><i class="fa fa-edit"></i> Edit profile</a></li>
                     <li><a href="{% url 'store:currency-register' %}"><i class="fa fa-money"></i> Add currecy</a></li>
                   {% if request.path == '/store/add/' %}
                     <li style="background-color:rgb(255, 113, 139);"><a href="{% url 'store:ticket-register' %}"><i class="fa fa-ticket"></i> Add ticket</a></li>
                   {% else %}
                     <li><a href="{% url 'store:ticket-register' %}"><i class="fa fa-ticket"></i> Add ticket</a></li>
+                  {% endif %}
+                  {% if '/edit/' in request.path %}
+                    <li class="disabled" style="background-color:rgb(255, 113, 139);"><a><i class="fa fa-pencil-square-o"></i> Edit ticket</a></li>
+                  {% else %}
+                    <li class="disabled"><a><i class="fa fa-pencil-square-o"></i> Edit ticket</a></li>
+                  {% endif %}
+                  {% if '/dashboard/' in request.path %}
+                    <li class="disabled" style="background-color:rgb(255, 113, 139);"><a><i class="fa fa-bar-chart"></i> Dashboard</a></li>
+                  {% else %}
+                    <li class="disabled"><a><i class="fa fa-bar-chart"></i> Dashboard</a></li>
                   {% endif %}
                   </ul>
                 </div>
