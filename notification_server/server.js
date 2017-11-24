@@ -42,15 +42,11 @@ app.get('/subscribe/list', (req, res) => {
   .catch(error => res.send(error))
 })
 
-app.get('/subscribe/check', (req, res) => {
-  const { storeId, userId } = req.body  
-  Subscribe.find({ storeId, userId })
+app.get('/subscribe/check/:userId/:storeId', (req, res) => {
+  const { storeId, userId } = req.params  
+  Subscribe.findOne({ storeId, userId })
   .then(sub => {
-    if (sub) {
-      res.send(true)
-    } else {
-      res.send(false)
-    }
+    res.send(sub !== null)
   })
 })
 

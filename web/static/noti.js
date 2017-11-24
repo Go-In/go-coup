@@ -59,6 +59,18 @@ function sendSubscriptionToServer(data) {
   });
 }
 
+function checkSubscribe() {
+  let userId = $('#userId').attr('value')
+  let storeId = $('#storeId').attr('value')
+  $.ajax({
+    type: 'GET',
+    url: 'http://localhost:8080/subscribe/check/' + userId + '/' + storeId,
+    success: function (response) {
+      console.log('res', response)
+    }
+  })
+}
+
 function urlBase64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - base64String.length % 4) % 4);
   const base64 = (base64String + padding)
@@ -98,3 +110,5 @@ function renderUnSubscribeButton() {
   .removeClass('btn-primary')
   .html('unsubscribe this store')
 }
+
+checkSubscribe()
