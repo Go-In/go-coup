@@ -10,10 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "config": "^1.28.1",
+    "cors": "^2.8.4",
     "express": "^4.16.2",
     "mongoose": "^4.13.4",
-    "pg-promise": "^7.3.2"
+    "web-push": "^3.2.4"
   },
   "devDependencies": {
     "nodemon": "^1.12.1"
