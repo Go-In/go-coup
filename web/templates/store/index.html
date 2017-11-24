@@ -27,13 +27,14 @@
   </div>
 </div>
 <div style="display:flex; justify-content: space-around; padding: 20px;">
-<table class="table table-bordered">
+<table class="table">
     <thead>
       <tr>
         <th>Name</th>
         <th>Price</th>
         <th>Detail</th>
         <th>Date</th>
+        <th>Dashboard</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>
@@ -45,9 +46,10 @@
           <td>{{ ticket.price }} {{ ticket.currency }}</td>
           <td>{{ ticket.detail }}</td>
           <td>{{ ticket.expire_date }}</td>
-          <td><a href="{% url 'store:ticket-edit' ticket.id %}">edit</a></td>
+          <td><i class="fa fa-line-chart"></i></td>
+          <td><a href="{% url 'store:ticket-edit' ticket.id %}"><i class="fa fa-pencil"></i></a></td>
           <td>
-            <a onclick="deleteTicket('{% url 'store:ticket-delete' ticket.id %}')">delete</a>
+            <a onclick="deleteTicket('{% url 'store:ticket-delete' ticket.id %}')"><i class="fa fa-trash"></i></a>
           </td>
         </tr>
       {% endfor %}
