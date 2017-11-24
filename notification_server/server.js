@@ -38,8 +38,27 @@ app.get('/status', (req, res) => {
 
 app.get('/subscribe/list', (req, res) => {
   Subscribe.find({})
-  .then(data => res.send(data))
+  .then(subscribers => res.send(subscribers))
   .catch(error => res.send(error))
+})
+
+app.get('/notify/all', (req, res) => {
+  Subscribe.find({})
+  .then(subscribers => {
+    subscribers.forEach(sub => {
+      const { endpoint, publicKey, auth } = sub
+      const pushSub = {
+        endpoint,
+        keys: {
+          p256dh: publicKey,
+          auth
+        }
+      }
+      const payload = JSON.stringify({})
+      webpush.sendNotification(pushSub, payload, {})
+    })
+    res.send('noti send')
+  })
 })
 
 app.get('/subscribe/check/:userId/:storeId', (req, res) => {
@@ -94,5 +113,4 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, function () {
   console.log(`push_server listening on port ${PORT}!`)
 })
-
 
