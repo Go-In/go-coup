@@ -53,7 +53,10 @@ function sendUnSubscriptionToServer() {
       storeId: $('#storeId').attr('value'),
     },
     success: function (response) {
-      console.log('Unsubscribed successfully! ' + JSON.stringify(response));
+      console.log('Unsubscribed successfully! ' + JSON.stringify(response));      
+      if (response.success) {
+        renderSubscribeButton()
+      }
     },
     error: function (err) {
       console.log('err', err)
@@ -69,6 +72,9 @@ function sendSubscriptionToServer(data) {
     data,
     success: function (response) {
       console.log('Subscribed successfully! ' + JSON.stringify(response));
+      if (response.success) {
+        renderUnSubscribeButton()
+      }
     },
     error: function (err) {
       console.log('err', err)

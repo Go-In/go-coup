@@ -80,6 +80,15 @@ app.post('/subscribe', (req, res) => {
   })
 })
 
+app.post('/unsubscribe', (req, res) => {
+  Subscribe.remove({ userId: req.body.userId, storeId: req.body.storeId })
+  .then(() => {
+    res.send({ success: true, message: 'unsubscribe success' })
+  })
+  .catch(e => {
+    res.send({ success: false, message: 'something worng' })
+  })
+})
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, function () {
