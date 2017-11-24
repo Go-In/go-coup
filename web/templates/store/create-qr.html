@@ -33,6 +33,25 @@
                     })
                 </script>
             {% endif %}
+            {% if error.digit %}
+            <script>
+                msg = "Point must be number"
+            </script>
+            {% endif %}
+            {% if error.currency %}
+            <script>
+                msg = "Don't have any currency"
+            </script>
+            {% endif %}
+            {% if error %}
+            <script>
+              swal({
+                title: msg,
+                text: "",
+                type: 'error',
+              })
+            </script>
+            {% endif %}
         </form>
 </div>
 
