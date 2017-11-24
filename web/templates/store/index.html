@@ -1,6 +1,6 @@
 {% load staticfiles %}
 {% include 'components/store/header.html' %}
-<div class="row top_tiles" style="display: flex; justify-content: space-around; margin-top: 20px;">
+<div class="row top_tiles" style="display: flex; justify-content: space-between; margin-top: 20px;">
   <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
     <div class="tile-stats">
       <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
@@ -26,29 +26,8 @@
     </div>
   </div>
 </div>
-</div>
-
-
-<div class="container body">
-  <!-- <div class="store-header" style="display:flex; justify-content: space-between;">
-    <h1>STORE MANAGE</h1>
-    <h1>You are : {{ user.username }}</h1>
-  </div>
-  <div style="text-align: right;">
-  <a href="{% url 'store:ticket-register' %}">
-    <button class="btn btn-gocoup" style="margin-bottom:20px;">
-      add new ticket
-    </button>
-  </a>
-  <a href="{% url 'store:currency-register' %}">
-    <button class="btn btn-gocoup" style="margin-bottom:20px;">
-      add new currency
-    </button>
-  </a>
-  </div> -->
-  
-
-  <table class="table table-bordered">
+<div style="display:flex; justify-content: space-around; padding: 20px;">
+<table class="table table-bordered">
     <thead>
       <tr>
         <th>Name</th>
@@ -75,6 +54,25 @@
     </tbody>
   </table>
 </div>
+
+<!-- <div class="container body">
+  <div class="store-header" style="display:flex; justify-content: space-between;">
+    <h1>STORE MANAGE</h1>
+    <h1>You are : {{ user.username }}</h1>
+  </div>
+  <div style="text-align: right;">
+  <a href="{% url 'store:ticket-register' %}">
+    <button class="btn btn-gocoup" style="margin-bottom:20px;">
+      add new ticket
+    </button>
+  </a>
+  <a href="{% url 'store:currency-register' %}">
+    <button class="btn btn-gocoup" style="margin-bottom:20px;">
+      add new currency
+    </button>
+  </a>
+  </div>
+</div> -->
 <script>
   function deleteTicket(ticketUrl) {
     swal({

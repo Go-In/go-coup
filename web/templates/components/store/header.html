@@ -32,8 +32,8 @@
 </head>
 <body>
     <div class="container body">
-        <div class="main_container">
-          <div class="col-sm-2 left_col" style="width:250px;">
+        <!-- <div class="main_container"> -->
+          <div class="col-sm-2 left_col" style="width:250px; height:100vh;">
             <div class="left_col scroll-view">
               <div class="navbar" style="border: 0;">
                 <a href="/store" class="site_title"><i class="fa fa-shopping-cart"></i> <span>Store manage</span></a>
@@ -57,10 +57,10 @@
                 <div class="menu_section">
                   <h3>General</h3>
                   <ul class="nav side-menu">
-                    <li><a><i class="fa fa-home"></i> Home </a></li>
+                    <li><a href="/store"><i class="fa fa-home"></i> Home </a></li>
                     <li><a><i class="fa fa-edit"></i> Edit profile</a></li>
-                    <li><a><i class="fa fa-money"></i> Add currecy</a></li>
-                    <li><a><i class="fa fa-ticket"></i> Add ticket</a></li>
+                    <li><a href="{% url 'store:currency-register' %}"><i class="fa fa-money"></i> Add currecy</a></li>
+                    <li><a href="{% url 'store:ticket-register' %}"><i class="fa fa-ticket"></i> Add ticket</a></li>
                   </ul>
                 </div>
   
@@ -68,7 +68,8 @@
               <!-- /sidebar menu -->
             </div>
           </div>
-  
+        <!-- </div> -->
+        <div class="main_container">
           <!-- top navigation -->
           <div class="top_nav">
             <div class="nav_menu" style="display:flex; justify-content: space-between;">
@@ -83,7 +84,7 @@
               <nav>
                 <div class="right">
                   {% if user.is_authenticated %}
-                  <div class="nav-btn">
+                  <div class="nav-btn" style="background-color:#d4286a">
                     <a href="{% url 'user:logout' %}">
                       Logout
                     </a>
