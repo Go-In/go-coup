@@ -49,8 +49,30 @@ app.get('/subscribe/list/:storeId', (req, res) => {
 })
 
 
-app.get('/notify/all', (req, res) => {
-  Subscribe.find({})
+app.get('/notify/all/', (req, res) => {
+  Subscribe.find({ })
+  .then(subscribers => {
+    subscribers.forEach(sub => {
+      const { endpoint, publicKey, auth } = sub
+      const pushSub = {
+        endpoint,
+        keys: {
+          p256dh: publicKey,
+          auth
+        }
+      }
+      const payload = JSON.stringify({
+        title: 'Hello World',
+        message: 'Event from GoCoup !'
+      })
+      webpush.sendNotification(pushSub, payload, {})
+    })
+    res.send('noti send')
+  })
+})
+
+app.get('/notify/store/:storeId', (req, res) => {
+  Subscribe.find({ storeId: req.params.storeId })
   .then(subscribers => {
     subscribers.forEach(sub => {
       const { endpoint, publicKey, auth } = sub
