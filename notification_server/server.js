@@ -36,6 +36,12 @@ app.get('/status', (req, res) => {
   res.send('Server is running')
 })
 
+app.get('/subscribe', (req, res) => {
+  Subscribe.find({})
+  .then(data => res.send(data))
+  .catch(error => res.send(error))
+})
+
 app.post('/subscribe', (req, res) => {
   const newSubscriber = {
     endpoint: req.body.endpoint,
