@@ -33,7 +33,8 @@ function subscribeStore(storeId, userId) {
     var endpoint = subscription.endpoint;
     var key = subscription.getKey('p256dh');
     var auth = subscription.getKey('auth');
-    sendSubscriptionToServer(endpoint, key, auth);
+    console.log(subscription)
+    // sendSubscriptionToServer(endpoint, key, auth);
   })
 }
 
@@ -73,3 +74,27 @@ function urlBase64ToUint8Array(base64String) {
   return outputArray;
 }
 
+navigator.serviceWorker.ready
+.then(function(reg) {
+  return reg.pushManager.getSubscription()
+})
+.then(function(subcribe) {
+  if (subcribe) {
+    renderUnSubscribeButton()
+  } else {
+    renderSubscribeButton()
+  }
+})
+
+function renderSubscribeButton() {
+  $('#subscribe-btn')
+  .addClass('btn-primary')
+  .removeClass('btn-danger')
+  .html('subscribe this store')
+}
+function renderUnSubscribeButton() {
+  $('#subscribe-btn')
+  .addClass('btn-danger')
+  .removeClass('btn-primary')
+  .html('unsubscribe this store')
+}

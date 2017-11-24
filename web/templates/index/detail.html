@@ -50,11 +50,11 @@
             <p>{{ ticket.detail }}</p>
           </div>
           <div>
-            <button 
-              class="btn btn-primary"
+            <button
+              id="subscribe-btn"
+              class="btn"
               onclick="subscribeStore({{ ticket.store.id }}, {{ user.id }})"
             >
-              subscribe this store
             </button>
           </div>            
           {% if not is_store and user.is_authenticated %}
