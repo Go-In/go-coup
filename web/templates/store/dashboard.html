@@ -4,7 +4,7 @@
     <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="tile-stats">
             <div class="icon"><i class="fa fa-shopping-cart"></i></div>
-            <div class="count">112</div>
+            <div class="count">30</div>
             <h3>Sold</h3>
             <p>Total sold of this ticket.</p>
         </div>
@@ -12,7 +12,7 @@
     <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="tile-stats">
             <div class="icon"><i class="fa fa-eye"></i></div>
-            <div class="count">190</div>
+            <div class="count">56</div>
             <h3>Views</h3>
             <p>Total view of this ticket.</p>
         </div>
@@ -26,29 +26,49 @@
         </div>
     </div>
 </div>
-<div class="col-md-9 col-sm-12 col-xs-12" style="width:100%; padding: 30px 20% 0 20%;">
-<canvas id="myChart" style="display:flex"></canvas>
-<script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [{
-            label: "Buy",
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 11, 5, 6],
+<div class="col-md-9 col-sm-12 col-xs-12" style="width:48%; margin-left:4%;">
+    <p style="text-align:center; margin-top:20px;">Graph show buy and view total</p>
+    <canvas id="buyview" style="display:flex"></canvas>
+    <script>
+    var ctx = document.getElementById('buyview').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["1", "2", "3", "4", "5", "6", "7"],
+            datasets: [{
+                label: "Buy",
+                borderColor: 'rgb(255, 128, 0)',
+                data: [2, 5, 10, 13, 20, 23, 30],
+            },
+            {
+                label: "View",
+                borderColor: 'rgb(30, 190, 165)',
+                data: [8, 15, 21, 30, 37, 45, 56],
+            }]
         },
-        {
-            label: "View",
-            borderColor: 'rgb(30, 190, 165)',
-            data: [0, 11, 9, 5, 13, 8, 10],
-        }]
-    },
-
-    // Configuration options go here
-    options: {}
-});
-</script>
+        options: {}
+    });
+    </script>
+</div>
+<div class="col-md-9 col-sm-12 col-xs-12" style="width:48%;">
+    <p style="text-align:center; margin-top:20px;">Graph show percent of this ticket sold</p>
+        <canvas id="percentsold" style="display:flex"></canvas>
+        <script>
+            new Chart(document.getElementById("percentsold"),{
+                "type":"doughnut",
+                "data":
+                    {
+                        "labels": ["other ticket","this ticket"],
+                        "datasets": 
+                            [
+                                {
+                                    "label":"My First Dataset",
+                                    "data": [295, 30],
+                                    "backgroundColor": [ "rgb(192, 192, 192)","rgb(153, 255, 153)"]
+                                }
+                            ]
+                    }
+                });
+        </script>
 </div>
 {% include 'components/store/footer.html' %}
