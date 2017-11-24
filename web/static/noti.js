@@ -17,7 +17,7 @@ function askPermission() {
   });
 }
 
-function subscribeStore(storeId, userId) {
+function subscribeStore() {
   askPermission()
   .then(function() {
     return navigator.serviceWorker.ready
@@ -38,9 +38,27 @@ function subscribeStore(storeId, userId) {
       endpoint,
       publicKey: btoa(String.fromCharCode.apply(null, new Uint8Array(key))),
       auth: btoa(String.fromCharCode.apply(null, new Uint8Array(auth))),
-      userId,
-      storeId
+      userId: $('#userId').attr('value'),
+      storeId: $('#storeId').attr('value')
     });
+  })
+}
+
+function sendUnSubscriptionToServer() {
+  $.ajax({
+    type: 'POST',
+    url: 'http://localhost:8080/unsubscribe',
+    data: {
+      userId: $('#userId').attr('value'),
+      storeId: $('#storeId').attr('value'),
+    },
+    success: function (response) {
+      console.log('Unsubscribed successfully! ' + JSON.stringify(response));
+    },
+    error: function (err) {
+      console.log('err', err)
+    },
+    dataType: 'json'
   })
 }
 
@@ -62,12 +80,10 @@ function sendSubscriptionToServer(data) {
 function checkSubscribe() {
   let userId = $('#userId').attr('value')
   let storeId = $('#storeId').attr('value')
-  console.log(storeId, userId)
   $.ajax({
     type: 'GET',
     url: 'http://localhost:8080/subscribe/check/' + userId + '/' + storeId,
     success: function (isSub) {
-      console.log(isSub)
       if (isSub) {
         renderUnSubscribeButton()
       } else {
@@ -109,12 +125,14 @@ function renderSubscribeButton() {
   .addClass('btn-primary')
   .removeClass('btn-danger')
   .html('subscribe this store')
+  .attr('onclick', 'subscribeStore()')
 }
 function renderUnSubscribeButton() {
   $('#subscribe-btn')
   .addClass('btn-danger')
   .removeClass('btn-primary')
   .html('unsubscribe this store')
+  .attr('onclick', 'sendUnSubscriptionToServer()')
 }
 if (window.location.href.split('/')[3] === 'detail') {
   checkSubscribe()
