@@ -62,11 +62,17 @@ function sendSubscriptionToServer(data) {
 function checkSubscribe() {
   let userId = $('#userId').attr('value')
   let storeId = $('#storeId').attr('value')
+  console.log(storeId, userId)
   $.ajax({
     type: 'GET',
     url: 'http://localhost:8080/subscribe/check/' + userId + '/' + storeId,
-    success: function (response) {
-      console.log('res', response)
+    success: function (isSub) {
+      console.log(isSub)
+      if (isSub) {
+        renderUnSubscribeButton()
+      } else {
+        renderSubscribeButton()
+      }
     }
   })
 }
@@ -86,17 +92,17 @@ function urlBase64ToUint8Array(base64String) {
   return outputArray;
 }
 
-navigator.serviceWorker.ready
-.then(function(reg) {
-  return reg.pushManager.getSubscription()
-})
-.then(function(subcribe) {
-  if (subcribe) {
-    renderUnSubscribeButton()
-  } else {
-    renderSubscribeButton()
-  }
-})
+// navigator.serviceWorker.ready
+// .then(function(reg) {
+//   return reg.pushManager.getSubscription()
+// })
+// .then(function(subcribe) {
+//   if (subcribe) {
+//     renderUnSubscribeButton()
+//   } else {
+//     renderSubscribeButton()
+//   }
+// })
 
 function renderSubscribeButton() {
   $('#subscribe-btn')
@@ -110,5 +116,6 @@ function renderUnSubscribeButton() {
   .removeClass('btn-primary')
   .html('unsubscribe this store')
 }
-
-checkSubscribe()
+if (window.location.href.split('/')[3] === 'detail') {
+  checkSubscribe()
+}
