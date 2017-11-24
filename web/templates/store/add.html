@@ -66,6 +66,11 @@
         <center>
             <input style="margin:20px; width:50%;" class="btn btn-gocoup" type="submit" value="submit" />
         </center>
+        {% if error.currency %}
+        <script>
+            msg = "Currency must have"
+        </script>
+        {% endif %}
         {% if error.name_len %}
         <script>
             msg = "Ticket name is too long"
@@ -81,9 +86,24 @@
             msg = "Detail is too long"
         </script>
         {% endif %}
-        {% if error.remain_neg %}
+        {% if error.remain_day %}
+        <script>
+            msg = "Remaining days must have"
+        </script>
+        {% endif %}
+        {% if error.remain_day_neg %}
         <script>
             msg = "Remaining days must be positive"
+        </script>
+        {% endif %}
+        {% if error.remain %}
+        <script>
+            msg = "Remaining must have"
+        </script>
+        {% endif %}
+        {% if error.remain_neg %}
+        <script>
+            msg = "Remaining must be positive"
         </script>
         {% endif %}
         {% if error %}

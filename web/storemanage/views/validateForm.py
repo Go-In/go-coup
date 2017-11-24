@@ -16,9 +16,18 @@ def validateTicketForm(data):
         error['price_neg'] = True
     if len(data['detail']) > 1023:
         error['detail_len'] = True
-    if data['remaining_day']:
-        if int(data['remaining_day']) < 0:
-            error['remain_neg'] = True
+    if 'is_period' in data :
+        if data['remaining_day']:
+            if int(data['remaining_day']) < 0:
+                error['remain_day_neg'] = True
+        else:
+            error['remain_day'] = True
+    if 'is_limit' in data :
+        if data['remain']:
+            if int(data['remain']) < 0:
+                error['remain_neg'] = True
+        else:
+            error['remain'] = True
     # if not URLValidator(data['ticket_image_url']):
     #     error['ticket_url'] = True
     # if not URLValidator(data['content_image_url']):

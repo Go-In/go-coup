@@ -16,7 +16,12 @@ def ticketRegister(request):
             'currency_list': currency_list
         })
     data = request.POST
+
     error = validateTicketForm(data)
+
+    if not currency_list:
+        error['currency'] = True
+
     if error:
         return render(request,'store/add.html', {
             'error': error,
