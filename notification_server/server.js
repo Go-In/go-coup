@@ -36,10 +36,22 @@ app.get('/status', (req, res) => {
   res.send('Server is running')
 })
 
-app.get('/subscribe', (req, res) => {
+app.get('/subscribe/list', (req, res) => {
   Subscribe.find({})
   .then(data => res.send(data))
   .catch(error => res.send(error))
+})
+
+app.get('/subscribe/check', (req, res) => {
+  const { storeId, userId } = req.body  
+  Subscribe.find({ storeId, userId })
+  .then(sub => {
+    if (sub) {
+      res.send(true)
+    } else {
+      res.send(false)
+    }
+  })
 })
 
 app.post('/subscribe', (req, res) => {
