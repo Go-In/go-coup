@@ -24,10 +24,10 @@
   </div>
 
 </div>
-{% for c in coupon %}
+{% for c in coupon_url %}
   <script>
     new QRCode(document.getElementById("qr_{{ forloop.counter }}"), {
-      text: "http://jindo.dev.naver.com/collie",
+      text: "{{ c }}",
       width: 128,
       height: 128,
     });
