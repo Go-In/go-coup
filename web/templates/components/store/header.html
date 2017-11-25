@@ -65,7 +65,11 @@
                     <li><a href="/store"><i class="fa fa-home"></i> Home </a></li>
                   {% endif %}
                     <li class="disabled"><a><i class="fa fa-edit"></i> Edit profile</a></li>
+                  {% if request.path == '/store/currency/add/' %}
+                    <li style="background-color:rgb(255, 113, 139);"><a href="{% url 'store:currency-register' %}"><i class="fa fa-money"></i> Add currecy</a></li>
+                  {% else %}
                     <li><a href="{% url 'store:currency-register' %}"><i class="fa fa-money"></i> Add currecy</a></li>
+                  {% endif %}
                   {% if request.path == '/store/add/' %}
                     <li style="background-color:rgb(255, 113, 139);"><a href="{% url 'store:ticket-register' %}"><i class="fa fa-ticket"></i> Add ticket</a></li>
                   {% else %}
