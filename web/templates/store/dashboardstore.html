@@ -1,29 +1,136 @@
 {% load staticfiles %}
 {% include 'components/store/header.html' %}
-<div class="row top_tiles" style="display: flex; justify-content: space-between; margin-top: 20px;">
-    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="tile-stats">
-            <div class="icon"><i class="fa fa-shopping-cart"></i></div>
-            <div class="count">30</div>
-            <h3>Sold</h3>
-            <p>Total sold of this ticket.</p>
+<div class="row tile_count" style="margin-left:10px;">
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
+          <div class="count">1081</div>
+          <span class="count_bottom"><i class="green">9% </i> From last Week</span>
         </div>
-    </div>
-    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="tile-stats">
-            <div class="icon"><i class="fa fa-eye"></i></div>
-            <div class="count">56</div>
-            <h3>Views</h3>
-            <p>Total view of this ticket.</p>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="fa fa-shopping-cart"></i> Total Buys</span>
+          <div class="count">325</div>
+          <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
         </div>
-    </div>
-    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="tile-stats">
-            <div class="icon"><i class="fa fa-heart"></i></div>
-            <div class="count">179</div>
-            <h3>Subscribes</h3>
-            <p>Total subscribes of this store.</p>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="fa fa-shopping-cart"></i> Average Buys per day</span>
+          <div class="count green">27.08</div>
+          <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>6% </i> From last Week</span>
         </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="fa fa-eye"></i> Total Views</span>
+          <div class="count">500</div>
+          <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>5% </i> From last Week</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="fa fa-eye"></i> Average Views per day</span>
+          <div class="count">41.67</div>
+          <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>1% </i> From last Week</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="fa fa-heart"></i> Total Subscribes</span>
+          <div class="count">179</div>
+          <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>2% </i> From last Week</span>
+        </div>
+      </div>
+<div class="col-md-9 col-sm-12 col-xs-12" style="width:100%; padding: 0 20%; 0 20%; margin-top:10px;">
+            <p style="text-align:center; margin-top:20px;">Graph show view and buy per day</p>
+            <canvas id="buyviewperday" style="display:flex"></canvas>
+            <script>
+            var ctx = document.getElementById('buyviewperday').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ["9 Nov", "10 Nov", "11 Nov", "12 Nov", "13 Nov", "14 Nov", "15 Nov", "16 Nov", "17 Nov", "18 Nov", "19 Nov", "20 Nov"],
+                    datasets: [
+                    {
+                        label: "View",
+                        borderColor: 'rgb(139,0,139)',
+                        data: [28, 38, 41, 39, 43, 38, 32, 45, 35, 27, 39, 27],
+                        fill: false,
+                        lineTension: 0.00001,
+                        fill: true,
+                    },
+                    {
+                        label: "Buy",
+                        borderColor: 'rgb(30,144,255)',
+                        data: [20, 31, 21, 25, 33, 19, 21, 27, 22, 25, 32, 25],
+                        fill: false,
+                        lineTension: 0.00001,
+                        fill: true,
+                    },
+                    ]
+                },
+                options: {}
+            });
+            </script>
+        </div>
+<div class="col-md-9 col-sm-12 col-xs-12" style="width:100%; margin-top:20px; padding: 0 20%; 0 20%">
+        <p style="text-align:center; margin-top:20px;">Graph show view and buy of each tickets</p>
+            <canvas id="soldtime" style="display:flex"></canvas>
+            <script>
+                new Chart(document.getElementById("soldtime"),{
+                    "type":"bar",
+                    "data":
+                        {
+                            "labels":[
+                                "Discount 50 Baht",
+                                "Free drink",
+                                "Buy 1 get 1",
+                                "Discount 20%"
+                                ],
+                            "datasets":
+                                [
+                                    {
+                                        "label":"View",
+                                        "data":[8, 10, 17, 6],
+                                        "fill":false,
+                                        "backgroundColor":"rgba(255, 215, 53, 0.5)",
+                                        "borderColor":"rgba(255, 215, 53)",
+                                        "borderWidth":2,
+                                    },
+                                    {
+                                        "label":"Buy",
+                                        "data":[5, 6, 12, 3],
+                                        "fill":false,
+                                        "backgroundColor":"rgba(0, 153, 0, 0.5)",
+                                        "borderColor":"rgba(0, 153, 0)",
+                                        "borderWidth":2,
+                                    },
+                                ]
+                            
+                        },
+                    "options":
+                        {"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}});
+            </script>
     </div>
-</div>
+    <div class="col-md-9 col-sm-12 col-xs-12" style="width:100%; margin-top:10px; margin-bottom:20px; padding: 0 20%; 0 20%;">
+            <p style="text-align:center; margin-top:20px;">Graph show view and buy total</p>
+            <canvas id="buyview" style="display:flex"></canvas>
+            <script>
+            var ctx = document.getElementById('buyview').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ["9 Nov", "10 Nov", "11 Nov", "12 Nov", "13 Nov", "14 Nov", "15 Nov", "16 Nov", "17 Nov", "18 Nov", "19 Nov", "20 Nov"],
+                    datasets: [
+                    {
+                        label: "View",
+                        borderColor: 'rgb(64,224,208)',
+                        data: [8, 15, 21, 30, 37, 45, 56, 63, 72, 89, 91, 100],
+                        fill: false,
+                        lineTension: 0.00001,
+                    },
+                    {
+                        label: "Buy",
+                        borderColor: 'rgb(240,128,128)',
+                        data: [2, 5, 10, 13, 20, 29, 35, 42, 56, 61, 67, 72],
+                        fill: false,
+                        lineTension: 0.00001,
+                    },
+                    ]
+                },
+                options: {}
+            });
+            </script>
+        </div>
 {% include 'components/store/footer.html' %}
