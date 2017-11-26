@@ -20,15 +20,14 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 }
 
 func save(w http.ResponseWriter, r *http.Request) {
-	data := Data{r.PostFormValue("price"), r.PostFormValue("currency"), r.PostFormValue("reuse")}
+	pk := r.PostFormValue("pk")
 	key := RandStringRunes(13)
-	dataToStr, _ := json.Marshal(data)
-	err := client.Set(key, string(dataToStr), 0).Err()
+	err := client.Set(key, string(pk), 0).Err()
 	if err != nil {
 		panic(err)
 	}
 
-	resPayload := Payload{"OK", string(key), data}
+	resPayload := Payload{"OK", string(key), pk}
 
 	res, err := json.Marshal(resPayload)
 
@@ -39,7 +38,6 @@ func save(w http.ResponseWriter, r *http.Request) {
 func load(w http.ResponseWriter, r *http.Request) {
 	key := r.PostFormValue("key")
 	val, err := client.Get(key).Result()
-	var data Data
 
 	resPayload := Payload{Key: key}
 	if err == redis.Nil {
@@ -47,11 +45,7 @@ func load(w http.ResponseWriter, r *http.Request) {
 	} else if err != nil {
 		resPayload.Status = "INTERNAL_SERVER_ERROR"
 	} else {
-		error := json.Unmarshal([]byte(val), &data)
-		if error != nil {
-			panic(error)
-		}
-		resPayload.Value = data
+		resPayload.Pk = val
 		resPayload.Status = "OK"
 
 	}
@@ -65,6 +59,6 @@ func handleRequests() {
 	http.HandleFunc("/", homePage)
 	http.HandleFunc("/save", save)
 	http.HandleFunc("/load", load)
-	fmt.Println("codegen is listening and serving on PORT 8081")
-	log.Fatal(http.ListenAndServe(":8081", nil))
+	fmt.Println("coupon-qr-gen is listening and serving on PORT 8082")
+	log.Fatal(http.ListenAndServe(":8082", nil))
 }

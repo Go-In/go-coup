@@ -9,12 +9,14 @@ from storemanage.models import Ticket
 # Create your views here.
 from usermanage import models
 from .validateForm import validateCustomerForm
+from .redirect_after_login import redirect_after_login
 
 def customerRegister(request):
     if request.user.is_authenticated:
         return redirect('index:index')
     if request.method == 'GET':
         return render(request,'usermanage/register-customer.html')
+    
     data = request.POST
 
     error = validateCustomerForm(data)
@@ -31,4 +33,7 @@ def customerRegister(request):
     g.save()
     customerprofile = models.Customer(user = user, first_name = data['first_name'], last_name = data['last_name'])
     customerprofile.save()
-    return redirect('index:index')
+    
+    login(request, user)
+
+    return redirect_after_login(user)
