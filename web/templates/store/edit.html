@@ -1,25 +1,25 @@
 {% include 'components/store/header.html' %}
-<div class="container" style="margin-bottom:50px;">
-    <h1>EDIT TICKET</h1>
-    <form method="POST" action="" style="border:2px solid pink;">
+<div style="display: flex; justify-content:center;">
+    <form method="POST" action="" style="flex-direction:column; width:60%; margin-top:100px;">
     {% csrf_token %}
-        <div class="col-md-12 col-xs-12">
+        <div class="col-md-6 col-xs-6">
             <label>Name*:</label>
             <input type="text" class="form-control" name="name" value="{{ ticket.name }}" />
         </div>
-        <div class="col-md-12 col-xs-12">
+        <div class="col-md-6 col-xs-6">
             <label>Detail*:</label>
             <input type="text" class="form-control" name="detail" value="{{ ticket.detail }}" />
         </div>
-        <div class="col-md-12 col-xs-12">
+        <div class="col-md-6 col-xs-6">
             <label>Price*:</label>
             <input type="number" class="form-control" name="price" value="{{ ticket.price }}" />
         </div>
-        <div class="col-md-12 col-xs-12">
+        <div class="col-md-6 col-xs-6">
             <label>Expire date*:</label>
             <input type="date" class="form-control" name="expire_date" value="{{ ticket.expire_date|date:"Y-m-d" }}" />
         </div>
-        <div class="col-md-12 col-xs-12">
+        <div class="col-md-6 col-xs-6">
+            <br>
             <label class="checkbox">
             Is period? *
             <input type="checkbox" value="period" data-toggle="checkbox" class="custom-checkbox" name="is_period" {% if ticket.is_period %} checked {% endif %}>
@@ -29,11 +29,12 @@
             </span>
             </label>
         </div>
-        <div class="col-md-12 col-xs-12">
+        <div class="col-md-6 col-xs-6">
             <label>Remaning day*:</label>
             <input type="number" class="form-control" name="remaining_day" value="{{ ticket.remaining_day }}" />
         </div>
-        <div class="col-md-12 col-xs-12">
+        <div class="col-md-6 col-xs-6">
+            <br>
             <label class="checkbox">
             Is limit? *
             <input type="checkbox" value="limit" data-toggle="checkbox" class="custom-checkbox" name="is_limit" {% if ticket.is_limit %} checked {% endif %}>
@@ -43,11 +44,11 @@
             </span>
             </label>
         </div>
-        <div class="col-md-12 col-xs-12">
+        <div class="col-md-6 col-xs-6">
             <label>Remaining*:</label>
             <input type="number" class="form-control" name="remain" value="{{ ticket.remain }}" />
         </div>
-        <div class="col-md-12 col-xs-12" style="margin-top:10px;">
+        <div class="col-md-6 col-xs-6" style="margin-top:10px;">
             <label>Currency*:</label>
             <select name="currency">
             {% for c in currency_list %}
@@ -55,7 +56,7 @@
             {% endfor %}
         </select>
         </div>
-        <div class="col-md-12 col-xs-12">
+        <div class="col-md-6 col-xs-6">
             <label>Ticket image url*:</label>
             <input type="text" class="form-control" name="ticket_image_url" value="{{ ticket.ticket_image_url }}" />
         </div>

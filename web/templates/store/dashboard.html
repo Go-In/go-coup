@@ -1,0 +1,151 @@
+{% load staticfiles %}
+{% include 'components/store/header.html' %}
+<div class="row top_tiles" style="display: flex; justify-content: space-between; margin-top: 20px;">
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-shopping-cart"></i></div>
+            <div class="count">30</div>
+            <h3>Sold</h3>
+            <p>Total sold of this ticket.</p>
+        </div>
+    </div>
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-eye"></i></div>
+            <div class="count">56</div>
+            <h3>Views</h3>
+            <p>Total view of this ticket.</p>
+        </div>
+    </div>
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-heart"></i></div>
+            <div class="count">179</div>
+            <h3>Subscribes</h3>
+            <p>Total subscribes of this store.</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-9 col-sm-12 col-xs-12" style="width:48%; margin-left:4%; margin-top:10px;">
+    <p style="text-align:center; margin-top:20px;">Graph show buy and view total</p>
+    <canvas id="buyview" style="display:flex"></canvas>
+    <script>
+    var ctx = document.getElementById('buyview').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["1", "2", "3", "4", "5", "6", "7"],
+            datasets: [{
+                label: "Buy",
+                borderColor: 'rgb(153, 255, 204)',
+                data: [2, 5, 10, 13, 20, 29, 35],
+                fill: false,
+                lineTension: 0.00001,
+            },
+            {
+                label: "View",
+                borderColor: 'rgb(30, 190, 165)',
+                data: [8, 15, 21, 30, 37, 45, 56],
+                fill: false,
+                lineTension: 0.00001,
+            },]
+        },
+        options: {}
+    });
+    </script>
+</div>
+<div class="col-md-9 col-sm-12 col-xs-12" style="width:48%; margin-top:10px;">
+    <p style="text-align:center; margin-top:20px;">Graph show percent of this ticket sold</p>
+        <canvas id="percentsold" style="display:flex"></canvas>
+        <script>
+            new Chart(document.getElementById("percentsold"),{
+                "type":"doughnut",
+                "data":
+                    {
+                        "labels": ["other ticket","this ticket"],
+                        "datasets": 
+                            [
+                                {
+                                    "label":"My First Dataset",
+                                    "data": [295, 30],
+                                    "backgroundColor": [ "rgb(192, 192, 192)","rgb(153, 255, 153)"]
+                                }
+                            ]
+                    }
+                });
+        </script>
+</div>
+<div class="col-md-9 col-sm-12 col-xs-12" style="width:100%; margin-top:20px; padding: 0 10%; 0 10%">
+        <p style="text-align:center; margin-top:20px;">Graph show ticket sold per time</p>
+            <canvas id="soldtime" style="display:flex"></canvas>
+            <script>
+                new Chart(document.getElementById("soldtime"),{
+                    "type":"bar",
+                    "data":
+                        {
+                            "labels":[
+                                "12.00PM - 1.00AM",
+                                "1.00AM - 2.00AM",
+                                "2.00AM - 3.00AM",
+                                "3.00AM - 4.00AM",
+                                "4.00AM - 5.00AM",
+                                "5.00AM - 6.00AM",
+                                "6.00AM - 7.00AM",
+                                "7.00AM - 8.00AM",
+                                "8.00AM - 9.00AM",
+                                "9.00AM - 10.00AM",
+                                "10.00AM - 11.00AM",
+                                "11.00AM - 12.00AM",
+                                "12.00AM - 1.00PM",
+                                "1.00PM - 2.00PM",
+                                "2.00PM - 3.00PM",
+                                "3.00PM - 4.00PM",
+                                "4.00PM - 5.00PM",
+                                "5.00PM - 6.00PM",
+                                "6.00PM - 7.00PM",
+                                "7.00PM - 8.00PM",
+                                "8.00PM - 9.00PM",
+                                "9.00PM - 10.00PM",
+                                "10.00PM - 11.00PM",
+                                "11.00PM - 12.00PM",
+                                ],
+                            "datasets":
+                                [
+                                    {
+                                        "label":"Sold",
+                                        "data":[0,2,0,0,1,0,3,5,2,7,6,12,6,3,8,10,3,1,2,0,1,0,2,1],
+                                        "fill":false,
+                                        "backgroundColor":[
+                                            "rgba(0, 0, 0, 0.8)",
+                                            "rgba(0, 0, 10, 0.8)",
+                                            "rgba(0, 0, 20, 0.8)",
+                                            "rgba(0, 0, 30, 0.8)",
+                                            "rgba(0, 0, 40, 0.8)",
+                                            "rgba(0, 0, 50, 0.8)",
+                                            "rgba(0, 0, 60, 0.8)",
+                                            "rgba(0, 0, 90, 0.8)",
+                                            "rgba(0, 0, 120, 0.8)",
+                                            "rgba(0, 0, 150, 0.8)",
+                                            "rgba(0, 0, 180, 0.8)",
+                                            "rgba(0, 0, 210, 0.8)",
+                                            "rgba(0, 0, 255, 0.8)",
+                                            "rgba(0, 0, 210, 0.8)",
+                                            "rgba(0, 0, 180, 0.8)",
+                                            "rgba(0, 0, 150, 0.8)",
+                                            "rgba(0, 0, 120, 0.8)",
+                                            "rgba(0, 0, 90, 0.8)",
+                                            "rgba(0, 0, 60, 0.8)",
+                                            "rgba(0, 0, 50, 0.8)",
+                                            "rgba(0, 0, 40, 0.8)",
+                                            "rgba(0, 0, 30, 0.8)",
+                                            "rgba(0, 0, 20, 0.8)",
+                                            "rgba(0, 0, 10, 0.8)",
+                                            ],
+                                    }
+                                ]
+                        },
+                    "options":
+                        {"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}});
+            </script>
+    </div>
+{% include 'components/store/footer.html' %}

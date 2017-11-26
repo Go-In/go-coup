@@ -1,4 +1,5 @@
 {% include 'components/header.html' %}
+{% load qr_code %}
 <div class="full-container">
   <div class="container">
     {% include 'components/tabbar.html' %}
@@ -9,28 +10,66 @@
       <div class="row">
         <div class="coupon">
           <div class="coupon-img">
-            <img class="coupon-image" src="{{c.image_url}}" alt="">
+            <img src="{{c.image_url}}" alt="">
           </div>
           <div class="coupon-content">
             <p>Name: {{c.name}}</p>
             <p>Exp: {{c.exp}}</p>
             <p>Description: {{c.detail}}</p>
+            <!-- <p>coupon_url: {{ coupon_url.forloop_counter }}</p> -->
           </div>
-          <div id="qr_{{ forloop.counter }}"></div>
+          <!-- <button data-toggle="modal" data-target="#exampleModal"> -->
+          <a data-toggle="modal" data-target="#exampleModal" class="show-modal">
+            <div id="qr_{{ forloop.counter }}"></div>
+              <!-- {% qr_from_text c.forloop.coun size="M" %} -->
+          <!-- </button> -->
+          </a>
         </div>
       </div>
      {% endfor %}
     </div>
   </div>
-
 </div>
-{% for c in coupon %}
+{% for c in coupon_url %}
   <script>
     new QRCode(document.getElementById("qr_{{ forloop.counter }}"), {
-      text: "http://jindo.dev.naver.com/collie",
+      text: "{{ c }}",
       width: 128,
       height: 128,
     });
+    $('#qr_{{ forloop.counter }}').parent().attr('url', '{{ c }}')
   </script>
 {% endfor %}
+<script>
+    $('a.show-modal').click(function() {
+      $('.modal-body').text($(this).attr('url'));
+    });
+      
+</script>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% include 'components/footer.html' %}

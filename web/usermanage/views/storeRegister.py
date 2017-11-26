@@ -33,5 +33,8 @@ def storeRegister(request):
     g.save()
     storeprofile = models.Store(user = user, store_name=data['storename'], profile_image_url=data['profile_image_url'])
     storeprofile.save()
+    
+    login(request, user) 
+
     return redirect_after_login(user)
 
