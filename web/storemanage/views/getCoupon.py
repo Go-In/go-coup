@@ -12,17 +12,28 @@ def getCoupon(request, key):
     payload = {'key':  key}
     req = requests.post(url_get_pk, data=payload)
     found = False
-    if req.json()['Status'] == 'Ok':
+    active = False
+    print(req.json())
+    if req.json()['Status'] == 'OK':
         found = True
-        pk = req.json()['Pk']   
-
+        pk = req.json()['Pk']  
         coupon = Coupon.objects.get(id=pk)
-        coupon.active = False
-        coupon.save()
-        return render(request, 'store/get-coupon.html', {
-            'coupon': coupon,
-            'found': found,
-        })
+        if coupon.active:
+            active = True 
+
+            coupon.active = False
+            coupon.save()
+            return render(request, 'store/get-coupon.html', {
+                'coupon': coupon,
+                'found': found,
+                'active': active,
+            })
+        else:
+            return render(request, 'store/get-coupon.html', {
+                'coupon': coupon,
+                'found': found,
+                'active': active,
+            })
     else:
         return render(request, 'store/get-coupon.html', {
             'found': found,
