@@ -85,6 +85,11 @@
                   {% else %}
                     <li><a href="{% url 'store:dashboard' %}"><i class="fa fa-bar-chart"></i> Dashboard</a></li>
                   {% endif %}
+                  {% if '/store/create-qr/' in request.path %}
+                    <li style="background-color:rgb(255, 113, 139);"><a href="{% url 'store:create-qr' %}"><i class="fa fa-qrcode"></i> Create QR</a></li>
+                  {% else %}
+                    <li><a href="{% url 'store:create-qr' %}"><i class="fa fa-qrcode"></i> Create QR</a></li>
+                  {% endif %}
                   </ul>
                 </div>
   
