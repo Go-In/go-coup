@@ -154,5 +154,6 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': 'memcached:11211',
+        'TIMEOUT': 1,
     }
 }
