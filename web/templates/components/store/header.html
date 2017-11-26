@@ -15,8 +15,12 @@
   <link rel="stylesheet" href="{% static 'css/cart.css' %}">
   <link rel="stylesheet" href="{% static 'css/coupon.css' %}">
   <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <link rel="stylesheet" href="{% static 'css/store.css' %}">
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 
   <title>Store Management</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.js"></script>
@@ -26,38 +30,112 @@
   <link href="https://fonts.googleapis.com/css?family=Kanit:300,400,700" rel="stylesheet">
   <script src="{% static 'js/script.js' %}"></script>
   <script src="{% static 'js/flat-ui.min.js' %}"></script>
+  <script src="https://use.fontawesome.com/de2946df28.js"></script>
 </head>
 <body>
-<div class="header">
-      <div class="container">
-        <div class="navigation">
-          <div class="left">
-              <div class="nav-btn">
-                <a href="/">
-                  <img class="logo" src="{% static 'images/logo-white.png' %}" alt="logo">
-                </a>
+    <div class="container body">
+        <!-- <div class="main_container"> -->
+          <div class="col-sm-2 left_col" style="width:250px; height:100vh; bottom:0; position:fixed">
+            <div class="left_col scroll-view">
+              <div class="navbar" style="border: 0;">
+                <a href="/store" class="site_title"><i class="fa fa-shopping-cart"></i> <span>Store manage</span></a>
               </div>
+  
+              <div class="clearfix"></div>
+  
+              <!-- menu profile quick info -->
+              <div class="profile clearfix">
+                <div class="profile_info">
+                  <span>Welcome,</span>
+                  <h2>{{ user.username }}</h2>
+                </div>
+              </div>
+              <!-- /menu profile quick info -->
+  
+              <br />
+  
+              <!-- sidebar menu -->
+              <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                <div class="menu_section">
+                  <h3>General</h3>
+                  <ul class="nav side-menu">
+                  {% if request.path == '/store/' %}
+                    <li style="background-color:rgb(255, 113, 139);"><a href="/store"><i class="fa fa-home"></i> Home </a></li>
+                  {% else %}
+                    <li><a href="/store"><i class="fa fa-home"></i> Home </a></li>
+                  {% endif %}
+                    <li class="disabled"><a><i class="fa fa-edit"></i> Edit profile</a></li>
+                  {% if request.path == '/store/currency/add/' %}
+                    <li style="background-color:rgb(255, 113, 139);"><a href="{% url 'store:currency-register' %}"><i class="fa fa-money"></i> Add currecy</a></li>
+                  {% else %}
+                    <li><a href="{% url 'store:currency-register' %}"><i class="fa fa-money"></i> Add currecy</a></li>
+                  {% endif %}
+                  {% if request.path == '/store/add/' %}
+                    <li style="background-color:rgb(255, 113, 139);"><a href="{% url 'store:ticket-register' %}"><i class="fa fa-ticket"></i> Add ticket</a></li>
+                  {% else %}
+                    <li><a href="{% url 'store:ticket-register' %}"><i class="fa fa-ticket"></i> Add ticket</a></li>
+                  {% endif %}
+                  {% if '/edit/' in request.path %}
+                    <li class="disabled" style="background-color:rgb(255, 113, 139);"><a><i class="fa fa-pencil-square-o"></i> Edit ticket</a></li>
+                  {% else %}
+                    <li class="disabled"><a><i class="fa fa-pencil-square-o"></i> Edit ticket</a></li>
+                  {% endif %}
+                  {% if '/dashboard/' in request.path %}
+                    <li class="disabled" style="background-color:rgb(255, 113, 139);"><a><i class="fa fa-bar-chart"></i> Dashboard</a></li>
+                  {% else %}
+                    <li><a href="{% url 'store:dashboard' %}"><i class="fa fa-bar-chart"></i> Dashboard</a></li>
+                  {% endif %}
+                  {% if '/store/create-qr/' in request.path %}
+                    <li style="background-color:rgb(255, 113, 139);"><a href="{% url 'store:create-qr' %}"><i class="fa fa-qrcode"></i> Create QR</a></li>
+                  {% else %}
+                    <li><a href="{% url 'store:create-qr' %}"><i class="fa fa-qrcode"></i> Create QR</a></li>
+                  {% endif %}
+                  </ul>
+                </div>
+  
+              </div>
+              <!-- /sidebar menu -->
+            </div>
           </div>
-          <div class="right">
-            {% if user.is_authenticated %}
-              <div class="nav-btn">
-                <a href="{% url 'user:logout' %}">
-                  Logout
-                </a>
-              </div>
-            {% else %}
-            <a href="/user/login">
-              <div class="nav-btn">
-                  Login
-              </div>
-            </a>
-            <a href="/user/register">
-              <div class="nav-btn">
-                  Register
-              </div>
-            </a>
-            {% endif %}
+        <!-- </div> -->
+        <div class="main_container" style="margin-left:250px;">
+          <!-- top navigation -->
+          <div class="top_nav">
+            <div class="nav_menu" style="display:flex; justify-content: space-between;">
+              <nav></nav>
+              <nav>
+                <div class="nav-btn-logo">
+                  <a href="/store">
+                    <img class="logo" src="{% static 'images/logo-pink.png' %}" alt="logo">
+                  </a>
+                </div>
+              </nav>
+              <nav>
+                <div class="right">
+                  {% if user.is_authenticated %}
+                  <div class="nav-btn" style="background-color:#d4286a">
+                    <a href="{% url 'user:logout' %}">
+                      Logout
+                    </a>
+                  </div>
+                  {% else %}
+                    <a href="/user/login">
+                      <div class="nav-btn">
+                        Login
+                      </div>
+                    </a>
+                    <a href="/user/register">
+                      <div class="nav-btn">
+                        Register
+                      </div>
+                    </a>
+                  {% endif %}
+                </div>
+              </nav>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+          <!-- /top navigation -->
+      
+<script>
+  $()
+</script>
