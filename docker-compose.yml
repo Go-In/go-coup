@@ -55,6 +55,10 @@ services:
         volumes:
             - ./codegen:/go/src/codegen
         command: /bin/ash -c "go build; ./codegen"
+    mongo:
+        image: mongo:3.4
+        ports:
+            - "27017:27017"
     # notification:
     #     build: './notification_server'
     #     ports:

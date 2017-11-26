@@ -48,7 +48,6 @@ app.get('/subscribe/list/:storeId', (req, res) => {
   .catch(error => res.send(error))  
 })
 
-
 app.get('/notify/all/', (req, res) => {
   Subscribe.find({ })
   .then(subscribers => {
