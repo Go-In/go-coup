@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'usermanage.apps.UsermanageConfig',
     'storemanage.apps.StoremanageConfig',
     'customermanage.apps.CustomermanageConfig',
+    'social_django',
     'signaldetect.apps.SignaldetectConfig',
     'haystack',
     'qr_code',
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'querycount.middleware.QueryCountMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'go_coup.urls'
@@ -72,7 +74,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'go_coup.context_processors.groups'
+                'go_coup.context_processors.groups',
+                'social_django.context_processors.login_redirect',
+                'social_django.context_processors.backends',
+
             ],
         },
     },
@@ -149,6 +154,8 @@ STATICFILES_DIRS = [
 #auth
 
 LOGIN_URL = '/user/login'
+LOGIN_REDIRECT_URL = '/'
+
 
 # CACHEOPS_REDIS = {
 #     'host': 'localhost', # redis-server is on same machine
@@ -159,3 +166,17 @@ LOGIN_URL = '/user/login'
 # CACHEOPS = {
 #     '*.*': {'ops': 'get', 'timeout': 60},
 # }
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+from .facebook_key import a, b
+
+SOCIAL_AUTH_FACEBOOK_KEY = a
+SOCIAL_AUTH_FACEBOOK_SECRET = b
+
