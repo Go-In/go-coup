@@ -4,7 +4,7 @@
 {% if user.is_authenticated %}
     {% if is_store %}
         {% if found %} 
-            {% if coupon.active %}
+            {% if active %}
                 <script>
                     swal({
                     title: 'Success',
