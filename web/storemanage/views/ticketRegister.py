@@ -1,10 +1,10 @@
+import requests
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from storemanage.models import Currency, Ticket
 from usermanage.models import Store
 from django.utils.dateparse import parse_date
-
 from .validateForm import validateTicketForm
 
 @login_required()
@@ -34,10 +34,10 @@ def ticketRegister(request):
     ticket_attrib['store'] = user
     ticket = Ticket(**ticket_attrib)
     ticket.save()
-    post_data = {
-      'title':  'New Coupon from' + store.store_name,
-      'message': 'name: ' + request.POST['name'] + '\ndetail: ' + request.POST['detail'],
-      'image': request.POST['content_image_url'],
-    }
-    requests.post('localhost:8080/notify/store/' + user.id, data=post_data)
+    # post_data = {
+    #   'title':  'New Coupon from' + store.store_name,
+    #   'message': 'name: ' + request.POST['name'] + '\ndetail: ' + request.POST['detail'],
+    #   'image': request.POST['content_image_url'],
+    # }
+    # requests.get('http://localhost:8080/notify/all/')
     return redirect('store:index')

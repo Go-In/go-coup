@@ -70,7 +70,7 @@ app.get('/notify/all/', (req, res) => {
   })
 })
 
-app.get('/notify/store/:storeId', (req, res) => {
+app.post('/notify/store/:storeId', (req, res) => {
   Subscribe.find({ storeId: req.params.storeId })
   .then(subscribers => {
     subscribers.forEach(sub => {
@@ -83,8 +83,9 @@ app.get('/notify/store/:storeId', (req, res) => {
         }
       }
       const payload = JSON.stringify({
-        title: 'Hello World',
-        message: 'Event from GoCoup !'
+        title: req.body.title,
+        message: req.body.message,
+        logo: req.body.image,
       })
       webpush.sendNotification(pushSub, payload, {})
     })
