@@ -5,16 +5,18 @@
     <div class="content row">
       <div class="col-md-6 col-xs-12">
         <div class="detail-discription">
-          <div class="detail-head">
-            <img class="detail-head-image" src="{{ ticket.ticket_image_url }}" alt="head">
+          <div class="detail-head" style="display:flex;">
+            <a class="coup-link" href="{% url 'index:store' store.pk %}">
+              <img class="profile-image" src="{{ store.profile_image_url}}" alt="head">
+            </a>
             <div class="detail-head-title">
               <a class="detail-head" href="{% url 'index:store' store.id %}">
-                <h1>{{ ticket.store }}</h1>
+                <h1 style="margin-left:10px;">{{ ticket.store }}</h1>
               </a>
-              <p>exp: {{ ticket.expire_date }}</p>
+              <p style="margin-left:10px;">exp: {{ ticket.expire_date }}</p>
             </div>
-            <hr>
           </div>
+          <hr>
           <img
             class="detail-content-image"
             src="{{ ticket.content_image_url }}"
@@ -26,9 +28,7 @@
       <div class="col-md-6 col-xs-12">
         <div class="detail">
           <div class="detail-discription">
-            <a class="coup-link" href="{% url 'index:store' store.pk %}">
-              <img class="detail-head-image" src="{{ store.profile_image_url}}" alt="head">
-            </a>
+            <img class="detail-head-image" src="{{ ticket.ticket_image_url }}" alt="head">
             <table class="detail-table">
               <tr class="detail-tr">
                 <td class="align-left">Name:</td>
