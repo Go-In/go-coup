@@ -5,11 +5,12 @@
 <div class="container" style="margin-bottom:50px; padding:20% 20% 0 20%;">
         <form method="POST" action="."  style="border:2px solid pink;">
             {% csrf_token %}
-            <div class="col-md-12 col-xs-12">
+            <div class="col-md-8 col-xs-8">
                 <label>Point:</label>
                 <input type="text" class="form-control" name="point" value="" required />
             </div>
-            <div class="col-md-12 col-xs-12" style="margin-top:10px;">
+            <br>
+            <div class="col-md-4 col-xs-4" style="margin-top:10px;">
                 <label>Currency:</label>
                 <select name="currency">
                 {% for c in currency_list %}
@@ -18,7 +19,7 @@
                 </select>
             </div>
             <center>
-                <input style="margin:20px; width:50%;" class="btn btn-gocoup" type="submit" value="submit" />
+                <input style="margin:20px; width:30%;" class="btn btn-gocoup" type="submit" value="submit" />
             </center>
             {% if qr %}
                 <script>
