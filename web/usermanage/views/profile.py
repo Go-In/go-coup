@@ -12,8 +12,7 @@ from usermanage import models
 @login_required()
 def profile(request):
     user = request.user
-
-    data = {'username':user.username,'email':user.email}
+    data = {'username':user.username,'email':user.email, 'firstname':user.first_name, 'lastname':user.last_name}
     if user.groups.filter(name='store').exists():
         store = models.Store.objects.get(user=user)
         data['store_name']=store.store_name

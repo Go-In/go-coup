@@ -33,7 +33,6 @@ def customerRegister(request):
     g.save()
     customerprofile = models.Customer(user = user, first_name = data['first_name'], last_name = data['last_name'])
     customerprofile.save()
-    
     login(request, user)
 
     return redirect_after_login(user)

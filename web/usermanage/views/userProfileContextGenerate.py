@@ -11,7 +11,7 @@ from usermanage import models
 
 
 def userProfileContextGenerate(user):
-    data = {'username':user.username,'email':user.email}
+    data = {'username':user.username,'email':user.email,'first_name':user.first_name}
     if user.groups.filter(name='store').exists():
         store = models.Store.objects.get(user=user)
         data['store_name']=store.store_name
