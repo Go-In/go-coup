@@ -1,0 +1,58 @@
+{% load staticfiles %}
+{% load qr_code %}
+{% include 'components/header.html' %}
+
+<div class="container" style="margin-bottom:50px;">
+    <h1>CREATE QR CODE</h1>
+        <form method="POST" action="."  style="border:2px solid pink;">
+            {% csrf_token %}
+            <div class="col-md-12 col-xs-12">
+                <label>Point:</label>
+                <input type="text" class="form-control" name="point" value="" required />
+            </div>
+            <div class="col-md-12 col-xs-12" style="margin-top:10px;">
+                <label>Currency:</label>
+                <select name="currency">
+                {% for c in currency_list %}
+                    <option value="{{c.pk}}">{{c.name}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <center>
+                <input style="margin:20px; width:50%;" class="btn btn-gocoup" type="submit" value="submit" />
+            </center>
+            {% if qr %}
+                <script>
+                    swal({
+                    title: 'Redeem code',
+                    type: 'info',
+                    html: '<h3>Get {{point}} {{currency}} from QR code</h3>' +
+                          '<div>{% qr_from_text url_redeem size="M" %}</div>' +
+                          '<h3>or get from this link<h3>' +
+                          '<h3>{{url_redeem}}<h3>'
+                    })
+                </script>
+            {% endif %}
+            {% if error.digit %}
+            <script>
+                msg = "Point must be number"
+            </script>
+            {% endif %}
+            {% if error.currency %}
+            <script>
+                msg = "Don't have any currency"
+            </script>
+            {% endif %}
+            {% if error %}
+            <script>
+              swal({
+                title: msg,
+                text: "",
+                type: 'error',
+              })
+            </script>
+            {% endif %}
+        </form>
+</div>
+
+{% include 'components/store/footer.html' %}
