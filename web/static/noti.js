@@ -1,4 +1,5 @@
 var publicKey = 'BAjY5Vq4p2wwLa-tdde3ip7uBxP02MN_4GTvQv4FDQTCs3b_tWl-eZoqtLhhtp_gPmvnk-CtS4zL4kRyeSb6f6I'
+var host = 'localhost'
 
 function askPermission() {
   return new Promise(function(resolve, reject) {
@@ -47,7 +48,7 @@ function subscribeStore() {
 function sendUnSubscriptionToServer() {
   $.ajax({
     type: 'POST',
-    url: 'http://localhost:8080/unsubscribe',
+    url: 'http://' + host + ':8080/unsubscribe',
     data: {
       userId: $('#userId').attr('value'),
       storeId: $('#storeId').attr('value'),
@@ -68,7 +69,7 @@ function sendUnSubscriptionToServer() {
 function sendSubscriptionToServer(data) {
   $.ajax({
     type: 'POST',
-    url: 'http://localhost:8080/subscribe',
+    url: 'http://' + host + ':8080/subscribe',
     data,
     success: function (response) {
       console.log('Subscribed successfully! ' + JSON.stringify(response));
@@ -88,7 +89,7 @@ function checkSubscribe() {
   let storeId = $('#storeId').attr('value')
   $.ajax({
     type: 'GET',
-    url: 'http://localhost:8080/subscribe/check/' + userId + '/' + storeId,
+    url: 'http://' + host + ':8080/subscribe/check/' + userId + '/' + storeId,
     success: function (isSub) {
       if (isSub) {
         renderUnSubscribeButton()

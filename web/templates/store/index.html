@@ -20,7 +20,7 @@
   <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
     <div class="tile-stats">
       <div class="icon"><i class="fa fa-heart"></i></div>
-      <div id="sub-num" class="count">-</div>
+      <div id="sub-num" class="count">{{ subscribes_len }}</div>
       <h3>Subscribes</h3>
       <p>Total subscribes of this store.</p>
     </div>
@@ -66,18 +66,12 @@
 <script>
   var userId = $('#userId').attr('value')
   var storeName = $('#storeName').attr('value')
-  $.ajax({
-    type: 'GET',
-    url: 'http://localhost:8080/subscribe/list/' + userId,
-    success: function(res) {
-      $('#sub-num').html(res.length)
-    }
-  })
-  
+  var host = 'localhost'
+ 
   function promote(name, detail, content_image_url) {
     $.ajax({
       type: 'POST',
-      url: 'http://localhost:8080/notify/store/' + userId,
+      url: 'http://' + host + ':8080/notify/store/' + userId,
       data: {
         'title':  'New Coupon from  ' + storeName,
         'message': 'name: ' + name + '  \n detail: ' + detail,
