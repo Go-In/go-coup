@@ -20,7 +20,7 @@
   <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
     <div class="tile-stats">
       <div class="icon"><i class="fa fa-heart"></i></div>
-      <div class="count">179</div>
+      <div id="sub-num" class="count">-</div>
       <h3>Subscribes</h3>
       <p>Total subscribes of this store.</p>
     </div>
@@ -59,9 +59,18 @@
       {% endfor %}
     </tbody>
   </table>
+  <div id="userId" value="{{ user.id }}"></div>
 </div>
 
 <script>
+  $.ajax({
+    type: 'GET',
+    url: 'http://localhost:8080/subscribe/list/' + $('#userId').attr('value'),
+    success: function(res) {
+      $('#sub-num').html(res.length)
+    }
+  })
+  
   function deleteTicket(ticketUrl) {
     swal({
       title: 'Are you sure?',
