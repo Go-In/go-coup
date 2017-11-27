@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^search-demo/$', views.searchDemo, name='search-demo'),
     url(r'^get-point/(?P<store>.+)/(?P<key>.+)/$', views.getPoint, name='get-point'),
     url(r'^sw.js', views.sw, name='service-worker'),
+    url(r'^brand/(?P<store_id>[0-9]+)/$', views.store, name='store'),
+    url(r'^store-list/$', views.store_list, name='store_list'),
 ]

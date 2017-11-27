@@ -7,7 +7,7 @@ from django.http import JsonResponse
 
 import requests
 
-def getCoupon(request, key):
+def getCoupon(request, customer, key):
     url_get_pk = 'http://coupon-qr-gen:8082/load'
     payload = {'key':  key}
     req = requests.post(url_get_pk, data=payload)

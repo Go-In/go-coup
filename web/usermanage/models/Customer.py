@@ -13,6 +13,8 @@ class Customer(models.Model):
     attribute = JSONField(default = dict())
     profile_image_url = models.CharField(max_length=1023, null=True)
     available = models.BooleanField(default=True)
+    # endpoint = models.CharField(max_length=1000, null=True)
+    # keys = model.CharField(max_length=1000)
 
     def __str__(self):
         return self.first_name

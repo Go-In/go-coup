@@ -224,3 +224,7 @@ html, body {
 .min-height {
   min-height: 500px;
 }
+.link-btn:hover {
+  text-decoration: none;
+  color: white;
+}

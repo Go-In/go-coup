@@ -6,8 +6,10 @@ from django.contrib.auth.decorators import login_required, user_passes_test, per
 from django.contrib.auth.forms import UserCreationForm
 from customermanage.models import Coupon, Wallet
 from storemanage.models import Ticket
+from django.core.urlresolvers import reverse
 # Create your views here.
 from usermanage import models
+from go_coup.host import host_url
 
 import requests
 
@@ -23,8 +25,9 @@ def customerCoupon(request):
         payload = {'pk': c.id}
         req = requests.post(url_gencode, data=payload)
         key = req.json()['Key']
-        url_use_coupon = "http://localhost:8000/store/get-coupon/" + key + "/"
-        print(url_use_coupon)
+
+        path_coupon = str(reverse('store:get-coupon', args=(user, key)))
+        url_use_coupon = host_url + path_coupon
         coupon_url.append(url_use_coupon)
     print(coupon_url)
 

@@ -58,6 +58,18 @@ services:
         volumes:
             - ./codegen:/go/src/codegen
         command: /bin/ash -c "go build; ./codegen"
+    mongo:
+        image: mongo:3.4
+        ports:
+            - "27017:27017"
+    notification:
+        build: './notification_server'
+        ports:
+            - '8080:8080'
+        volumes:
+            - ./notification_server:/application
+        command: node server.js
+        entrypoint: /application/entrypoint.sh
     coupon-qr-gen:
         build: ./coupon-qr-gen
         depends_on:

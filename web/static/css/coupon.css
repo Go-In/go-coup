@@ -23,3 +23,6 @@
 .coupon-image {
   width: 124px;
 }
+#qrcode-modal > img{
+  margin: 0 auto 20px auto !important;
+}

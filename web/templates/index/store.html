@@ -1,0 +1,45 @@
+{% load staticfiles %}
+{% include 'components/header.html' %}
+<div class="container">
+    <div class="profile-title detail-content" style="margin-top:10px;">
+        <img class="profile-image" src="{{ store.profile_image_url }}" alt="profile">
+    </div>
+    <div class="profile-title detail-content" style="margin-top:15px;">
+        <p style="font-size:160%;">Store's Name: {{store.store_name}}</p>
+    </div>
+    <div class="content row">
+        {% for ticket in tickets %}
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <a class="coup-link" href="{% url 'index:detail' ticket.id %}">
+                    <div class="coupon-sell">
+                        <img
+                            class="coup-img"
+                            src="{{ ticket.ticket_image_url }}"
+                            onError="this.onerror=null;this.src='https://kfcbd.com/wp-content/uploads/2016/11/kfc-logo.png'"
+                        >
+                        <div class="coup-text-wrapper">
+                            <div class="coup-mini-logo">
+                                    <img
+                                        class="profile-mini-logo"
+                                        src="{{ store.profile_image_url }}"                                            onError="this.onerror=null;this.src='https://kfcbd.com/wp-content/uploads/2016/11/kfc-logo.png'"
+                                        >
+                            </div>
+                            <div class="coup-left">
+                                <p class="coup-text">name: {{ ticket.name }}</p>
+                                <p class="coup-text">exp: {{ ticket.expire_date }}</p>
+                            </div>
+                            <div class="coup-right">
+                                <p class="coup-text">{{ ticket.price }} {{ ticket.currency }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% if forloop.counter|divisibleby:"3" %}
+                </div><div class="row">
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+{% include 'components/footer.html' %}
