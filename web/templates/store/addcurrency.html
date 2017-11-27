@@ -1,0 +1,10 @@
+{% load staticfiles %}
+{% include 'components/store/header.html' %}
+
+<form method="POST" action="" style="display:flex; justify-content:center; margin-top:20%;">
+    {% csrf_token %}
+        <input type="text" name="name" value="US Dollar" style="height: 40px;"/>
+        <input style="height:40px; margin-left:10px;" class="btn btn-gocoup" type="submit" value="submit" />
+</form>        
+
+{% include 'components/store/footer.html' %}

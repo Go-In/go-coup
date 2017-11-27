@@ -9,7 +9,7 @@ from django.utils.dateparse import parse_date
 def currencyRegister(request):
     user = request.user
     if request.method == 'GET':
-        return render(request,'storemanage/currency-form.html')
+        return render(request,'store/addcurrency.html')
     data = request.POST
     currency = Currency(store=user,name=data['name'])
     currency.save()

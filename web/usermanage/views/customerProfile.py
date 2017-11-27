@@ -14,5 +14,8 @@ from .userProfileContextGenerate import userProfileContextGenerate
 @permission_required('usermanage.customer_rights',raise_exception=True)
 def customerProfile(request):
     user = request.user
-    data = {'data':userProfileContextGenerate(user)}
+    print(request.user.first_name)
+    # data = {'data':userProfileContextGenerate(user)}
+    data = {'data': {'first_name': user.first_name, 'last_name': user.last_name}}
+    print(data)
     return render(request,'index/profile.html',data)

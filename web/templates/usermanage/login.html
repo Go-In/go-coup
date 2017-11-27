@@ -31,6 +31,10 @@
                                 })
                             </script>
               {% endif %}
+
+                <p><strong>-- OR --</strong></p>
+                <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+
             </center>
             <br>
           </div>
@@ -40,3 +44,4 @@
 
   </div>
 {% include 'components/footer.html' %}
+
