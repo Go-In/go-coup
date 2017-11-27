@@ -224,16 +224,7 @@ html, body {
 .min-height {
   min-height: 500px;
 }
-.helper {
-  #position: absolute;
-  #top: 50%;
-  display: table-cell;
-  vertical-align: middle;
-}
-.content {
-  #position: relative;
-  #top: -50%;
-  margin: 0 auto;
-  width: 200px;
-  border: 1px solid orange;
+.link-btn:hover {
+  text-decoration: none;
+  color: white;
 }
