@@ -11,3 +11,4 @@ codegen/codegen
 coupon-qr-gen/coupon-qr-gen
 
 web/go_coup/facebook_key.py
+web/go_coup/host.py

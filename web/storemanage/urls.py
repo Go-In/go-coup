@@ -26,5 +26,5 @@ urlpatterns = [
     url(r'^(?P<ticket_id>[0-9]+)/delete/$', views.ticketDelete, name='ticket-delete'),
     url(r'^(?P<ticket_id>[0-9]+)/dashboard/$', views.ticketDashboard, name='ticket-dashboard'),
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
-    url(r'^get-coupon/(?P<key>.+)/$', views.getCoupon, name='get-coupon'),
+    url(r'^get-coupon/(?P<customer>.+)/(?P<key>.+)/$', views.getCoupon, name='get-coupon'),
 ]

@@ -3,8 +3,10 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from storemanage.models import Currency
 from django.utils.dateparse import parse_date
+from django.core.urlresolvers import reverse
 
 from .validateForm import validateQR
+from go_coup.host import host_url
 
 import requests
 
@@ -45,7 +47,9 @@ def createQr(request):
     url_gencode = 'http://codegen:8081/save'
     req = requests.post(url_gencode, data=payload)
     key = req.json()['Key']
-    url_redeem = "http://localhost:8000/get-point/" + str(user) + "/" + key + "/"
+    
+    path_redeem = str(reverse('index:get-point', args=(user, key)))
+    url_redeem = host_url + path_redeem
 
     # show qr code alert
     qr = True
