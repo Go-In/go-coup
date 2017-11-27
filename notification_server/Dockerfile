@@ -3,4 +3,4 @@ RUN mkdir /application
 WORKDIR /application
 ADD . /application
 RUN chmod +x /application/entrypoint.sh
-RUN npm i -g
+RUN npm i

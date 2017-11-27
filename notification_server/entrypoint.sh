@@ -1,3 +1,3 @@
 #!/bin/sh
-npm i -g
+npm i
 node server.js
