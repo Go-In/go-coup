@@ -1,29 +1,40 @@
 {% load staticfiles %}
 {% include 'components/store/header.html' %}
-<div class="container">
-  <div class="store-header" style="display:flex; justify-content: space-between;">
-    <h1>STORE MANAGE</h1>
-    <h1>You are : {{ user.username }}</h1>
+<div class="row top_tiles" style="display: flex; justify-content: space-between; margin-top: 20px;">
+  <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="tile-stats">
+      <div class="icon"><i class="fa fa-shopping-cart"></i></div>
+      <div class="count">325</div>
+      <h3>Sold</h3>
+      <p>Total sold of all tickets.</p>
+    </div>
   </div>
-  <div style="text-align: right;">
-  <a href="{% url 'store:ticket-register' %}">
-    <button class="btn btn-gocoup" style="margin-bottom:20px;">
-      add new ticket
-    </button>
-  </a>
-  <a href="{% url 'store:currency-register' %}">
-    <button class="btn btn-gocoup" style="margin-bottom:20px;">
-      add new currency
-    </button>
-  </a>
+  <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="tile-stats">
+      <div class="icon"><i class="fa fa-eye"></i></div>
+      <div class="count">500</div>
+      <h3>Views</h3>
+      <p>Total view of all tickets.</p>
+    </div>
   </div>
-  <table class="table table-bordered">
+  <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="tile-stats">
+      <div class="icon"><i class="fa fa-heart"></i></div>
+      <div class="count">179</div>
+      <h3>Subscribes</h3>
+      <p>Total subscribes of this store.</p>
+    </div>
+  </div>
+</div>
+<div style="display:flex; justify-content: space-around; padding: 20px;">
+<table class="table">
     <thead>
       <tr>
         <th>Name</th>
         <th>Price</th>
         <th>Detail</th>
         <th>Date</th>
+        <th>Dashboard</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>
@@ -35,15 +46,17 @@
           <td>{{ ticket.price }} {{ ticket.currency }}</td>
           <td>{{ ticket.detail }}</td>
           <td>{{ ticket.expire_date }}</td>
-          <td><a href="{% url 'store:ticket-edit' ticket.id %}">edit</a></td>
+          <td><a href="{% url 'store:ticket-dashboard' ticket.id %}"><i class="fa fa-line-chart"></i></a></td>
+          <td><a href="{% url 'store:ticket-edit' ticket.id %}"><i class="fa fa-pencil"></i></a></td>
           <td>
-            <a onclick="deleteTicket('{% url 'store:ticket-delete' ticket.id %}')">delete</a>
+            <a onclick="deleteTicket('{% url 'store:ticket-delete' ticket.id %}')"><i class="fa fa-trash"></i></a>
           </td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
 </div>
+
 <script>
   function deleteTicket(ticketUrl) {
     swal({

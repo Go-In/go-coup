@@ -1,0 +1,58 @@
+{% include 'components/header.html' %}
+
+<div class="container" style="margin-bottom:50px;"></div>
+{% if user.is_authenticated %}
+    {% if is_store %}
+        {% if found %} 
+            {% if active %}
+                <script>
+                    swal({
+                    title: 'Success',
+                    type: 'success',
+                    html:'<h3>Get coupon from QR code</h3>' + 
+                        '<img src={{ coupon.ticket.ticket_image_url }}>' +
+                        '<h3>{{ coupon.ticket.name }}</h3>'
+                    })
+                </script>
+            {% else %}
+                <script>
+                    swal({
+                    title: 'Error',
+                    type: 'error',
+                    html:'<h3>Coupon already used</h3>' + 
+                        '<img src={{ coupon.ticket.ticket_image_url }}>' +
+                        '<h3>{{ coupon.ticket.name }}</h3>'
+                    })
+                </script>
+            {% endif %}
+        {% else %}
+            <script>
+                swal({
+                title: 'Error',
+                type: 'error',
+                html:'<h3>Not found coupon</h3>' 
+                })
+            </script>
+        {% endif %}
+    {% else %}
+        <script>
+            swal({
+            title: 'Error',
+            type: 'error',
+            html: '<h3>For store only</h3>'
+            })
+        </script>
+    {% endif %}
+{% else %}
+    <script>
+        swal({
+        title: 'Error',
+        type: 'error',
+        html: '<h3>Please login for get coupon data</h3>'
+        })
+    </script>
+{% endif %}
+</div>
+
+{% include 'components/store/footer.html' %}
+    

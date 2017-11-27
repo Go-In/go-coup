@@ -15,6 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
+
+# LOGIN_URL = 'login'
+# LOGOUT_URL = 'logout'
+# LOGIN_REDIRECT_URL = 'home'
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,5 +29,6 @@ urlpatterns = [
     url(r'^customer/',include('customermanage.urls', namespace='customer')),
     url(r'^shopping/',include('market.urls', namespace='market')),
     url(r'^search/', include('haystack.urls')),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
 
 ]
