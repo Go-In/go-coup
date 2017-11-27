@@ -135,7 +135,6 @@ function renderSubscribeButton() {
 
 function renderUnSubscribeButton() {
   $('#subscribe-btn')
-  .s
   .html('<i class="fa fa-thumbs-down" aria-hidden="true"></i>' + '  unsubscribe this store')
   .attr('onclick', 'sendUnSubscriptionToServer()')
 }

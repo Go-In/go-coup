@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.staticfiles.views import serve
 from storemanage.models import Ticket, Currency
 from customermanage.models import Wallet, Qrcode
+from usermanage.models import Store
 from django.http import JsonResponse
 
 import requests
@@ -21,6 +22,7 @@ def index(request):
         'success': success,
         'fail': fail
     })
+    
 def sw(request):
     return serve(request, '../static/sw.js')
 
@@ -32,10 +34,12 @@ def detail(request, ticket_id):
     if fail:
         request.session['fail'] = False
     ticket = Ticket.objects.get(pk=ticket_id)
+    store = Store.objects.get(user=ticket.store)
     if ticket.available == False:
         return redirect('index:index')
     return render(request, 'index/detail.html', {
         'ticket' : ticket,
+        'store' : store,
         'success': success,
         'fail': fail
     })
@@ -69,6 +73,23 @@ def searchDemo(request):
         print(i.detail)
     return render(request, 'index/search-demo.html', {
         'tickets' : tickets
+    })
+
+def store(request, store_id):
+    user = request.user
+    print('store id:', store_id)
+    store = Store.objects.get(pk=store_id)
+    tickets = Ticket.objects.filter(store=store.user)
+    return render(request, 'index/store.html', {
+        'tickets': tickets,
+        'store': store,
+    })
+
+def store_list(request):
+    user = request.user
+    stores = Store.objects.filter(available=True)
+    return render(request, 'index/store-list.html', {
+        'stores' : stores,
     })
 
 def getPoint(request, store, key):

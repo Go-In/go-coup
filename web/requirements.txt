@@ -9,3 +9,4 @@ qrcode~=5.3.0
 pillow~=4.2.1
 django-qr-code
 requests
+python-memcached
