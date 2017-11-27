@@ -5,6 +5,8 @@ from storemanage.models import Currency, Ticket
 from django.utils.dateparse import parse_date
 from django.core.validators import URLValidator
 
+import re
+
 def validateTicketForm(data):
     error = {}
 
@@ -21,5 +23,13 @@ def validateTicketForm(data):
     #     error['ticket_url'] = True
     # if not URLValidator(data['content_image_url']):
     #     error['content_url'] = True
+
+    return error
+
+def validateQR(data):
+    error = {}
+    
+    if not re.match(r'\d', data['point']):
+        error['digit'] = True
 
     return error

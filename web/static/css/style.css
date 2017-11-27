@@ -73,9 +73,18 @@ html, body {
   text-decoration: none;
   color: white;
 }
+.nav-btn-logo {
+  display: flex;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  height: 100%;
+  align-items: center;
+}
 .footer {
-  background: #f1457c;
-  margin-top: 50px;
+  background: #d4286a;
+  margin-top: 10px;
   color: white;
 }
 .footer-link:link,.footer-link:visited  {

@@ -65,6 +65,6 @@ func handleRequests() {
 	http.HandleFunc("/", homePage)
 	http.HandleFunc("/save", save)
 	http.HandleFunc("/load", load)
-	fmt.Println("Listen and serve on PORT 8081")
+	fmt.Println("codegen is listening and serving on PORT 8081")
 	log.Fatal(http.ListenAndServe(":8081", nil))
 }
