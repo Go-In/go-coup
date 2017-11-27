@@ -129,16 +129,13 @@ function urlBase64ToUint8Array(base64String) {
 
 function renderSubscribeButton() {
   $('#subscribe-btn')
-  .addClass('btn-primary')
-  .removeClass('btn-danger')
-  .html('subscribe this store')
+  .html('<i class="fa fa-thumbs-up" aria-hidden="true"></i>' + '  subscribe this store')
   .attr('onclick', 'subscribeStore()')
 }
+
 function renderUnSubscribeButton() {
   $('#subscribe-btn')
-  .addClass('btn-danger')
-  .removeClass('btn-primary')
-  .html('unsubscribe this store')
+  .html('<i class="fa fa-thumbs-down" aria-hidden="true"></i>' + '  unsubscribe this store')
   .attr('onclick', 'sendUnSubscriptionToServer()')
 }
 if (window.location.href.split('/')[3] === 'detail') {

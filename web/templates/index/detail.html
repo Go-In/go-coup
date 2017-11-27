@@ -14,6 +14,9 @@
                 <h1 style="margin-left:10px;">{{ ticket.store }}</h1>
               </a>
               <p style="margin-left:10px;">exp: {{ ticket.expire_date }}</p>
+              {% if not is_store and user.is_authenticated %}
+                <div><button id="subscribe-btn" class="btn"></i></button></div>  
+              {% endif %}
             </div>
           </div>
           <hr>
@@ -53,16 +56,7 @@
           </div>
           <div class="detail-discription">
             <p>{{ ticket.detail }}</p>
-          </div>
-          {% if user.is_authenticated %}
-          <div>
-            <button
-              id="subscribe-btn"
-              class="btn"
-            >
-            </button>
-          </div>    
-          {% endif %}        
+          </div> 
           {% if not is_store and user.is_authenticated %}
             <form class="buy-btn-form" method="POST" action="{% url 'market:purchase' %}">
                 {% csrf_token %}
