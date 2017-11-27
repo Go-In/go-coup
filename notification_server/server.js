@@ -85,7 +85,7 @@ app.post('/notify/store/:storeId', (req, res) => {
       const payload = JSON.stringify({
         title: req.body.title,
         message: req.body.message,
-        logo: req.body.image,
+        image: req.body.image,
       })
       webpush.sendNotification(pushSub, payload, {})
     })

@@ -26,19 +26,18 @@ def ticketRegister(request):
     # print(data.items())
     # get STORE from user
     store = Store.objects.get(user=user)
-    # ticket_attrib = {k:v for k,v in data.items() if v != ''}
-    # ticket_attrib.pop('csrfmiddlewaretoken')
-    # ticket_attrib['is_period'] = True if 'is_period' in ticket_attrib else False
-    # ticket_attrib['is_limit'] = True if 'is_limit' in ticket_attrib else False
-    # ticket_attrib['currency'] = Currency.objects.get(pk=ticket_attrib['currency'])
-    # ticket_attrib['store'] = user
-    # ticket = Ticket(**ticket_attrib)
-    # ticket.save()
+    ticket_attrib = {k:v for k,v in data.items() if v != ''}
+    ticket_attrib.pop('csrfmiddlewaretoken')
+    ticket_attrib['is_period'] = True if 'is_period' in ticket_attrib else False
+    ticket_attrib['is_limit'] = True if 'is_limit' in ticket_attrib else False
+    ticket_attrib['currency'] = Currency.objects.get(pk=ticket_attrib['currency'])
+    ticket_attrib['store'] = user
+    ticket = Ticket(**ticket_attrib)
+    ticket.save()
     post_data = {
-      'title':  'New Coupon from' + store.store_name,
+      'title':  'New Coupon from ' + store.store_name,
       'message': 'name: ' + request.POST['name'] + '\ndetail: ' + request.POST['detail'],
       'image': request.POST['content_image_url'],
     }
-    requests.get('http://notification/notify/all/')
-    # requests.post('http://notification/notify/store/' + str(user.id), data=post_data)
+    requests.post('http://notification:8080/notify/store/' + str(user.id), data=post_data)
     return redirect('store:index')

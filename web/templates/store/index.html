@@ -49,7 +49,7 @@
           <td>{{ ticket.expire_date }}</td>
           <td><a href="{% url 'store:ticket-dashboard' ticket.id %}"><i class="fa fa-line-chart"></i></a></td>
           <td> 
-            <a onclick="promote()"><i class="fa fa-bullhorn" aria-hidden="true"></i></a>
+            <a onclick="promote('{{ ticket.name }}', '{{ ticket.detail }}', '{{ ticket.content_image_url }}')"><i class="fa fa-bullhorn" aria-hidden="true"></i></a>
           </td>
           <td><a href="{% url 'store:ticket-edit' ticket.id %}"><i class="fa fa-pencil"></i></a></td>
           <td>
@@ -60,17 +60,36 @@
     </tbody>
   </table>
   <div id="userId" value="{{ user.id }}"></div>
+  <div id="storeName" value="{{ user.store }}"></div>
 </div>
 
 <script>
+  var userId = $('#userId').attr('value')
+  var storeName = $('#storeName').attr('value')
   $.ajax({
     type: 'GET',
-    url: 'http://localhost:8080/subscribe/list/' + $('#userId').attr('value'),
+    url: 'http://localhost:8080/subscribe/list/' + userId,
     success: function(res) {
       $('#sub-num').html(res.length)
     }
   })
   
+  function promote(name, detail, content_image_url) {
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost:8080/notify/store/' + userId,
+      data: {
+        'title':  'New Coupon from  ' + storeName,
+        'message': 'name: ' + name + '  \n detail: ' + detail,
+        'image': content_image_url,
+      },
+      success: function() {
+
+      },
+      dataType: 'json'
+    })
+  }
+
   function deleteTicket(ticketUrl) {
     swal({
       title: 'Are you sure?',
