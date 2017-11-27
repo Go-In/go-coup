@@ -16,11 +16,11 @@ def customerRegister(request):
         return redirect('index:index')
     if request.method == 'GET':
         return render(request,'usermanage/register-customer.html')
-    
+
     data = request.POST
 
     error = validateCustomerForm(data)
-    
+
     if error:
         return render(request,'usermanage/register-customer.html', {
             'error' : error
@@ -33,6 +33,7 @@ def customerRegister(request):
     g.save()
     customerprofile = models.Customer(user = user, first_name = data['first_name'], last_name = data['last_name'])
     customerprofile.save()
+    user = authenticate(request,username = data['username'], password=data['password'])
     login(request, user)
 
     return redirect_after_login(user)
