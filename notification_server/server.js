@@ -27,7 +27,7 @@ const vapidKeys = {
 }
 
 webpush.setVapidDetails(
-  'localhost:8000',
+  'web:8000',
   vapidKeys.publicKey,
   vapidKeys.privateKey
 )
@@ -45,7 +45,7 @@ app.get('/subscribe/list', (req, res) => {
 app.get('/subscribe/list/:storeId', (req, res) => {
   Subscribe.find({ storeId: req.params.storeId })
   .then(subscribers => res.send(subscribers))
-  .catch(error => res.send(error))  
+  .catch(error => res.send(error))
 })
 
 app.get('/notify/all/', (req, res) => {
@@ -94,7 +94,7 @@ app.post('/notify/store/:storeId', (req, res) => {
 })
 
 app.get('/subscribe/check/:userId/:storeId', (req, res) => {
-  const { storeId, userId } = req.params  
+  const { storeId, userId } = req.params
   Subscribe.findOne({ storeId, userId })
   .then(sub => {
     res.send(sub !== null)
@@ -111,7 +111,7 @@ app.post('/subscribe', (req, res) => {
   }
 
   const { storeId, userId } = req.body
-   
+
   Subscribe.update(
     { userId, storeId },
     {
@@ -121,10 +121,10 @@ app.post('/subscribe', (req, res) => {
       publicKey: req.body.publicKey,
       auth: req.body.auth
     },
-    { upsert: true } 
+    { upsert: true }
   )
-  .then(() => { 
-    res.send({ success: true, message: 'add success' })    
+  .then(() => {
+    res.send({ success: true, message: 'add success' })
   })
   .catch(e => {
     res.send({ success: false, message: 'something worng' })
@@ -145,4 +145,3 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, function () {
   console.log(`push_server listening on port ${PORT}!`)
 })
-
