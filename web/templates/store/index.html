@@ -20,7 +20,7 @@
   <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
     <div class="tile-stats">
       <div class="icon"><i class="fa fa-heart"></i></div>
-      <div class="count">179</div>
+      <div id="sub-num" class="count">{{ subscribes_len }}</div>
       <h3>Subscribes</h3>
       <p>Total subscribes of this store.</p>
     </div>
@@ -35,6 +35,7 @@
         <th>Detail</th>
         <th>Date</th>
         <th>Dashboard</th>
+        <th>Promote</th>        
         <th>Edit</th>
         <th>Delete</th>
       </tr>
@@ -47,6 +48,9 @@
           <td>{{ ticket.detail }}</td>
           <td>{{ ticket.expire_date }}</td>
           <td><a href="{% url 'store:ticket-dashboard' ticket.id %}"><i class="fa fa-line-chart"></i></a></td>
+          <td> 
+            <a onclick="promote('{{ ticket.name }}', '{{ ticket.detail }}', '{{ ticket.content_image_url }}')"><i class="fa fa-bullhorn" aria-hidden="true"></i></a>
+          </td>
           <td><a href="{% url 'store:ticket-edit' ticket.id %}"><i class="fa fa-pencil"></i></a></td>
           <td>
             <a onclick="deleteTicket('{% url 'store:ticket-delete' ticket.id %}')"><i class="fa fa-trash"></i></a>
@@ -55,9 +59,31 @@
       {% endfor %}
     </tbody>
   </table>
+  <div id="userId" value="{{ user.id }}"></div>
+  <div id="storeName" value="{{ user.store }}"></div>
 </div>
 
 <script>
+  var userId = $('#userId').attr('value')
+  var storeName = $('#storeName').attr('value')
+  var host = 'localhost'
+ 
+  function promote(name, detail, content_image_url) {
+    $.ajax({
+      type: 'POST',
+      url: 'http://' + host + ':8080/notify/store/' + userId,
+      data: {
+        'title':  'New Coupon from  ' + storeName,
+        'message': 'name: ' + name + '  \n detail: ' + detail,
+        'image': content_image_url,
+      },
+      success: function() {
+
+      },
+      dataType: 'json'
+    })
+  }
+
   function deleteTicket(ticketUrl) {
     swal({
       title: 'Are you sure?',

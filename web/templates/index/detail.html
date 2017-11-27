@@ -54,6 +54,15 @@
           <div class="detail-discription">
             <p>{{ ticket.detail }}</p>
           </div>
+          {% if user.is_authenticated %}
+          <div>
+            <button
+              id="subscribe-btn"
+              class="btn"
+            >
+            </button>
+          </div>    
+          {% endif %}        
           {% if not is_store and user.is_authenticated %}
             <form class="buy-btn-form" method="POST" action="{% url 'market:purchase' %}">
                 {% csrf_token %}
@@ -64,6 +73,8 @@
         </div>
       </div>
     </div>
+    <div id="userId" value="{{ user.id }}"></div>
+    <div id="storeId" value="{{ ticket.store.id }}"></div>    
   </div>
 {% if success %}
   <script>

@@ -3,7 +3,6 @@ from django.contrib.staticfiles.views import serve
 from storemanage.models import Ticket, Currency
 from customermanage.models import Wallet, Qrcode
 from usermanage.models import Store
-
 from django.http import JsonResponse
 
 import requests
@@ -16,6 +15,7 @@ def index(request):
         request.session['success'] = False
     if fail:
         request.session['fail'] = False
+
     tickets = Ticket.objects.filter(available=True)
     return render(request, 'index/index.html', {
         'tickets': tickets,
