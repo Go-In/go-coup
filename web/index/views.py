@@ -19,6 +19,7 @@ def index(request):
         'success': success,
         'fail': fail
     })
+    
 def sw(request):
     return serve(request, '../static/sw.js')
 
