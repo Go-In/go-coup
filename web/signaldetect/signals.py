@@ -72,7 +72,7 @@ def test_social(sender, instance, **kwargs):
         g.user_set.add(user)
         user.save()
         g.save()
-        customerprofile = Customer(user = user)
+        customerprofile = Customer(user = user, first_name = user.first_name, last_name = user.last_name)
         customerprofile.save()
     # if 'customer' in groups:
     #     g = Group.objects.get(name='customer')
@@ -105,6 +105,3 @@ def test_social(sender, instance, **kwargs):
     # customerprofile = models.Customer(user = user, first_name = data['first_name'], last_name = data['last_name'])
     # customerprofile.save()
     # return redirect('index:index')
-
-
-

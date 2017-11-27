@@ -15,7 +15,7 @@ from .userProfileContextGenerate import userProfileContextGenerate
 def customerProfile(request):
     user = request.user
     print(request.user.first_name)
-    # data = {'data':userProfileContextGenerate(user)}
-    data = {'data': {'first_name': user.first_name, 'last_name': user.last_name}}
+    data = {'data':userProfileContextGenerate(user)}
+    # data = {'data': {'first_name': user.first_name, 'last_name': user.last_name}}
     print(data)
     return render(request,'index/profile.html',data)
