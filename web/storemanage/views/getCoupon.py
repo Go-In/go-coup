@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib.staticfiles.views import serve
 from storemanage.models import Ticket, Currency
 from customermanage.models import Coupon
+from django.contrib.auth.decorators import login_required, permission_required
 
 from django.http import JsonResponse
 
 import requests
 
+@login_required()
+@permission_required('usermanage.store_rights',raise_exception=True)
 def getCoupon(request, customer, key):
     url_get_pk = 'http://coupon-qr-gen:8082/load'
     payload = {'key':  key}
@@ -16,10 +19,10 @@ def getCoupon(request, customer, key):
     print(req.json())
     if req.json()['Status'] == 'OK':
         found = True
-        pk = req.json()['Pk']  
+        pk = req.json()['Pk']
         coupon = Coupon.objects.get(id=pk)
         if coupon.active:
-            active = True 
+            active = True
 
             coupon.active = False
             coupon.save()
@@ -38,4 +41,3 @@ def getCoupon(request, customer, key):
         return render(request, 'store/get-coupon.html', {
             'found': found,
         })
-    
