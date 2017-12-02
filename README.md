@@ -6,6 +6,15 @@
 * [Docker-Compose](https://docs.docker.com/compose/install/)
 * ในกรณีที่จะรัน elasticsearch ระบบต้องมี RAM อย่างน้อย 1gb
 
+### Usage Tools
+* Django 1.11
+* Go Programming Language
+* NodeJS
+* PostgreSQL
+* MongoDB
+* Redis
+* Memcached
+
 ### Build and run container(s)
 
 * รันคำสั่งนี้บน terminal ใน project dir เพื่อทำการรัน Docker container
